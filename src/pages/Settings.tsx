@@ -17,11 +17,9 @@ export default function Settings() {
     window.setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
   return <>
-    <header className="page-head"><h1>Cài đặt</h1><p>Tùy chỉnh mục tiêu, giao diện và bản sao lưu học tập.</p></header>
+    <header className="page-head"><h1>Cài đặt</h1><p>Tùy chỉnh giao diện, thời lượng học và bản sao lưu.</p></header>
     <section className="panel stack"><h2>Hồ sơ luyện tập</h2>
-      <label>Band mục tiêu<select value={state.targetBand} onChange={event => update(current => ({ ...current, targetBand: Number(event.target.value) }))}>
-        {Array.from({ length: 11 }, (_, index) => 4 + index / 2).map(band => <option key={band} value={band}>{band.toFixed(1)}</option>)}
-      </select></label>
+      <p>Mục tiêu <strong>IELTS {state.targetBand.toFixed(1)}</strong></p>
       <label>Thời lượng tập trung mỗi phiên<select value={state.dailyMinutes} onChange={event => {
         const dailyMinutes = Number(event.target.value)
         const duration = dailyMinutes * 60

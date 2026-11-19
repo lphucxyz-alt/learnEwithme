@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+export const targetBand = 6.5
 export const domains = ['foundations', 'ipa', 'verbs', 'structures', 'tests', 'review', 'practice', 'focus'] as const
 export const domainSchema = z.enum(domains)
 export type Domain = z.infer<typeof domainSchema>
@@ -23,7 +24,7 @@ export const stateSchema = z.object({
   accent: z.enum(['en-GB', 'en-US']),
   rate: z.literal([0.6, 0.75, 1, 1.2]),
   dailyMinutes: z.number().int().min(5).max(120),
-  targetBand: z.number().min(4).max(9),
+  targetBand: z.number().min(4).max(9).default(targetBand).transform(() => targetBand),
   fluencyNotes: z.string().default(''),
   activity: z.record(isoDay, z.object({ xp: count, seconds: count, counts: z.partialRecord(domainSchema, count), qualified: z.boolean().optional() })),
   lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count })).default({}),
@@ -35,7 +36,7 @@ export const stateSchema = z.object({
 })
 export type StudyState = z.infer<typeof stateSchema>
 export const initialState: StudyState = {
-  version: 1, theme: 'light', accent: 'en-GB', rate: 1, dailyMinutes: 25, targetBand: 7, fluencyNotes: '',
+  version: 1, theme: 'light', accent: 'en-GB', rate: 1, dailyMinutes: 25, targetBand, fluencyNotes: '',
   activity: {}, lessons: {}, recentPractice: [], cards: {}, drafts: {}, attempts: [],
   focus: { mode: 'work', duration: 1500, remaining: 1500, deadline: null }
 }

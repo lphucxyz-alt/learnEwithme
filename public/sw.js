@@ -1,4 +1,4 @@
-const cacheName = 'ielts-discipline-os-v2'
+const cacheName = 'ielts-discipline-os-v3'
 const base = new URL(self.registration.scope)
 
 self.addEventListener('install', event => {

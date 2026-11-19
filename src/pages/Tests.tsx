@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useStudy } from '../app/StudyProvider'
 import { leastRecent, rememberPractice } from '../services/random'
+import { starterExamIds } from '../features/discipline/study-plan'
 import { bandEstimate, exams, questionsOf } from '../features/tests/catalog'
 import { ExamHistory, ExamSession } from '../features/tests/ExamSession'
 
@@ -24,14 +25,18 @@ export default function Tests() {
   const { state, update } = useStudy()
   const navigate = useNavigate()
   const [skill, setSkill] = useState('')
-  const [difficulty, setDifficulty] = useState('')
+  const [difficulty, setDifficulty] = useState('Gợi ý 6.5')
   const [collection, setCollection] = useState('')
   const [status, setStatus] = useState('')
   const [query, setQuery] = useState('')
   const entries = exams.map(exam => {
     const attempts = state.attempts.filter(item => item.examId === exam.id)
     return { exam, attempts, status: state.drafts[exam.id] ? 'Đang làm' : attempts.length ? 'Đã xong' : 'Chưa làm' }
-  }).filter(item => (!skill || item.exam.skill === skill) && (!difficulty || item.exam.difficulty === difficulty) && (!collection || item.exam.collection === collection) && (!status || item.status === status) && item.exam.title.toLowerCase().includes(query.trim().toLowerCase()))
+  }).filter(({ exam, status: examStatus }) => {
+    const matchesDifficulty = difficulty === 'Gợi ý 6.5' ? starterExamIds.includes(exam.id) : !difficulty || exam.difficulty === difficulty
+    return matchesDifficulty && (!skill || exam.skill === skill) && (!collection || exam.collection === collection)
+      && (!status || examStatus === status) && exam.title.toLowerCase().includes(query.trim().toLowerCase())
+  })
   function chooseRandom() {
     const unattempted = entries.filter(item => item.status === 'Chưa làm')
     const key = (item: typeof entries[number]) => 'test:' + item.exam.id
@@ -41,19 +46,19 @@ export default function Tests() {
     navigate('/tests/' + next.exam.id)
   }
   return <>
-    <header className="page-head"><p className="overline">MÔ PHỎNG THI MÁY</p><h1>Kho đề IELTS</h1><p>{exams.length} đề tự biên soạn ở ba độ khó, có bài làm quen, Academic và General Training.</p></header>
+    <header className="page-head"><p className="overline">MÔ PHỎNG THI MÁY</p><h1>Kho đề IELTS</h1><p>Bắt đầu với một bài gợi ý cho mỗi kỹ năng. Đổi bộ lọc để tìm thêm bài.</p></header>
     <section className="panel stack"><div className="between">
-      <input type="search" aria-label="Tìm đề" placeholder="Tìm tên đề" value={query} onChange={event => setQuery(event.target.value)} />
+      <input type="search" aria-label="Tìm đề" placeholder="Tìm tên đề" value={query} onChange={event => { setQuery(event.target.value); if (difficulty === 'Gợi ý 6.5' && event.target.value.trim()) setDifficulty('') }} />
       <button className="primary" disabled={!entries.length} onClick={chooseRandom}>Chọn đề ngẫu nhiên</button>
     </div><div className="row">
       {([
         ['Kỹ năng', skill, setSkill, ['Reading', 'Listening', 'Writing', 'Speaking']],
-        ['Độ khó', difficulty, setDifficulty, ['Nền tảng', 'Trung bình', 'Nâng cao']],
-        ['Bộ đề', collection, setCollection, [...new Set(exams.map(item => item.collection))]],
+        ['Độ khó', difficulty, setDifficulty, ['Gợi ý 6.5', 'Nền tảng', 'Trung bình', 'Nâng cao']],
+        ['Bộ đề', collection, (value: string) => { setCollection(value); if (value && difficulty === 'Gợi ý 6.5') setDifficulty('') }, [...new Set(exams.map(item => item.collection))]],
         ['Trạng thái', status, setStatus, ['Chưa làm', 'Đang làm', 'Đã xong']]
       ] as const).map(([label, value, set, options]) =>
         <select key={label} aria-label={label} value={value} onChange={event => set(event.target.value)}>
-          <option value="">{label}</option>{options.map(option => <option key={option}>{option}</option>)}
+          <option value="">{label === 'Độ khó' ? 'Mọi mức' : label}</option>{options.map(option => <option key={option}>{option}</option>)}
         </select>)}
     </div>
     <p className="muted">{entries.length} đề phù hợp · Chọn ngẫu nhiên ưu tiên đề chưa làm và lâu chưa gặp.</p>

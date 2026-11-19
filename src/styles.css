@@ -231,3 +231,52 @@ label:has(textarea) { width: 100%; }
   .metrics .streak-card { grid-column: 1 / -1; }
   .bottom-nav a { font-size: .63rem; white-space: normal; line-height: 1.1; text-align: center; }
 }
+
+.hero-study {
+  align-items: center;
+  background: radial-gradient(ellipse at 100% 10%, #87345d 0%, transparent 62%), #4c163d;
+}
+.hero-study > div { flex: 1 1 18rem; }
+.next-study {
+  flex: 0 1 19rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #a75c82;
+  border-radius: .85rem;
+  background: #3e183bd4;
+}
+.next-study h2 { font-size: 1rem; color: #ffb1cd; }
+.next-study p strong { color: #fff7fb; font-size: 1.12rem; }
+.study-path { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .9rem 1.4rem; }
+.study-path > .stack { gap: .35rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero, .page-head { animation: enter-study .34s cubic-bezier(.2,.65,.25,1) both; }
+  .next-study { animation: enter-study .38s .09s cubic-bezier(.2,.65,.25,1) both; }
+  .quiz-feedback { animation: enter-study .23s ease-out both; }
+  .streak-card[data-lit="true"] .flame { animation: glow-flame .85s ease-out; }
+  .streak-card[data-lit="true"] .flame svg { animation: kindle .55s ease-out; transform-origin: 50% 80%; }
+  .streak-card { transition: border-color .25s ease; }
+  progress::-webkit-progress-value { transition: width .27s ease-out; }
+  button, .button { transition: background-color .16s ease, border-color .16s ease, transform .16s ease; }
+  button:not(:disabled):active, .button:active { transform: scale(.98); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .primary:not(:disabled):hover { transform: translateY(-2px); }
+  .primary:not(:disabled):active { transform: translateY(0) scale(.98); }
+}
+
+@keyframes enter-study {
+  from { opacity: .5; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow-flame {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  35% { box-shadow: 0 0 0 .35rem var(--flame-tint); }
+}
+@keyframes kindle {
+  0% { transform: scale(.85); }
+  55% { transform: scale(1.15) rotate(-5deg); }
+  100% { transform: scale(1); }
+}

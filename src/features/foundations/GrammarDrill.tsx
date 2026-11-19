@@ -43,7 +43,7 @@ export function GrammarDrill({ question, done, onAnswer, final = false }: {
         {choice === 'Ø' ? 'Ø · bỏ trống' : choice}
       </label>)}</div>
     </fieldset>
-    {result !== null && <div className="lesson-rule stack" role="status">
+    {result !== null && <div className="lesson-rule stack quiz-feedback" role="status">
       <strong className={result ? 'answer' : 'error'}>{result ? 'Chính xác' : 'Đáp án: ' + question.answer}</strong>
       <p>{question.explanation}</p>
       <p>{spokenExample} <Listen text={spokenExample} /></p>

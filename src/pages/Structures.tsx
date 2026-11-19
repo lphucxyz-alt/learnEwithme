@@ -23,8 +23,8 @@ export default function Structures() {
       <section className="panel stack"><div className="between"><h2>{item.title}</h2><span className="pill">{item.category}</span></div>
         <p className="formula">{item.formula}</p>
         <div className="comparison">
-          <div><span className="overline">Ví dụ cơ bản · 5.5</span><p>{item.basic}</p><Listen text={item.basic} /></div>
-          <div><span className="overline">Ví dụ nâng cấp · 7.5–8.5</span><p>{item.upgraded}</p><Listen text={item.upgraded} /></div>
+          <div><span className="overline">Câu đơn giản</span><p>{item.basic}</p><Listen text={item.basic} /></div>
+          <div><span className="overline">Cách nói rõ ý hơn</span><p>{item.upgraded}</p><Listen text={item.upgraded} /></div>
         </div>
         <p>{item.reason}</p>
         <button disabled={saved} onClick={() => complete('structures', 1, 0, [structureCard(item)], false)}>{saved ? 'Đã lưu vào sổ lỗi' : 'Đánh dấu khó'}</button>

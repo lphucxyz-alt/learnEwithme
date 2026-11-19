@@ -1,6 +1,6 @@
 # IELTS Discipline OS
 
-Luyện IELTS theo vòng học mỗi ngày. Tra cứu, luyện chủ động, thi thử, phân tích lỗi và ôn lại theo lịch SM-2.
+Lộ trình tự học hướng tới IELTS 6.5. Trang chủ gợi ý bài nền tảng tiếp theo dựa trên kết quả đã lưu, rồi dẫn đến các bài làm quen của từng kỹ năng. Tra cứu, luyện chủ động, thi thử, phân tích lỗi và ôn lại theo lịch SM-2.
 
 ## Chạy trên máy
 

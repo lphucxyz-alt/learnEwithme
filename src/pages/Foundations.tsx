@@ -16,9 +16,10 @@ export default function Foundations() {
   const [level, setLevel] = useState('')
   const [group, setGroup] = useState('')
   const [query, setQuery] = useState('')
-  const results = lessons.filter(item => (!level || item.level === level) && (!group || item.group === group)
+  const visibleLevel = level || (query.trim() ? 'all' : 'A1')
+  const results = lessons.filter(item => (visibleLevel === 'all' || item.level === visibleLevel) && (!group || item.group === group)
     && normalize([item.title, item.rule, item.group].join(' ')).includes(normalize(query)))
-  const next = lessons.find(item => !state.lessons[item.id]?.attempts)
+  const next = results.find(item => !state.lessons[item.id]?.attempts)
   return <>
     <header className="hero"><div><p className="overline">TIẾNG ANH TỪ GỐC · A1–B1</p><h1>Nền tảng tiếng Anh</h1>
       <p>{lessons.length} bài · {grammarQuestions.length} câu luyện có giải thích tiếng Việt.</p></div>
@@ -28,8 +29,8 @@ export default function Foundations() {
       <h2>Tìm chủ điểm cần ôn</h2>
       <div className="row">
         <input type="search" aria-label="Tìm bài nền tảng" placeholder="Ví dụ: mạo từ, in/on/at, quá khứ" value={query} onChange={event => setQuery(event.target.value)} />
-        <select aria-label="Trình độ" value={level} onChange={event => setLevel(event.target.value)}>
-          <option value="">Mọi trình độ</option>{levels.map(value => <option key={value}>{value}</option>)}
+        <select aria-label="Trình độ" value={visibleLevel} onChange={event => setLevel(event.target.value)}>
+          <option value="all">Mọi trình độ</option>{levels.map(value => <option key={value}>{value}</option>)}
         </select>
         <select aria-label="Chủ điểm" value={group} onChange={event => setGroup(event.target.value)}>
           <option value="">Mọi chủ điểm</option>{groups.map(value => <option key={value}>{value}</option>)}

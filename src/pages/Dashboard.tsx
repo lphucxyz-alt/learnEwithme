@@ -5,6 +5,7 @@ import { dayKey, shiftDay, streaks, clockLabel } from '../features/discipline/ac
 import { useNow } from '../features/discipline/FocusTimer'
 import { ReviewCard } from '../features/discipline/Review'
 import { StreakCard } from '../features/discipline/StreakCard'
+import { getStudyPlan } from '../features/discipline/study-plan'
 import { FluencyPlan } from '../features/discipline/FluencyPlan'
 
 export default function Dashboard() {
@@ -17,24 +18,30 @@ export default function Dashboard() {
   const [weeks, setWeeks] = useState(12)
   const [selected, setSelected] = useState<string | null>(null)
   const activity = state.activity[today]
+  const plan = getStudyPlan(state)
   const { current, longest, shields, protectedDays, studiedToday } = streaks(state.activity, today)
   const due = Object.values(state.cards).filter(card => card.due <= today).sort((a,b) => a.due.localeCompare(b.due))
-  const rituals = [
-    { domain: 'foundations', title: 'Luyện ngữ pháp nền tảng', total: 5 },
-    { domain: 'ipa', title: 'Luyện phân biệt âm IPA', total: 5 },
-    { domain: 'verbs', title: 'Ôn động từ bất quy tắc', total: 10 },
-    { domain: 'structures', title: 'Biến đổi câu IELTS', total: 3 },
-    { domain: 'practice', title: 'Hoàn thành phiên luyện nhanh', total: 1 }
-  ] as const
   const mondayOffset = (new Date(today + 'T12:00:00').getDay() + 6) % 7
   const start = shiftDay(today, -mondayOffset - (weeks - 1) * 7)
   const detail = state.activity[selected ?? today]
   return <>
-    <header className="hero">
-      <div><p className="overline">{new Intl.DateTimeFormat('vi', { weekday: 'long', month: 'long', day: 'numeric' }).format(now)}</p>
-      <h1>Trung tâm kỷ luật</h1><p>Tập trung vào bước tiếp theo trên đường đến band {state.targetBand.toFixed(1)}.</p></div>
-      <div className="row"><Link className="button primary" to="/foundations">Học nền tảng</Link><Link className="button hero-secondary" to="/practice">Luyện nhanh</Link></div>
+    <header className="hero hero-study">
+      <div><p className="overline">MỤC TIÊU IELTS {state.targetBand.toFixed(1)}</p>
+      <h1>Trung tâm kỷ luật</h1><p>Học chắc câu cơ bản, luyện ngắn mỗi ngày, rồi làm quen với đề IELTS.</p></div>
+      <section className="next-study stack">
+        <h2>Bài nên làm tiếp</h2>
+        <p><strong>{plan.title}</strong></p>
+        <p>{plan.detail}</p>
+        <Link className="button primary" to={plan.path}>{plan.label}</Link>
+      </section>
     </header>
+    <section className="panel study-path">
+      <div className="stack"><h2>Lộ trình 6.5</h2>
+        <small>{plan.basicsDone}/{plan.basicsTotal} chủ điểm cốt lõi đạt ít nhất 65%</small>
+        <progress aria-label="Tiến độ chủ điểm cốt lõi" value={plan.basicsDone} max={plan.basicsTotal} />
+      </div>
+      <div className="row"><Link className="button" to="/foundations">Nền tảng</Link><Link className="button" to="/practice">Luyện 5 phút</Link><Link className="button" to="/tests">Đề làm quen</Link></div>
+    </section>
     <div className="metrics">
       <StreakCard days={current} longest={longest} studied={studiedToday} protectedYesterday={protectedDays.has(shiftDay(today, -1))} />
       <section className="panel"><span>XP hôm nay</span><strong>{activity?.xp ?? 0} XP</strong><small>{Math.floor((activity?.seconds ?? 0) / 60)} phút tập trung</small></section>
@@ -51,12 +58,10 @@ export default function Dashboard() {
       <p className="muted">{selected ?? today}{protectedDays.has(selected ?? today) && ' · Được khiên bảo vệ'} · {detail?.xp ?? 0} XP · {Math.floor((detail?.seconds ?? 0) / 60)} phút · {Object.values(detail?.counts ?? {}).reduce((a,b) => a+b, 0)} lượt</p>
     </section>
     <div className="split">
-      <section className="panel stack"><h2>Nhiệm vụ hằng ngày</h2>{rituals.map(ritual => {
-        const count = activity?.counts[ritual.domain] ?? 0
-        return <Link key={ritual.domain} className="quest" to={'/' + ritual.domain}>
-          <span>{count >= ritual.total ? '✓' : '○'} {ritual.title}</span><strong>{Math.min(count, ritual.total)}/{ritual.total}</strong>
-        </Link>
-      })}</section>
+      <section className="panel stack"><h2>Hôm nay</h2>
+        <Link className="quest" to="/foundations"><span>Học 3 câu ngữ pháp</span><strong>{Math.min(activity?.counts.foundations ?? 0, 3)}/3</strong></Link>
+        <Link className="quest" to="/practice"><span>Làm một lượt luyện ngắn</span><strong>{Math.min(activity?.counts.practice ?? 0, 1)}/1</strong></Link>
+      </section>
       <section className="panel stack"><h2>Sổ tay lỗi sai <span className="pill">{due.length} đến hạn</span></h2>
         {due[0] ? <ReviewCard key={due[0].id} card={due[0]} /> : <p className="muted">Hôm nay bạn đã ôn hết các thẻ đến hạn.</p>}
         <details><summary>Tất cả thẻ ({Object.keys(state.cards).length})</summary><ul>{Object.values(state.cards).map(card =>

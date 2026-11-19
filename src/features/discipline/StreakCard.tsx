@@ -5,9 +5,9 @@ export function StreakCard({ days, longest, studied, protectedYesterday }: {
 }) {
   const stage = milestones.reduce((level, milestone, index) => days >= milestone ? index + 1 : level, 0)
   const next = milestones[stage]
-  return <section className="panel streak-card stack" data-stage={stage}>
+  return <section className="panel streak-card stack" data-stage={stage} data-lit={studied}>
     <div className="row streak-title">
-      <span className="flame">
+      <span className="flame" key={stage + (studied ? '-lit' : '-idle')}>
         <svg viewBox="0 0 32 36" aria-hidden="true">
           <path fill="currentColor" d="M17 1c1 8-5 12-6 16-2-1-3-3-3-6-5 4-7 9-6 14 1 6 7 10 14 10 8 0 14-5 14-13 0-7-6-12-9-14 1 6-1 8-2 8 1-5-1-11-2-15Z" />
           <path className="flame-core" d="M17 18c0 4-5 7-5 10 0 3 2 5 5 5s5-2 5-5c0-4-3-7-5-10Z" />
