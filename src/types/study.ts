@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { coachEntrySchema } from './coach'
 
 export const targetBand = 6.5
 export const domains = ['foundations', 'ipa', 'verbs', 'structures', 'tests', 'review', 'practice', 'focus'] as const
@@ -28,6 +29,7 @@ export const stateSchema = z.object({
   fluencyNotes: z.string().default(''),
   activity: z.record(isoDay, z.object({ xp: count, seconds: count, counts: z.partialRecord(domainSchema, count), qualified: z.boolean().optional() })),
   lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count })).default({}),
+  coachHistory: z.array(coachEntrySchema).max(30).default([]),
   recentPractice: z.array(z.string()).max(240).default([]),
   cards: z.record(z.string(), cardSchema),
   drafts: z.record(z.string(), draftSchema),
@@ -37,6 +39,6 @@ export const stateSchema = z.object({
 export type StudyState = z.infer<typeof stateSchema>
 export const initialState: StudyState = {
   version: 1, theme: 'light', accent: 'en-GB', rate: 1, dailyMinutes: 25, targetBand, fluencyNotes: '',
-  activity: {}, lessons: {}, recentPractice: [], cards: {}, drafts: {}, attempts: [],
+  activity: {}, lessons: {}, coachHistory: [], recentPractice: [], cards: {}, drafts: {}, attempts: [],
   focus: { mode: 'work', duration: 1500, remaining: 1500, deadline: null }
 }

@@ -1,30 +1,36 @@
 import { useEffect, useRef, useState } from 'react'
 import { useStudy } from '../../app/StudyProvider'
+import { CoachReview } from '../coach/CoachReview'
 import { Listen } from '../../components/Audio'
 import { clockLabel } from '../discipline/activity'
 import { useNow } from '../discipline/FocusTimer'
 import type { Exam } from '../../types/exam'
+
+const roundMinutes = [4, 3, 2] as const
+type Clip = { id: string; url: string; blob: Blob; seconds: number }
 
 export function Speaking({ parts, fluency = false, onRecording }: {
   parts: Extract<Exam, { skill: 'Speaking' }>['parts']; fluency?: boolean; onRecording?: (part: number, seconds: number) => void
 }) {
   const { complete, state, update } = useStudy()
   const [round, setRound] = useState(0)
-  const [clips, setClips] = useState<Record<number, string>>({})
+  const [clips, setClips] = useState<Record<number, Clip>>({})
   const [reference, setReference] = useState('')
   const clipUrls = useRef<string[]>([])
-  const duration = [240, 180, 120][round]
+  const duration = roundMinutes[round] * 60
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<{ prepEnd: number; speakEnd: number } | null>(null)
   const [active, setActive] = useState(false)
   const [requesting, setRequesting] = useState(false)
-  const [url, setUrl] = useState('')
+  const [recording, setRecording] = useState<Clip>()
   const [error, setError] = useState('')
   const recorder = useRef<MediaRecorder | null>(null)
   const mounted = useRef(true)
   const generation = useRef(0)
   const now = useNow()
   const part = parts[index]
+  const lastAdvice = state.coachHistory.find(entry => entry.mode === 'speaking' && entry.topic === part.title && entry.feedback.sufficient)
+    ?.feedback.nextAction
   useEffect(() => {
     mounted.current = true
     return () => {
@@ -36,7 +42,7 @@ export function Speaking({ parts, fluency = false, onRecording }: {
       clipUrls.current.forEach(clip => URL.revokeObjectURL(clip))
     }
   }, [])
-  useEffect(() => () => { if (url) URL.revokeObjectURL(url) }, [url])
+  useEffect(() => () => { if (recording) URL.revokeObjectURL(recording.url) }, [recording])
   useEffect(() => () => { if (reference) URL.revokeObjectURL(reference) }, [reference])
   const remaining = phase ? Math.max(0, Math.ceil(((now < phase.prepEnd ? phase.prepEnd : phase.speakEnd) - now) / 1000)) : 0
   useEffect(() => {
@@ -67,14 +73,21 @@ export function Speaking({ parts, fluency = false, onRecording }: {
         if (!mounted.current || request !== generation.current) return
         setActive(false)
         if (chunks.length) {
-          const clip = URL.createObjectURL(new Blob(chunks, { type: current.mimeType }))
+          const blob = new Blob(chunks, { type: current.mimeType })
+          const seconds = Math.max(1, Math.round((Date.now() - started) / 1000))
+          const clip = { id: crypto.randomUUID(), url: URL.createObjectURL(blob), blob, seconds }
           if (fluency) {
-            clipUrls.current.push(clip)
+            const replaced = clips[round]?.url
+            if (replaced) {
+              URL.revokeObjectURL(replaced)
+              clipUrls.current = clipUrls.current.filter(item => item !== replaced)
+            }
+            clipUrls.current.push(clip.url)
             setClips(previous => ({ ...previous, [round]: clip }))
-            complete('practice', 8, Math.round((Date.now() - started) / 1000))
+            complete('practice', 8, seconds)
           } else {
-            setUrl(clip)
-            onRecording?.(index, Math.max(1, Math.round((Date.now() - started) / 1000)))
+            setRecording(clip)
+            onRecording?.(index, seconds)
           }
         }
       }
@@ -97,7 +110,14 @@ export function Speaking({ parts, fluency = false, onRecording }: {
   }
   return <section className="panel stack">
     <div className="row">{parts.map((item, position) => <button key={item.title} disabled={requesting || active} aria-pressed={index === position} onClick={() => {
-      setIndex(position); setPhase(null); setUrl(''); setRound(0); setClips({})
+      if (index === position) return
+      clipUrls.current.forEach(clip => URL.revokeObjectURL(clip))
+      clipUrls.current = []
+      setIndex(position)
+      setPhase(null)
+      setRecording(undefined)
+      setRound(0)
+      setClips({})
     }}>Part {position + 1}</button>)}</div>
     <h2>{part.title}</h2><ul>{part.prompts.map(prompt => <li key={prompt}>{prompt} <Listen text={prompt} /></li>)}</ul>
     {index === 1 && !fluency && <div className="row"><button onClick={() => {
@@ -106,20 +126,35 @@ export function Speaking({ parts, fluency = false, onRecording }: {
     }}>Bắt đầu 1 phút chuẩn bị</button>
       {phase && <strong>{remaining ? (now < phase.prepEnd ? 'Chuẩn bị ' : 'Nói ') + clockLabel(remaining) : 'Hết giờ nói'}</strong>}</div>}
     {fluency && <div className="row">
-      {[4, 3, 2].map((minutes, position) => <button key={minutes} aria-pressed={round === position} disabled={active || requesting} onClick={() => {
+      {roundMinutes.map((minutes, position) => <button key={minutes} aria-pressed={round === position} disabled={active || requesting} onClick={() => {
         setRound(position); setPhase(null)
       }}>{minutes} phút</button>)}
       <strong>{clockLabel(phase ? remaining : duration)}</strong>
     </div>}
+    {fluency && lastAdvice && <div className="lesson-rule"><h3>Gợi ý cho lượt tiếp theo</h3><p>{lastAdvice}</p></div>}
     <div className="row"><button className="primary" disabled={active || requesting} onClick={() => void startRecording()}>{requesting ? 'Đang yêu cầu quyền' : 'Ghi âm'}</button><button disabled={!active} onClick={() => {
       if (recorder.current?.state === 'recording') recorder.current.stop()
     }}>Dừng ghi âm</button>{active && <span role="status">Đang ghi âm</span>}</div>
     {error && <p className="error" role="status">{error}</p>}
-    {url && <div className="row"><audio controls src={url} /><a className="button" href={url} download="ielts-speaking">Tải bản ghi</a></div>}
+    {recording && <div className="stack">
+      <div className="row"><audio controls src={recording.url} /><a className="button" href={recording.url} download="ielts-speaking">Tải bản ghi</a></div>
+      <CoachReview key={recording.id} id={recording.id} audio={recording.blob} exercise={{
+        mode: 'speaking', topic: part.title, prompt: part.prompts.join('\n'), seconds: recording.seconds
+      }} />
+    </div>}
     {fluency && <>
-      {Object.entries(clips).map(([position, clip]) => <div className="row" key={position}>
-        <strong>Lượt {4 - Number(position)} phút</strong><audio controls src={clip} /><a className="button" href={clip} download={'ielts-part-' + (index + 1) + '-' + (4 - Number(position)) + 'min'}>Tải bản ghi</a>
-      </div>)}
+      {Object.entries(clips).map(([position, clip]) => {
+        const currentRound = Number(position)
+        const minutes = roundMinutes[currentRound]
+        const earlierId = clips[currentRound - 1]?.id
+        return <div className="stack" key={clip.id}>
+          <div className="row"><strong>Lượt {minutes} phút</strong><audio controls src={clip.url} />
+            <a className="button" href={clip.url} download={'ielts-part-' + (index + 1) + '-' + minutes + 'min'}>Tải bản ghi</a></div>
+          <CoachReview id={clip.id} audio={clip.blob} earlierId={earlierId} exercise={{
+            mode: 'speaking', topic: part.title, prompt: part.prompts.join('\n'), round: minutes, seconds: clip.seconds
+          }} />
+        </div>
+      })}
       <label>Cụm từ dùng lại và chỗ bị khựng<textarea rows={3} value={state.fluencyNotes} onChange={event => {
         const value = event.target.value
         update(previous => ({ ...previous, fluencyNotes: value }))

@@ -3,6 +3,7 @@ import { HashRouter, Link, Route, Routes } from 'react-router-dom'
 import { Shell } from './app/Shell'
 import { StudyProvider } from './app/StudyProvider'
 import Foundations, { FoundationLesson } from './pages/Foundations'
+import Coach from './pages/Coach'
 import Dashboard from './pages/Dashboard'
 import Ipa from './pages/Ipa'
 import Fluency from './pages/Fluency'
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path="tests/:id/history/:attempt?" element={<TestHistoryRoute />} />
       <Route path="practice" element={<Practice />} />
       <Route path="practice/speaking" element={<Fluency />} />
+      <Route path="coach" element={<Coach />} />
       <Route path="settings" element={<Settings />} />
       <Route path="*" element={<section className="panel stack"><h1>Không tìm thấy trang</h1><Link to="/">Về trung tâm</Link></section>} />
     </Route>

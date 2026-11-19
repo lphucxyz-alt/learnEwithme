@@ -13,7 +13,7 @@ export function StreakCard({ days, longest, studied, protectedYesterday }: {
           <path className="flame-core" d="M17 18c0 4-5 7-5 10 0 3 2 5 5 5s5-2 5-5c0-4-3-7-5-10Z" />
         </svg>
       </span>
-      <div><span>Chuỗi học</span><strong>{days} ngày</strong></div>
+      <div><span className="metric-label">Chuỗi học</span><strong className="metric-value">{days} ngày</strong></div>
     </div>
     <p className="muted">{studied ? 'Đã thắp lửa hôm nay' : protectedYesterday ? 'Khiên đã giữ chuỗi hôm qua. Học hôm nay để tiếp tục.' : days ? 'Học hôm nay để giữ lửa.' : 'Hoàn thành một bài luyện để thắp lửa.'}</p>
     <div className="between"><small>Kỷ lục {longest} ngày</small><small>{next ? 'Đổi màu ở ' + next + ' ngày' : 'Đã đạt mốc 365 ngày'}</small></div>

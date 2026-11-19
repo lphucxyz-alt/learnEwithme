@@ -31,6 +31,21 @@ Vite phục vụ tại đường dẫn `/learnEwithme/`. URL dùng hash, ví d�
 
 Micro cần HTTPS hoặc localhost và quyền trình duyệt. Cài app qua menu **Thêm vào màn hình chính**. App shell có thể mở ngoại tuyến sau lần tải đầu. Âm thanh từ điển cần mạng và đọc văn bản tùy giọng có sẵn trên thiết bị.
 
+## AI góp ý cho Speaking và Writing
+
+Trong **Luyện nói 4/3/2** hoặc phần Speaking, dừng ghi và bấm **Chấm với AI** dưới bản ghi. Ở Writing, nộp bài rồi chọn Task cần góp ý. Nhận xét gồm tối đa ba lỗi, gợi ý sửa câu và một việc để luyện lần sau. Chấm lượt dài trước để AI có thể so sánh khi chấm lượt sau cùng chủ đề. Lưu từng lỗi vào sổ ôn và xem các nhận xét còn lưu trong Trung tâm.
+
+Dịch vụ chấm dùng khóa Gemini từ môi trường của tiến trình Node.js trên Ubuntu. Khi khóa đã được cấu hình, chạy:
+
+```sh
+npm run build
+npm run coach
+```
+
+Mở [4/3/2 trên Ubuntu](http://127.0.0.1:4174/learnEwithme/#/practice/speaking) hoặc dùng Chrome truy cập GitHub Pages trên chính máy Ubuntu trong khi dịch vụ đang chạy. Cho phép truy cập mạng cục bộ nếu Chrome hỏi. Hai địa chỉ có bộ nhớ trình duyệt riêng. Để giữ tiến độ của GitHub Pages, hãy tiếp tục ở địa chỉ đó hoặc chuyển bằng sao lưu JSON.
+
+Backend lắng nghe trên loopback, kiểm tra origin và giới hạn lượt chấm. Nó gửi bài tới Gemini chỉ khi người học bấm chấm và giữ khóa ngoài bản build. Bản chép lời cùng nhận xét nằm trong lịch sử riêng của trình duyệt và bản sao lưu tiến độ. Tệp ghi âm giữ trong phiên. Trên thiết bị chưa kết nối dịch vụ, dùng **Sao chép yêu cầu** để nhờ AI phản hồi và đính kèm file ghi âm nếu có.
+
 ## GitHub Pages
 
 1. Vào **Settings → Pages → Build and deployment → Source**, chọn **GitHub Actions**.
