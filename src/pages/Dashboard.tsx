@@ -7,6 +7,7 @@ import { ReviewCard } from '../features/discipline/Review'
 import { StreakCard } from '../features/discipline/StreakCard'
 import { getStudyPlan } from '../features/discipline/study-plan'
 import { FluencyPlan } from '../features/discipline/FluencyPlan'
+import { EmptyStateCard, OnboardingWelcomeCard } from '../components/EmptyState'
 
 export default function Dashboard() {
   const { state } = useStudy()
@@ -31,6 +32,7 @@ export default function Dashboard() {
   const foundationsCount = Math.min(activity?.counts.foundations ?? 0, 3)
   const practiceCount = Math.min(activity?.counts.practice ?? 0, 1)
   const detailTurns = Object.values(detail?.counts ?? {}).reduce((a, b) => a + b, 0)
+  const isBrandNew = Object.keys(state.activity).length === 0 && Object.keys(state.cards).length === 0
 
   return (
     <div className="dashboard-view">
@@ -54,6 +56,8 @@ export default function Dashboard() {
           </Link>
         </section>
       </header>
+
+      {isBrandNew && <OnboardingWelcomeCard />}
 
       <section className="panel study-path">
         <div className="stack">
@@ -193,23 +197,33 @@ export default function Dashboard() {
             Hệ thống SM-2 tự động nhắc lại những câu bạn từng làm sai đúng lúc não bộ sắp quên.
           </small>
 
-          {due[0] ? (
+          {Object.keys(state.cards).length === 0 ? (
+            <EmptyStateCard
+              badge="Sổ tay sạch tinh"
+              title="Chưa có lỗi sai nào được lưu"
+              description="Mỗi khi làm sai ở phần Nền tảng hoặc Luyện ngắn, thẻ ôn tập SM-2 sẽ tự động xuất hiện tại đây."
+              actionLabel="Bắt đầu luyện 5 phút"
+              actionTo="/practice"
+            />
+          ) : due[0] ? (
             <ReviewCard key={due[0].id} card={due[0]} />
           ) : (
             <p className="muted">Hôm nay bạn đã ôn hết các thẻ đến hạn.</p>
           )}
 
-          <details className="cards-disclosure">
-            <summary>Tất cả thẻ ({Object.keys(state.cards).length})</summary>
-            <ul>
-              {Object.values(state.cards).map(card => (
-                <li key={card.id}>
-                  {card.prompt}
-                  <span>{card.due}</span>
-                </li>
-              ))}
-            </ul>
-          </details>
+          {Object.keys(state.cards).length > 0 && (
+            <details className="cards-disclosure">
+              <summary>Tất cả thẻ ({Object.keys(state.cards).length})</summary>
+              <ul>
+                {Object.values(state.cards).map(card => (
+                  <li key={card.id}>
+                    {card.prompt}
+                    <span>{card.due}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
         </section>
       </div>
 

@@ -5,6 +5,7 @@ import { Listen } from '../components/Audio'
 import type { Lesson } from '../data/foundations'
 import { grammarQuestions, lessons } from '../data/foundations/catalog'
 import { GrammarDrill } from '../features/foundations/GrammarDrill'
+import { triggerCelebration } from '../features/discipline/CelebrationHost'
 import { leastRecent, rememberPractice } from '../services/random'
 
 const levels = ['A1', 'A2', 'B1'] as const
@@ -89,10 +90,18 @@ function LessonPage({ lesson }: { lesson: Lesson }) {
           onAnswer={correct => {
             const total = score + Number(correct)
             setScore(total)
-            if (position + 1 === quiz.length) update(previous => {
-              const entry = previous.lessons[lesson.id]
-              return { ...previous, lessons: { ...previous.lessons, [lesson.id]: { attempts: (entry?.attempts ?? 0) + 1, best: Math.max(entry?.best ?? 0, total), last: total } } }
-            })
+            if (position + 1 === quiz.length) {
+              triggerCelebration({
+                xp: 15,
+                title: '+15 XP! Hoàn thành bài học',
+                subtitle: total === quiz.length ? 'Xuất sắc! Bạn làm đúng toàn bộ câu.' : 'Đã ghi nhận tiến độ ngữ pháp hôm nay.',
+                confetti: true
+              })
+              update(previous => {
+                const entry = previous.lessons[lesson.id]
+                return { ...previous, lessons: { ...previous.lessons, [lesson.id]: { attempts: (entry?.attempts ?? 0) + 1, best: Math.max(entry?.best ?? 0, total), last: total } } }
+              })
+            }
           }}
           done={() => setPosition(value => value + 1)} />}
         {quiz.length > 0 && !question && <>

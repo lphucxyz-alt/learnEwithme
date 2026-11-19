@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStudy } from '../../app/StudyProvider'
 import { clockLabel, dayKey, record } from './activity'
+import { triggerCelebration } from './CelebrationHost'
 
 export function useNow() {
   const [now, setNow] = useState(Date.now)
@@ -22,6 +23,14 @@ export function FocusTimer() {
       const session = previous.focus
       if (session.deadline === null || session.deadline > Date.now()) return previous
       const work = session.mode === 'work'
+      if (work) {
+        triggerCelebration({
+          xp: 20,
+          title: '+20 XP! Hoàn thành phiên Pomodoro',
+          subtitle: 'Bạn đã giữ vững nhịp tập trung — nghỉ ngơi 5 phút nhé!',
+          confetti: true
+        })
+      }
       const duration = work ? 300 : previous.dailyMinutes * 60
       const updated = work ? record(previous, 'focus', 20, session.duration, dayKey(new Date(session.deadline))) : previous
       return { ...updated, focus: { mode: work ? 'break' : 'work', duration, remaining: duration, deadline: null } }
