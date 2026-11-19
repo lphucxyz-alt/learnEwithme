@@ -1,0 +1,37 @@
+{
+  "id": "commute-stories",
+  "title": "Journeys and transport choices",
+  "skill": "Speaking",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 840,
+  "parts": [
+    {
+      "title": "Part 1 · Getting around",
+      "prompts": [
+        "How do you usually get around your town?",
+        "What do you usually do during a long journey?",
+        "Have your travel habits changed recently?"
+      ],
+      "sample": "I normally use the bus to get to class. I used to borrow my brother’s motorbike, but the bus is cheaper and I can review my vocabulary on the way. If I am travelling somewhere unfamiliar, I keep the map open so I can see when my stop is coming up."
+    },
+    {
+      "title": "Part 2 · A journey you remember",
+      "prompts": [
+        "Describe a journey that did not go as planned.",
+        "Say where you were going, who was with you and what changed.",
+        "Explain how you felt about it afterwards."
+      ],
+      "sample": "Last summer, my cousin and I took a bus to visit a hill town. We had bought tickets online, but we went to the wrong station because both stations had almost the same name. By the time we realised, the bus had already left. My cousin suggested finding another route rather than going home. We took a train to a smaller town and then shared a taxi with two other travellers we met at the station. We arrived much later than planned, but the trip turned out to be memorable because the driver told us about a local market we would otherwise have missed. At the time I was frustrated with myself for not checking the address. Afterwards, I was pleased that we had managed to solve the problem without ruining the day."
+    },
+    {
+      "title": "Part 3 · Public and private travel",
+      "prompts": [
+        "Why do some people prefer driving to public transport?",
+        "How can cities make buses more reliable?",
+        "What might change about daily travel as more people work from home?"
+      ],
+      "sample": "Reliability depends as much on waiting time as on the speed of the journey. If a bus comes every ten minutes, a small delay is manageable. On a route with one bus an hour, the same delay can mean missing a connection. I would therefore measure how regular the gaps are between buses and consider giving buses priority at busy junctions."
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "id": "city-birds",
+  "title": "Why some city birds sing earlier",
+  "skill": "Reading",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 1080,
+  "paragraphs": [
+    "A. A person living near a busy street might hear birdsong before hearing a single bus. For some species, starting to sing early could reduce competition with the roar of morning traffic. However, sound is only one possible influence. Artificial lighting and warmer overnight temperatures are also associated with urban areas, so a comparison between a city park and a rural meadow cannot isolate the role of noise.",
+    "B. A group of researchers studied twelve sites along a railway line that was closed on Sundays for maintenance. On weekdays, the first train passed over the line before dawn. The team put audio recorders in the same trees throughout the study and measured the first song of a common urban species. They also recorded local weather and the onset of natural daylight. A traffic count was not practicable at each site, so the locations were selected to avoid busy roads.",
+    "C. At sites nearest the railway, the birds began singing earlier on weekdays than on Sundays. At sites farther away, the weekday and Sunday records were more similar. The researchers considered the possibility that a train might simply mask the first few minutes of song. If that happened, the recorder would make birds appear to start later on weekdays. The observed pattern ran in the opposite direction.",
+    "D. The findings do not establish that the birds anticipate a named day of the week. For example, repeated noises before the first train could act as cues. The study also involved only one species. A useful next step would be to repeat the same monitoring for birds whose calls occupy different frequency ranges, because the ability to hear a signal through railway noise depends partly on its pitch."
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "choice",
+      "prompt": "Which heading best fits paragraph A?",
+      "answers": [
+        "Several possible reasons for earlier singing"
+      ],
+      "explanation": "Đoạn A nêu tiếng ồn, đèn và nhiệt độ rồi giải thích khó tách tác động.",
+      "evidence": 0,
+      "choices": [
+        "The loss of rural habitats",
+        "Several possible reasons for earlier singing",
+        "Training birds to recognise vehicles"
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. The railway did not operate on ___.",
+      "answers": [
+        "Sundays"
+      ],
+      "explanation": "Đường sắt đóng cửa vào Chủ nhật để bảo trì.",
+      "evidence": 1
+    },
+    {
+      "id": "q3",
+      "kind": "tfng",
+      "prompt": "Researchers changed the trees that held the recorders on Sundays.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Các máy ghi âm ở cùng cây suốt nghiên cứu.",
+      "evidence": 1
+    },
+    {
+      "id": "q4",
+      "kind": "gap",
+      "prompt": "Use TWO WORDS. The sites were chosen to avoid ___.",
+      "answers": [
+        "busy roads"
+      ],
+      "explanation": "Nhóm tránh các đường đông vì không thể đếm lưu lượng ở từng điểm.",
+      "evidence": 1
+    },
+    {
+      "id": "q5",
+      "kind": "tfng",
+      "prompt": "At the nearest sites, the birds started singing later on weekdays.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Các điểm gần có giờ bắt đầu hát sớm hơn vào ngày thường.",
+      "evidence": 2
+    },
+    {
+      "id": "q6",
+      "kind": "choice",
+      "prompt": "Why does paragraph C discuss sound being masked?",
+      "answers": [
+        "To test a possible measurement explanation."
+      ],
+      "explanation": "Nếu tiếng tàu che tiếng hát, máy có thể ghi nhận giờ bắt đầu muộn hơn, trái với kết quả.",
+      "evidence": 2,
+      "choices": [
+        "To propose a way of silencing trains.",
+        "To establish the number of birds.",
+        "To test a possible measurement explanation."
+      ]
+    },
+    {
+      "id": "q7",
+      "kind": "tfng",
+      "prompt": "The researchers identified how many individual birds changed their behaviour.",
+      "answers": [
+        "Not Given"
+      ],
+      "explanation": "Bài báo cáo thời điểm ghi được tiếng hát, không nói đến việc nhận diện và đếm từng cá thể.",
+      "evidence": 2
+    },
+    {
+      "id": "q8",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. The ability to detect a call through noise depends in part on its ___.",
+      "answers": [
+        "pitch"
+      ],
+      "explanation": "Câu cuối đoạn D nêu pitch.",
+      "evidence": 3
+    }
+  ]
+}

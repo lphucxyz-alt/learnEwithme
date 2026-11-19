@@ -1,0 +1,146 @@
+{
+  "id": "campus-survey",
+  "title": "Planning a campus travel survey",
+  "skill": "Listening",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 720,
+  "turns": [
+    {
+      "speaker": "Tutor",
+      "text": "You want to examine how students travel. What would make your survey different from the one conducted last year?"
+    },
+    {
+      "speaker": "Nina",
+      "text": "Last year students were simply asked if they owned a bicycle. I’d like to know how people actually came to campus on a particular day."
+    },
+    {
+      "speaker": "Jon",
+      "text": "We thought about asking them to remember every trip over the last month, but people might leave out short journeys."
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Good. Ask about the most recent weekday, and include the outward and return journeys separately. Those journeys may involve different modes."
+    },
+    {
+      "speaker": "Nina",
+      "text": "We were going to stand outside the car park to recruit people."
+    },
+    {
+      "speaker": "Tutor",
+      "text": "That would be fast, but you would meet more drivers than people who walk or take the bus. Try inviting randomly selected students by email. Send one reminder to anyone who hasn’t replied, then record the response rate."
+    },
+    {
+      "speaker": "Jon",
+      "text": "Do you think we should collect addresses so we can calculate distance?"
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Collect the first part of the postcode only if you need broad location information. For your question, asking about journey time will be simpler. No exact addresses."
+    },
+    {
+      "speaker": "Nina",
+      "text": "We’ll ask how long each leg took. Should we also ask why people chose that mode?"
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Yes. Offer a short list such as cost, convenience and lack of alternatives, and include a space for an answer you hadn’t considered."
+    },
+    {
+      "speaker": "Jon",
+      "text": "We have to deliver a report in three weeks. Can we start collecting responses next Monday?"
+    },
+    {
+      "speaker": "Tutor",
+      "text": "Test the form with five students first. Ask them to explain each question aloud. If their interpretations match what you intended, you can distribute it on Wednesday."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "choice",
+      "prompt": "What does Nina want to measure?",
+      "answers": [
+        "Transport used on a specific day"
+      ],
+      "explanation": "Đề mới hỏi cách đi thật vào một ngày.",
+      "evidence": 1,
+      "choices": [
+        "Bicycle ownership",
+        "Transport used on a specific day",
+        "The cost of building bicycle lanes"
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Record outward and ___ journeys separately.",
+      "answers": [
+        "return"
+      ],
+      "explanation": "Tutor nói outward and return journeys separately.",
+      "evidence": 3
+    },
+    {
+      "id": "q3",
+      "kind": "choice",
+      "prompt": "Why is the car park a poor place to recruit?",
+      "answers": [
+        "Drivers would be overrepresented."
+      ],
+      "explanation": "Người lái xe dễ được gặp hơn người đi bộ hoặc xe buýt.",
+      "evidence": 5,
+      "choices": [
+        "Too few students own telephones.",
+        "The car park will be closed.",
+        "Drivers would be overrepresented."
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Recruitment invitations should be sent by ___.",
+      "answers": [
+        "email"
+      ],
+      "explanation": "Tutor đề xuất mời sinh viên được chọn ngẫu nhiên bằng email.",
+      "evidence": 5
+    },
+    {
+      "id": "q5",
+      "kind": "choice",
+      "prompt": "What should be measured instead of calculating distance from exact addresses?",
+      "answers": [
+        "Journey time"
+      ],
+      "explanation": "Tutor khuyên hỏi thời gian chuyến đi và bỏ địa chỉ chính xác.",
+      "evidence": 7,
+      "choices": [
+        "Journey time",
+        "Bus frequency",
+        "Ticket price"
+      ]
+    },
+    {
+      "id": "q6",
+      "kind": "gap",
+      "prompt": "Write ONE NUMBER. The pilot should involve ___ students.",
+      "answers": [
+        "5",
+        "five"
+      ],
+      "explanation": "Thử biểu mẫu với năm sinh viên.",
+      "evidence": 11
+    },
+    {
+      "id": "q7",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. If the pilot works, distribute the survey on ___.",
+      "answers": [
+        "Wednesday"
+      ],
+      "explanation": "Wednesday mới là ngày gửi nếu pilot ổn.",
+      "evidence": 11
+    }
+  ]
+}

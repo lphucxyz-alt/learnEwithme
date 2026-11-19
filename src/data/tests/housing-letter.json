@@ -1,0 +1,22 @@
+{
+  "id": "housing-letter",
+  "title": "A repair request and flexible work",
+  "skill": "Writing",
+  "collection": "General Training",
+  "difficulty": "Trung bình",
+  "seconds": 3600,
+  "tasks": [
+    {
+      "title": "Task 1 · Write to your landlord",
+      "prompt": "You rent a flat. The heating has stopped working and the problem has affected your daily routine. Write a letter to your landlord. Describe the problem, explain how it affects you, and suggest when the repair can be carried out.",
+      "minWords": 150,
+      "sample": "Dear Ms Patel,\n\nI am writing about the heating in flat 12, which stopped working on Saturday evening. The control panel is on and I can still get hot water, but none of the radiators heats up. I have checked the settings and followed the restart instructions in the manual. The display continues to show the same error.\n\nThe temperature is now low enough that I have had to move my desk out of the living room. I work from home on most mornings, and the small portable heater I borrowed is only suitable for one room. I would appreciate it if you could arrange for an engineer to visit this week.\n\nI am available after 1 p.m. on Tuesday or any time on Thursday. If those times do not suit the engineer, please call me so we can agree on another appointment. I can send a photograph of the display beforehand if that would help.\n\nKind regards,\nAlex Morgan"
+    },
+    {
+      "title": "Task 2 · Flexible working hours",
+      "prompt": "Many workers would prefer to choose when they start and finish work. What are the advantages and disadvantages of allowing employees to choose their own working hours?",
+      "minWords": 250,
+      "sample": "Allowing employees to choose when they start and finish can make a job easier to combine with other responsibilities. However, flexible hours can create problems if colleagues or customers need help at the same time every day. The advantages therefore depend on how the policy is organised.\n\nOne benefit is that workers can arrange their hours around commitments that they cannot easily move. Someone who takes a child to school might start later and finish later, rather than paying for early childcare. A worker who starts early may avoid the busiest trains and spend less time travelling. These changes can reduce stress without reducing the number of hours worked. Employers may also find it easier to retain people who would otherwise leave because a standard schedule is impractical.\n\nOn the other hand, a team can become harder to coordinate if people have very little working time in common. A customer who calls late in the afternoon may have to wait until the next day if everyone on a support team chose an early start. Similarly, colleagues working on the same task may spend more time leaving messages for each other. A useful response is to set a few common hours for meetings and publish a timetable that keeps customer services covered. Some workplaces could offer more choice during quieter periods and restrict it when demand is high.\n\nIn summary, flexible hours can help people stay in work and manage their time, but the policy works best when it guarantees shared hours and dependable service. A predictable range of choices may be more useful than complete freedom."
+    }
+  ]
+}

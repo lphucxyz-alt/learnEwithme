@@ -1,0 +1,141 @@
+{
+  "id": "community-pool",
+  "title": "Booking a swimming lesson",
+  "skill": "Listening",
+  "collection": "Làm quen",
+  "difficulty": "Nền tảng",
+  "seconds": 600,
+  "turns": [
+    {
+      "speaker": "Ava",
+      "text": "Good afternoon, Meadow Pool. Ava speaking. How can I help?"
+    },
+    {
+      "speaker": "Tuan",
+      "text": "I’d like to book a beginner swimming lesson. The website mentions a Monday class, but I work late on Mondays."
+    },
+    {
+      "speaker": "Ava",
+      "text": "We also run beginners on Thursdays. That class starts at six fifteen and lasts forty-five minutes."
+    },
+    {
+      "speaker": "Tuan",
+      "text": "Thursday works. Do I need to bring goggles? I have a towel but my goggles are broken."
+    },
+    {
+      "speaker": "Ava",
+      "text": "We lend goggles for the first class. Please bring a towel and a small padlock for the locker."
+    },
+    {
+      "speaker": "Tuan",
+      "text": "Right. Is the main entrance opposite the library?"
+    },
+    {
+      "speaker": "Ava",
+      "text": "Usually, yes. Until the repairs are finished, come in through the side entrance on Birch Road."
+    },
+    {
+      "speaker": "Tuan",
+      "text": "Can I pay on the day? I read that a single session was twelve pounds."
+    },
+    {
+      "speaker": "Ava",
+      "text": "It is twelve pounds when you walk in, but the booking price is ten pounds if you pay online before Wednesday."
+    },
+    {
+      "speaker": "Tuan",
+      "text": "I’ll do that. Which desk should I go to when I arrive?"
+    },
+    {
+      "speaker": "Ava",
+      "text": "Go to reception and ask for Daniel. That’s D A N I E L. Please arrive ten minutes early so he can show you the changing rooms."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "gap",
+      "prompt": "Write ONE WORD. Tuan chooses the class on ___.",
+      "answers": [
+        "Thursday"
+      ],
+      "explanation": "Monday là lớp không phù hợp. Ava đề xuất Thursday.",
+      "evidence": 2
+    },
+    {
+      "id": "q2",
+      "kind": "gap",
+      "prompt": "Write a time. The class starts at ___.",
+      "answers": [
+        "6:15",
+        "6.15",
+        "six fifteen",
+        "18:15",
+        "18.15"
+      ],
+      "explanation": "Bản ghi nói six fifteen.",
+      "evidence": 2
+    },
+    {
+      "id": "q3",
+      "kind": "choice",
+      "prompt": "What extra item should Tuan bring?",
+      "answers": [
+        "A padlock"
+      ],
+      "explanation": "Towel đã có, goggles có thể mượn. Ava yêu cầu mang padlock.",
+      "evidence": 4,
+      "choices": [
+        "A padlock",
+        "Goggles",
+        "A thermometer"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "gap",
+      "prompt": "Write TWO WORDS. The temporary entrance is on ___.",
+      "answers": [
+        "Birch Road"
+      ],
+      "explanation": "Lối tạm ở Birch Road.",
+      "evidence": 6
+    },
+    {
+      "id": "q5",
+      "kind": "gap",
+      "prompt": "Write ONE NUMBER. The advance online price is £___.",
+      "answers": [
+        "10",
+        "ten"
+      ],
+      "explanation": "Twelve pounds là giá đến trực tiếp. Ten là giá đặt sớm qua mạng.",
+      "evidence": 8
+    },
+    {
+      "id": "q6",
+      "kind": "gap",
+      "prompt": "Write ONE WORD. Ask for ___ at reception.",
+      "answers": [
+        "Daniel"
+      ],
+      "explanation": "Tên được đánh vần D A N I E L.",
+      "evidence": 10
+    },
+    {
+      "id": "q7",
+      "kind": "choice",
+      "prompt": "Why should Tuan arrive early?",
+      "answers": [
+        "To see the changing rooms"
+      ],
+      "explanation": "Daniel sẽ chỉ chỗ thay đồ trước buổi học.",
+      "evidence": 10,
+      "choices": [
+        "To collect a refund",
+        "To see the changing rooms",
+        "To take a swimming test"
+      ]
+    }
+  ]
+}

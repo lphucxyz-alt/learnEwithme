@@ -1,0 +1,106 @@
+{
+  "id": "food-waste-measurement",
+  "title": "Measuring waste in a busy kitchen",
+  "skill": "Reading",
+  "collection": "Academic · Nâng cao",
+  "difficulty": "Nâng cao",
+  "seconds": 1140,
+  "paragraphs": [
+    "A. When a university catering manager said her kitchens had halved food waste, she was quoting the volume of rubbish collected each week. At the same time, a new supplier had switched from large crates to smaller ones, which reduced the amount of packaging in the bins. Several menus had also changed. The fall in collection volume was welcome, but the figure alone could not show how much edible food was being saved.",
+    "B. A research assistant proposed weighing discarded food separately. Rather than asking kitchen staff to identify dozens of ingredients during service, she provided three containers. One was for preparation losses, such as peel, a second was for meals produced but not served, and a third was for food returned from tables. Packaging went into the existing recycling system. The containers were weighed at the end of each shift, after volunteers subtracted the weight of the empty container.",
+    "C. What initially looked like irrelevant detail proved central. The amount of food deemed served differed on days when customers could help themselves. In those cases, food left in the display and food returned on plates were both discarded, but staff had fewer opportunities to prevent the latter. The research assistant therefore kept the two categories separate and recorded whether the service was a buffet. Later, comparisons were made only between shifts that used the same kind of service and had similar customer numbers.",
+    "D. The clearest improvement occurred after staff began making an extra batch of soup only in response to a request from the serving counter. On comparable shifts this reduced the mass of unserved soup without an increase in waiting times. The change did not affect the amount left on plates. The team concluded that a useful measurement tells managers where they can intervene. It also noted that a kitchen might save money without reducing waste by buying cheaper ingredients, so spending was tracked as a separate outcome."
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "choice",
+      "prompt": "Why does the author mention the supplier’s crates?",
+      "answers": [
+        "To show that bin volume tracked more than food."
+      ],
+      "explanation": "Thể tích rác giảm một phần vì bao bì thay đổi.",
+      "evidence": 0,
+      "choices": [
+        "To explain why staff weighed their meals.",
+        "To show that bin volume tracked more than food.",
+        "To recommend a cheaper supply contract."
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "gap",
+      "prompt": "Use TWO WORDS. Before calculating food mass, volunteers subtracted the weight of the ___.",
+      "answers": [
+        "empty container"
+      ],
+      "explanation": "Đoạn B nêu bước loại trọng lượng thùng rỗng.",
+      "evidence": 1
+    },
+    {
+      "id": "q3",
+      "kind": "tfng",
+      "prompt": "Staff were required to identify all individual ingredients before discarding food.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Hệ thống dùng ba loại thùng để tránh phân loại theo từng nguyên liệu.",
+      "evidence": 1
+    },
+    {
+      "id": "q4",
+      "kind": "choice",
+      "prompt": "What does paragraph C mainly explain?",
+      "answers": [
+        "How the team made fairer comparisons between shifts."
+      ],
+      "explanation": "Cần cùng kiểu phục vụ và số khách tương đương.",
+      "evidence": 2,
+      "choices": [
+        "Why the university stopped offering buffets.",
+        "How the team made fairer comparisons between shifts.",
+        "How the research team trained serving staff."
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "tfng",
+      "prompt": "Buffet shifts were compared only with comparable shifts of the same service type.",
+      "answers": [
+        "True"
+      ],
+      "explanation": "Các ca được so theo kiểu phục vụ và lượng khách.",
+      "evidence": 2
+    },
+    {
+      "id": "q6",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. The new system reduced the amount of ___ that was made but not served.",
+      "answers": [
+        "soup"
+      ],
+      "explanation": "Nấu mẻ súp bổ sung theo yêu cầu giúp giảm phần không phục vụ.",
+      "evidence": 3
+    },
+    {
+      "id": "q7",
+      "kind": "tfng",
+      "prompt": "The new soup procedure reduced plate waste.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Bài nêu thay đổi không ảnh hưởng lượng còn lại trên đĩa.",
+      "evidence": 3
+    },
+    {
+      "id": "q8",
+      "kind": "tfng",
+      "prompt": "The study compared its findings with at least one other university.",
+      "answers": [
+        "Not Given"
+      ],
+      "explanation": "Đoạn cuối nêu kết quả và cách theo dõi chi phí, không nêu trường đối chứng.",
+      "evidence": 3
+    }
+  ]
+}

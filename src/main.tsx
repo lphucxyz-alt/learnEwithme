@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter, Link, Route, Routes } from 'react-router-dom'
 import { Shell } from './app/Shell'
 import { StudyProvider } from './app/StudyProvider'
+import Foundations, { FoundationLesson } from './pages/Foundations'
 import Dashboard from './pages/Dashboard'
 import Ipa from './pages/Ipa'
 import Fluency from './pages/Fluency'
@@ -16,6 +17,8 @@ createRoot(document.getElementById('root')!).render(
   <StudyProvider><HashRouter><Routes>
     <Route element={<Shell />}>
       <Route index element={<Dashboard />} />
+      <Route path="foundations" element={<Foundations />} />
+      <Route path="foundations/:id" element={<FoundationLesson />} />
       <Route path="ipa" element={<Ipa />} />
       <Route path="verbs" element={<Verbs />} />
       <Route path="structures" element={<Structures />} />

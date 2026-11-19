@@ -1,0 +1,37 @@
+{
+  "id": "study-routines",
+  "title": "Learning habits and new skills",
+  "skill": "Speaking",
+  "collection": "Làm quen",
+  "difficulty": "Nền tảng",
+  "seconds": 840,
+  "parts": [
+    {
+      "title": "Part 1 · Study routines",
+      "prompts": [
+        "Do you prefer to study in the morning or in the evening?",
+        "Where do you usually do your homework?",
+        "Do you like learning with other people?"
+      ],
+      "sample": "I usually study in the evening because the house is quieter. I use a desk next to my bedroom window. When I have something difficult to practise, I prefer to study with a friend because we can explain our mistakes to each other."
+    },
+    {
+      "title": "Part 2 · A skill you learned",
+      "prompts": [
+        "Describe a useful skill you learned outside school.",
+        "Say what it was, when you learned it and who helped you.",
+        "Explain how you use it now."
+      ],
+      "sample": "A useful skill I learned outside school was cooking a simple meal. When I moved into a flat with two other students, I did not know how to make much beyond instant noodles. My aunt showed me how to cook rice and make a soup with vegetables and eggs. The difficult part was timing everything. The first time I tried on my own, the rice was still hard when the soup was ready. I started preparing the ingredients before turning on the stove, which made the process much less stressful. Now I cook two or three times a week, and I have enough confidence to change the recipe depending on what is in the fridge. It saves me money, but what I enjoy most is being able to make dinner for someone else when they visit."
+    },
+    {
+      "title": "Part 3 · Learning throughout life",
+      "prompts": [
+        "Why do adults sometimes find it difficult to learn new skills?",
+        "Which skills should schools teach alongside academic subjects?",
+        "Can online lessons replace practical experience?"
+      ],
+      "sample": "An online lesson is useful when someone needs to see a process several times. A learner can pause a video and look closely at a tool, for example. The challenge is that a video cannot always tell you what you are doing wrong. In skills such as cooking or repairing equipment, I would use online lessons to prepare and then ask for feedback on an actual attempt."
+    }
+  ]
+}

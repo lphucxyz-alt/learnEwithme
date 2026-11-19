@@ -27,7 +27,7 @@ export default function Structures() {
           <div><span className="overline">Ví dụ nâng cấp · 7.5–8.5</span><p>{item.upgraded}</p><Listen text={item.upgraded} /></div>
         </div>
         <p>{item.reason}</p>
-        <button disabled={saved} onClick={() => complete('structures', 1, 0, [structureCard(item)])}>{saved ? 'Đã lưu vào sổ lỗi' : 'Đánh dấu khó'}</button>
+        <button disabled={saved} onClick={() => complete('structures', 1, 0, [structureCard(item)], false)}>{saved ? 'Đã lưu vào sổ lỗi' : 'Đánh dấu khó'}</button>
       </section>
     </div>
     <section className="panel stack"><h2>Áp dụng cấu trúc</h2><StructureDrill key={item.id} item={item} /></section>

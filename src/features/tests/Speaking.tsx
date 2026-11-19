@@ -5,7 +5,9 @@ import { clockLabel } from '../discipline/activity'
 import { useNow } from '../discipline/FocusTimer'
 import type { Exam } from '../../types/exam'
 
-export function Speaking({ parts, fluency = false }: { parts: Extract<Exam, { skill: 'Speaking' }>['parts']; fluency?: boolean }) {
+export function Speaking({ parts, fluency = false, onRecording }: {
+  parts: Extract<Exam, { skill: 'Speaking' }>['parts']; fluency?: boolean; onRecording?: (part: number, seconds: number) => void
+}) {
   const { complete, state, update } = useStudy()
   const [round, setRound] = useState(0)
   const [clips, setClips] = useState<Record<number, string>>({})
@@ -70,7 +72,10 @@ export function Speaking({ parts, fluency = false }: { parts: Extract<Exam, { sk
             clipUrls.current.push(clip)
             setClips(previous => ({ ...previous, [round]: clip }))
             complete('practice', 8, Math.round((Date.now() - started) / 1000))
-          } else setUrl(clip)
+          } else {
+            setUrl(clip)
+            onRecording?.(index, Math.max(1, Math.round((Date.now() - started) / 1000)))
+          }
         }
       }
       current.onerror = () => {

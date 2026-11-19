@@ -54,6 +54,6 @@ export function Flashcard({ verb, move }: { verb: Verb; move: (direction: number
     }} onClick={flip}><strong>{flipped ? verb.past + ' · ' + verb.part : verb.base}</strong>
       <span>{flipped ? verbExample(verb) : verb.meaning + ' · Chạm hoặc nhấn Space để lật'}</span></button>
     <div className="row"><button onClick={() => move(-1)}>Thẻ trước</button><button onClick={() => move(1)}>Thẻ sau</button>
-      {flipped && <button onClick={() => complete('verbs', 1, 0, [verbCard(verb)])}>Đưa vào sổ lỗi</button>}</div>
+      {flipped && <button onClick={() => complete('verbs', 1, 0, [verbCard(verb)], false)}>Đưa vào sổ lỗi</button>}</div>
   </div>
 }

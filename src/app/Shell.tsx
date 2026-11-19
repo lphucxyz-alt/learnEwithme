@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { lessons } from '../data/foundations/catalog'
 import { sounds } from '../data/ipa'
 import { structures } from '../data/structures'
 import { FocusTimer } from '../features/discipline/FocusTimer'
@@ -10,6 +11,7 @@ import { useStudy } from './StudyProvider'
 
 const routes = [
   { path: '/', icon: 'home', title: 'Trung tâm', mobile: 'Hôm nay' },
+  { path: '/foundations', icon: 'book', title: 'Nền tảng', mobile: 'Nền tảng' },
   { path: '/practice', icon: 'bolt', title: 'Luyện nhanh', mobile: 'Luyện' },
   { path: '/ipa', icon: 'audio', title: 'Phòng lab IPA', mobile: 'IPA' },
   { path: '/verbs', icon: 'cards', title: 'Động từ', mobile: 'Động từ' },
@@ -18,6 +20,7 @@ const routes = [
 ]
 const paths: Record<string, string> = {
   home: 'M3 10L12 3l9 7v10H3zM9 20v-7h6v7',
+  book: 'M12 5v15M12 5c-3-2-6-3-9-2v15c3-1 6 0 9 2 3-2 6-3 9-2V3c-3-1-6 0-9 2',
   bolt: 'M13 2L4 14h7l-1 8 10-12h-7z',
   audio: 'M4 10v4m4-8v12m4-15v18m4-15v12m4-8v4',
   cards: 'M7 4h13v15H7zM4 8v13h12',
@@ -34,6 +37,7 @@ function Icon({ name }: { name: string }) {
 
 const searchItems = [
   ...routes.map(route => ({ title: route.title, type: 'Điều hướng', path: route.path })),
+  ...lessons.map(item => ({ title: item.title, type: 'Nền tảng ' + item.level, path: '/foundations/' + item.id })),
   ...sounds.map(sound => ({ title: '/' + sound.symbol + '/ · ' + sound.word, type: 'IPA', path: '/ipa?sound=' + encodeURIComponent(sound.symbol) })),
   ...verbs.map(verb => ({ title: verb.base + ' · ' + verb.meaning, type: 'Động từ', path: '/verbs?q=' + encodeURIComponent(verb.base) })),
   ...structures.map(item => ({ title: item.title, type: item.category, path: '/structures?id=' + item.id })),

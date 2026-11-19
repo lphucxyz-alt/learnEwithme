@@ -1,0 +1,111 @@
+{
+  "id": "repair-library",
+  "title": "The library that lends tools",
+  "skill": "Reading",
+  "collection": "Làm quen",
+  "difficulty": "Nền tảng",
+  "seconds": 900,
+  "paragraphs": [
+    "A. The library on North Street lends out tools as well as books. Members can borrow things such as a drill, a sewing machine or a set of gardening tools. A standard loan lasts seven days. If nobody else has booked the equipment, a member can ask for one renewal. The aim is to help people complete small jobs at home without buying items they may use only once.",
+    "B. People register at the main desk. A library card is enough for most requests, but powered tools require a ten-minute safety introduction. This introduction is given at the workbench on Saturday mornings. Participants learn to check a cable for damage and find the stop switch before switching the tool on.",
+    "C. The library does not buy every new item itself. Some residents donate equipment, and a volunteer team checks each donation before accepting it. The team rejects items it cannot repair or replace safely. It keeps a record of the checks so future volunteers can see what work was done and which parts were changed.",
+    "D. During the first three months, sewing machines were borrowed more often than drills. The coordinator expected drills to be the most popular because residents had requested them in a survey. She now plans to collect two kinds of information: how often each tool is borrowed and whether requests are turned down because all copies are out. The second figure should reveal which tools to buy next."
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. A normal loan lasts ___ days.",
+      "answers": [
+        "seven"
+      ],
+      "explanation": "Đoạn A nêu rõ “A standard loan lasts seven days”.",
+      "evidence": 0
+    },
+    {
+      "id": "q2",
+      "kind": "tfng",
+      "prompt": "A tool can always be renewed, even if another member has booked it.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Chỉ gia hạn khi không có người khác đặt.",
+      "evidence": 0
+    },
+    {
+      "id": "q3",
+      "kind": "choice",
+      "prompt": "What must a member do before borrowing powered tools?",
+      "answers": [
+        "Attend a safety introduction."
+      ],
+      "explanation": "Đoạn B phân biệt dụng cụ chạy điện và các yêu cầu khác.",
+      "evidence": 1,
+      "choices": [
+        "Pay a higher fee.",
+        "Attend a safety introduction.",
+        "Bring a set of replacement parts."
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Safety introductions take place at the ___.",
+      "answers": [
+        "workbench"
+      ],
+      "explanation": "Bài nêu địa điểm là workbench.",
+      "evidence": 1
+    },
+    {
+      "id": "q5",
+      "kind": "tfng",
+      "prompt": "Donated tools are checked before the library agrees to lend them.",
+      "answers": [
+        "True"
+      ],
+      "explanation": "Đội tình nguyện kiểm tra từng món trước khi nhận.",
+      "evidence": 2
+    },
+    {
+      "id": "q6",
+      "kind": "tfng",
+      "prompt": "All volunteers are trained electricians.",
+      "answers": [
+        "Not Given"
+      ],
+      "explanation": "Bài nêu vai trò kiểm tra của tình nguyện viên, không nêu nghề nghiệp hay bằng cấp.",
+      "evidence": 2
+    },
+    {
+      "id": "q7",
+      "kind": "choice",
+      "prompt": "Which tools were borrowed more often than drills in the first three months?",
+      "answers": [
+        "Sewing machines."
+      ],
+      "explanation": "Sewing machines were borrowed more often than drills.",
+      "evidence": 3,
+      "choices": [
+        "Drills.",
+        "Gardening tools.",
+        "Sewing machines."
+      ]
+    },
+    {
+      "id": "q8",
+      "kind": "choice",
+      "prompt": "Why does the coordinator want to count refused requests?",
+      "answers": [
+        "To identify demand that loan records miss."
+      ],
+      "explanation": "Một dụng cụ có thể có nhiều người muốn mượn khi mọi bản đã được cho mượn hết.",
+      "evidence": 3,
+      "choices": [
+        "To extend the loan period.",
+        "To identify demand that loan records miss.",
+        "To stop accepting donated tools."
+      ]
+    }
+  ]
+}

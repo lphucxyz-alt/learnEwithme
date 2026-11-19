@@ -1,0 +1,22 @@
+{
+  "id": "online-shops",
+  "title": "Shopping trends and local businesses",
+  "skill": "Writing",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 3600,
+  "tasks": [
+    {
+      "title": "Task 1 · Purchases by age group",
+      "prompt": "The table shows percentages of people in four age groups who made an online purchase in the previous month, in 2014 and 2024. Ages 18–29: 62 and 87. Ages 30–44: 59 and 85. Ages 45–59: 44 and 73. Ages 60+: 23 and 58. Summarise the main features and make relevant comparisons.",
+      "minWords": 150,
+      "sample": "The table compares the share of people who bought something online in the previous month in four age groups, in 2014 and 2024. Overall, online purchasing became more common in every group. Younger adults had the highest rates in both years, although the gap between the youngest and oldest groups narrowed.\n\nIn 2014, the two youngest groups had similar rates. Some 62% of 18–29-year-olds had made an online purchase, compared with 59% of those aged 30–44. By 2024 the figures had risen to 87% and 85%, respectively. The difference between the two groups therefore fell from three percentage points to two.\n\nAmong people aged 45–59, the proportion rose from 44% to 73%, a gain of 29 percentage points. The largest increase was in the oldest group. The rate among people aged 60 or above climbed from 23% to 58%, an increase of 35 points. As a result, the gap between the oldest and youngest groups fell from 39 to 29 percentage points."
+    },
+    {
+      "title": "Task 2 · Supporting small businesses",
+      "prompt": "In some towns, small shops are closing as people buy more goods online. What problems can this cause, and what can local authorities do to help?",
+      "minWords": 250,
+      "sample": "The growth of online retail has made shopping easier for many customers, but it can also leave some town centres with fewer independent shops. Two consequences are reduced access to everyday services and the loss of places where residents meet. Local authorities can help by improving access to the centre and making it easier for small firms to start there.\n\nThe first problem is that alternatives are not equally convenient for everyone. Some older residents, for example, prefer to ask a shopkeeper for advice or pay in person. If the nearest shop closes, they may be forced to travel farther. Vacant premises can also make a street feel less active. People who previously ran several errands on foot might then visit the area less often, reducing demand for the remaining businesses.\n\nOne useful response is to make routine visits easier. Reliable buses, safe crossings and places to sit can bring more people into a shopping street, without requiring them to buy anything from a particular firm. Councils could also work with property owners to offer short trial leases for empty units. An independent baker or repair business could test demand for a few months before taking on a long contract. The council should evaluate these measures by tracking visits and how many businesses are still operating a year later, rather than assuming that filling units immediately proves success.\n\nIn conclusion, shop closures can reduce both access to services and everyday contact between residents. Local authorities can respond by making central streets easier to reach and reducing the cost of trying a new business there."
+    }
+  ]
+}

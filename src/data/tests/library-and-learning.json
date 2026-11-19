@@ -1,0 +1,22 @@
+{
+  "id": "library-and-learning",
+  "title": "Libraries and lifelong learning",
+  "skill": "Writing",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 3600,
+  "tasks": [
+    {
+      "title": "Task 1 · Library service use",
+      "prompt": "The table shows the number of uses of four services at Bellbridge Library in 2015 and 2025. Printed loans: 48,000 and 31,000. E-book loans: 4,000 and 22,000. Computer sessions: 18,000 and 14,000. Workshop attendance: 1,000 and 6,000. Summarise the main features and make relevant comparisons.",
+      "minWords": 150,
+      "sample": "The table compares the use of four services at Bellbridge Library in 2015 and 2025. Overall, printed loans remained the most frequently used service, despite a marked decline. E-book borrowing increased considerably and overtook computer sessions. Workshop attendance also rose, although it remained the lowest of the four measures.\n\nIn 2015, there were 48,000 printed loans, well over twice the 18,000 computer sessions recorded that year. By 2025, use of both services had declined. Printed loans fell by 17,000 to 31,000, while computer sessions decreased more moderately, by 4,000 to 14,000. The difference between these two figures therefore narrowed from 30,000 to 17,000.\n\nE-book loans moved in the opposite direction, climbing from 4,000 to 22,000. In 2015 there had been far fewer e-book loans than computer sessions, but by 2025 they exceeded computer use by 8,000. Workshop attendance grew sixfold, from 1,000 to 6,000, and accounted for a smaller absolute increase than e-book borrowing."
+    },
+    {
+      "title": "Task 2 · Courses for adults",
+      "prompt": "Some people think local governments should fund educational courses for adults of all ages. Others believe public money should mainly support education for children. Discuss both views and give your own opinion.",
+      "minWords": 250,
+      "sample": "Local governments must decide how much of a limited budget to spend on people who have already left school. Although I would protect essential services for children first, I believe that authorities should fund some adult courses when these meet clear local needs.\n\nThe case for prioritising children is strong. Leaving primary school without basic reading or numeracy skills makes later subjects harder to learn, and families do not have equal access to private tuition. Public funding can therefore prevent gaps from widening. For example, an afternoon reading programme at a primary school can help children practise with trained staff, including children whose parents work long hours. If a council had to choose between such a programme and a leisure course for adults, the school programme should usually come first.\n\nHowever, the need to learn does not end at school. Adults may lose a job, move to a new country or find that essential services have shifted online. A short, subsidised course can address some of those barriers. For instance, a library that teaches adults to use online forms can make it easier for participants to apply for jobs or book appointments without relying on relatives. These are specific outcomes that a council can monitor, which makes the spending easier to justify.\n\nIn my view, the best policy guarantees basic school provision and then targets adult courses at skills that expand access to work or public services. This approach recognises the importance of early education while allowing communities to respond when people's circumstances change in adulthood."
+    }
+  ]
+}

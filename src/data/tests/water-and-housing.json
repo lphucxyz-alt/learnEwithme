@@ -1,0 +1,22 @@
+{
+  "id": "water-and-housing",
+  "title": "Water use and housing design",
+  "skill": "Writing",
+  "collection": "Academic · Nâng cao",
+  "difficulty": "Nâng cao",
+  "seconds": 3600,
+  "tasks": [
+    {
+      "title": "Task 1 · Rainwater collection",
+      "prompt": "The process has six stages. Rain falls on a roof; gutters carry it to a mesh filter; filtered water flows into a storage tank; a pump sends the water through a fine filter; treated water supplies toilets and garden taps; overflow enters a planted drainage area. Summarise the main features of the process.",
+      "minWords": 150,
+      "sample": "The process shows how rainwater collected from the roof of a building is prepared for use in toilets and gardens. Overall, the system collects water, filters it at two points and stores it before supplying the building and outdoor taps. Excess water follows a separate route into a planted area.\n\nIn the first stage, rain falling on the roof is directed into gutters. These carry the water to a mesh filter, where larger material can be removed before the water reaches storage. The filtered water then flows into a tank. This tank holds the supply until it is required for one of the two designated uses.\n\nWhen water is needed, a pump moves it from the tank through a second, finer filter. It is then delivered to toilets or taps used for gardening. The overflow has a different destination. During periods when more rain is collected than the tank can hold, the excess enters a planted drainage area."
+    },
+    {
+      "title": "Task 2 · Environmental rules for homes",
+      "prompt": "Some people think all new homes should be required to meet strict energy and water efficiency standards, even if this raises construction costs. To what extent do you agree or disagree?",
+      "minWords": 250,
+      "sample": "New housing can shape household energy and water use for decades. I support enforceable efficiency standards for new homes, provided that their requirements are introduced gradually and are accompanied by measures to manage upfront costs.\n\nThe principal reason for setting standards at the construction stage is that some improvements are easier to make before a home is occupied. Proper insulation, for instance, can be incorporated into walls while a building is under construction. Adding the same insulation later may require a family to move furniture or pay for substantial repairs. The initial investment can also lower bills throughout the life of the property. This matters particularly in rented housing, where the owner may otherwise have little incentive to pay for improvements that mainly benefit tenants.\n\nNevertheless, a rule that is tightened too quickly could make modest homes more expensive to build. Small contractors may need training, and products that meet a new specification may be scarce in some regions. Governments should therefore publish a gradual timetable and give builders more than one way to achieve the required performance. They could also direct support to affordable housing projects, where a small cost increase could otherwise put a development at risk. Requiring a particular device everywhere would be less sensible than setting an outcome, since the best solution differs by climate and site.\n\nOverall, I agree that new homes should meet ambitious environmental standards. The most effective standards would measure building performance and allow enough time for suppliers, builders and housing providers to adapt. That makes long-term savings more attainable without unnecessarily delaying construction."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "information-habits",
+  "title": "News, devices and attention",
+  "skill": "Speaking",
+  "collection": "Academic · Nâng cao",
+  "difficulty": "Nâng cao",
+  "seconds": 840,
+  "parts": [
+    {
+      "title": "Part 1 · Your sources of information",
+      "prompts": [
+        "How do you find out what is happening in your area?",
+        "Do you usually read news on your phone?",
+        "Would you like to spend less time looking at your phone?"
+      ],
+      "sample": "Most local news reaches me through a neighbourhood group. I check important announcements against the council website because messages in the group sometimes miss details. I also turn off news notifications while studying, since seeing an alert can interrupt my train of thought even when I decide not to open it."
+    },
+    {
+      "title": "Part 2 · Something you verified",
+      "prompts": [
+        "Describe a time when you checked whether a piece of information was accurate.",
+        "Say what you heard, why it mattered, and how you checked it.",
+        "Explain what you did after you found the answer."
+      ],
+      "sample": "A friend shared a message saying that the last bus from our university would leave an hour earlier during exam week. It mattered because I was due to finish an evening exam after the time listed in the message. I checked the route page and found an announcement with a similar headline. However, the timetable change applied only to a different route. I rang the station to confirm, mainly because the screenshot my friend sent had been cropped and did not show the route number. Once the station confirmed that our bus would run as usual, I sent the original link to our class group and explained which service the announcement referred to. What I took from that experience was that the information itself was genuine, but removing a small detail changed what it appeared to mean."
+    },
+    {
+      "title": "Part 3 · Evaluating information",
+      "prompts": [
+        "Should schools teach students how to check claims online?",
+        "What responsibilities do platforms have when users share inaccurate information?",
+        "Why might accurate information be less likely to spread than a false claim?"
+      ],
+      "sample": "A false claim can be easier to share because it offers a simple explanation or provokes a strong emotion. A careful correction may need several sentences to explain what is known and how the evidence was collected. Platforms could make it easier to see the original source and publication date before a post is forwarded. That change would give people more context without assuming that every disputed statement can be assessed immediately."
+    }
+  ]
+}

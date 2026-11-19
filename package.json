@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "npm run check:content && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "check:content": "node scripts/check-content.mjs"
+    "check:content": "node scripts/check-content.mjs",
+    "test": "node --test scripts/progress.test.mjs"
   },
   "repository": {
     "type": "git",

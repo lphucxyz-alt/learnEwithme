@@ -1,0 +1,37 @@
+{
+  "id": "everyday-purchases",
+  "title": "Objects, repairs and shopping",
+  "skill": "Speaking",
+  "collection": "Academic · Theo chủ đề",
+  "difficulty": "Trung bình",
+  "seconds": 840,
+  "parts": [
+    {
+      "title": "Part 1 · Shopping habits",
+      "prompts": [
+        "How often do you shop online?",
+        "Which things do you prefer to buy in person?",
+        "Do you make a list before you go shopping?"
+      ],
+      "sample": "I buy things online when I already know the brand and size. With shoes, I would rather try them on because sizes vary between brands. I also keep a short shopping list on my phone so I can check what I actually need before paying."
+    },
+    {
+      "title": "Part 2 · Something you repaired",
+      "prompts": [
+        "Describe a useful object that you repaired or had repaired.",
+        "Say what it was, what went wrong and how it was repaired.",
+        "Explain why you decided to keep it."
+      ],
+      "sample": "I had a desk lamp repaired a few years ago. It belonged to my grandfather and was still in good condition apart from a switch that sometimes failed. I had expected to replace it, but a neighbour suggested going to a repair workshop at our library. The person running the workshop tested the lamp and found that the switch was worn. She replaced the broken part and checked that the cable was safe before plugging it in again. The whole thing took less than half an hour. I kept the lamp partly because it reminded me of my grandfather, but I also realised that it fit my desk better than most new lamps I had looked at. I still use it every evening and have since taken a broken suitcase to the same workshop."
+    },
+    {
+      "title": "Part 3 · Buying and repairing",
+      "prompts": [
+        "Why do people sometimes replace objects that can be repaired?",
+        "Who should make it easier to repair electronic products?",
+        "Would a second-hand market change what manufacturers produce?"
+      ],
+      "sample": "When a repair is difficult to arrange, replacing an item can seem more convenient. Manufacturers can help by making parts available for several years and publishing repair information. Shops could display the expected cost of common repairs beside the price. That would help people make a decision before buying, when they still have several options."
+    }
+  ]
+}

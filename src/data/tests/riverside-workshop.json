@@ -1,0 +1,101 @@
+{
+  "id": "riverside-workshop",
+  "title": "Riverside skills centre: course notice",
+  "skill": "Reading",
+  "collection": "General Training",
+  "difficulty": "Nền tảng",
+  "seconds": 840,
+  "paragraphs": [
+    "A. Riverside Skills Centre is offering evening courses in bicycle repair, beginner photography and spreadsheet skills. The first meeting of each course is free to attend, but places are limited. To reserve a place, complete the web form by 4 p.m. on the Friday before your class starts. You will receive an email with your room number. If the centre is full, you can ask to join the waiting list.",
+    "B. The bicycle course meets in Workshop 2 on Tuesdays. Bring your own bicycle if you can move it safely. The centre supplies tools and gloves. The first session covers tyre pressure and punctures; gears are covered in the fourth and final session. If you bring a bicycle, leave it in the marked parking area until the tutor asks you to bring it inside.",
+    "C. Photography classes meet on Wednesdays. You can use a camera or a phone. Students must bring their own memory card if they borrow a centre camera. During the first class, the tutor will explain how to organise files. The second class takes place outdoors and will move inside only if the weather is unsafe.",
+    "D. Spreadsheet learners meet on Thursdays. Computers are provided in Room 3; there is no need to bring a laptop. Before attending, send the centre a message if you require a large-print handout. A general help desk operates until 6 p.m., but tutors will be available for course questions only on the evening they teach."
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Use the ___ form to reserve a place.",
+      "answers": [
+        "web"
+      ],
+      "explanation": "Đoạn A hướng dẫn complete the web form.",
+      "evidence": 0
+    },
+    {
+      "id": "q2",
+      "kind": "tfng",
+      "prompt": "Every session of each course is free.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Chỉ buổi đầu mỗi khóa được nói là miễn phí.",
+      "evidence": 0
+    },
+    {
+      "id": "q3",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. The bicycle course starts with tyre pressure and ___.",
+      "answers": [
+        "punctures"
+      ],
+      "explanation": "Đoạn B nêu hai nội dung của buổi đầu.",
+      "evidence": 1
+    },
+    {
+      "id": "q4",
+      "kind": "choice",
+      "prompt": "What should students do if they bring a bicycle?",
+      "answers": [
+        "Wait for the tutor before taking it inside."
+      ],
+      "explanation": "Xe để khu đánh dấu đến khi giáo viên cho mang vào.",
+      "evidence": 1,
+      "choices": [
+        "Take it straight into the workshop.",
+        "Wait for the tutor before taking it inside.",
+        "Take it into Room 3."
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "gap",
+      "prompt": "Use TWO WORDS. To borrow a centre camera, bring a ___.",
+      "answers": [
+        "memory card"
+      ],
+      "explanation": "Đoạn C yêu cầu mang thẻ nhớ của mình.",
+      "evidence": 2
+    },
+    {
+      "id": "q6",
+      "kind": "tfng",
+      "prompt": "The second photography class is planned as an outdoor session.",
+      "answers": [
+        "True"
+      ],
+      "explanation": "Lớp thứ hai dự kiến ngoài trời, trừ khi thời tiết không an toàn.",
+      "evidence": 2
+    },
+    {
+      "id": "q7",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Ask in advance if you need a large-print ___.",
+      "answers": [
+        "handout"
+      ],
+      "explanation": "Đoạn D yêu cầu nhắn trước để nhận tài liệu in chữ lớn.",
+      "evidence": 3
+    },
+    {
+      "id": "q8",
+      "kind": "tfng",
+      "prompt": "Photography tutors offer course guidance at the help desk every afternoon.",
+      "answers": [
+        "False"
+      ],
+      "explanation": "Giáo viên trả lời câu hỏi khóa học vào buổi tối họ dạy.",
+      "evidence": 3
+    }
+  ]
+}

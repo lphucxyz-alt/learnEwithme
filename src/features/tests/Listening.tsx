@@ -6,11 +6,14 @@ export function Listening({ turns, review = false }: { turns: { speaker: string;
   const { state } = useStudy()
   const [index, setIndex] = useState(-1)
   const [error, setError] = useState('')
+  const speakers = [...new Set(turns.map(turn => turn.speaker))]
   useEffect(() => stopAudio, [])
   function play(position: number) {
     if (position === turns.length) { setIndex(-1); return }
     setIndex(position)
-    speak(turns[position].text, position % 2 ? 'en-US' : state.accent, state.rate, {
+    const turn = turns[position]
+    const alternate = state.accent === 'en-GB' ? 'en-US' : 'en-GB'
+    speak(turn.text, speakers.indexOf(turn.speaker) % 2 ? alternate : state.accent, state.rate, {
       end: () => play(position + 1), error: message => { setError(message); setIndex(-1) }
     })
   }

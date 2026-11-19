@@ -4,7 +4,7 @@
 
 - Xác định trình độ xuất phát, band mục tiêu, ngày thi và ngân sách thời gian. Sau chẩn đoán, phân bổ bài theo kỹ năng yếu và đo lại bằng bài tương đương.
 - Vòng học Input → Practice → Active Recall → Exam Simulation → Error Analysis. Mỗi lỗi phải có đáp án, bằng chứng hoặc tiêu chí, lần ôn kế tiếp và cơ hội kiểm tra chuyển giao.
-- Giảm ma sát bằng phiên ngắn, tiếp tục bài đang làm và hiển thị bước kế tiếp. Shield được tích lũy sau tuần đủ bảy ngày, giúp bỏ lỡ một ngày mà vẫn duy trì động lực. Theo dõi mức độ đều đặn và độ chính xác và tiến độ từng kỹ năng.
+- Giảm ma sát bằng phiên ngắn, tiếp tục bài đang làm và hiển thị bước kế tiếp. Shield được cấp sau mỗi bảy ngày học thực sự liên tiếp. Một gián đoạn dùng tối đa một khiên. Ngày được giữ bằng khiên có dấu riêng trong lịch và giữ độ dài chuỗi theo lịch. Theo dõi mức độ đều đặn và độ chính xác và tiến độ từng kỹ năng.
 - Tách luyện có hỗ trợ khỏi mô phỏng có thời gian. Writing và Speaking cần rubric, mẫu có chú giải và phản hồi của người chấm trước khi diễn giải band.
 
 ## Hệ thống
@@ -15,7 +15,7 @@ React và TypeScript quản lý giao diện. React Router dùng hash để tải
 - `src/features` chứa logic nghiệp vụ theo phân hệ. `src/components` chứa điều khiển dùng chung.
 - `src/services` gồm adapter lưu trữ, Web Speech và SM-2. `src/types` định nghĩa hợp đồng.
 - `src/data` giữ học liệu. Kho bài thi tự nhận JSON từ `src/data/tests` qua Vite glob và kiểm tra schema.
-- Dữ liệu cá nhân lưu trong LocalStorage dưới khóa có phiên bản. Deadline ghi bằng timestamp, ngày học theo múi giờ thiết bị. Bản xuất JSON thay thế toàn bộ snapshot khi khôi phục. Ghi âm giữ trong phiên trình duyệt.
+- Dữ liệu cá nhân lưu trong LocalStorage dưới khóa có phiên bản. Deadline ghi bằng timestamp, ngày học theo múi giờ thiết bị. Bản xuất JSON thay thế toàn bộ snapshot khi khôi phục. Ghi âm giữ trong phiên trình duyệt. Snapshot cũ đọc được nhờ giá trị mặc định cho tiến độ nền tảng và lịch chọn câu mới. Lịch gần đây dùng cho luyện nhanh và chọn đề, với trộn ngẫu nhiên trong các mục có cùng độ ưu tiên.
 
 ## Thêm đề thi
 

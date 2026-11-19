@@ -8,7 +8,7 @@ type Update = (update: (state: StudyState) => StudyState) => void
 const StudyContext = createContext<{
   state: StudyState
   update: Update
-  complete: (domain: Domain, xp: number, seconds?: number, errors?: CardSeed[]) => void
+  complete: (domain: Domain, xp: number, seconds?: number, errors?: CardSeed[], qualifies?: boolean) => void
   storageError: boolean
 } | null>(null)
 
@@ -24,9 +24,9 @@ export function StudyProvider({ children }: { children: ReactNode }) {
     }
     document.documentElement.dataset.theme = state.theme
   }, [state])
-  function complete(domain: Domain, xp: number, seconds = 0, errors: CardSeed[] = []) {
+  function complete(domain: Domain, xp: number, seconds = 0, errors: CardSeed[] = [], qualifies = true) {
     update(previous => {
-      const next = record(previous, domain, xp, seconds)
+      const next = record(previous, domain, xp, seconds, undefined, qualifies)
       const cards = { ...next.cards }
       for (const error of errors) {
         const card = seedCard(error, cards[error.id])

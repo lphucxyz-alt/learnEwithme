@@ -1,0 +1,140 @@
+{
+  "id": "street-sensors",
+  "title": "Using sound sensors in a city park",
+  "skill": "Listening",
+  "collection": "Academic · Nâng cao",
+  "difficulty": "Nâng cao",
+  "seconds": 780,
+  "turns": [
+    {
+      "speaker": "Lecturer",
+      "text": "Today we’ll look at why environmental sound measurements need careful interpretation. In one city, residents complained that a park had become louder after it reopened. The council installed sound sensors, expecting a straightforward comparison between daytime and night-time levels."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "The first difficulty was placement. A sensor fixed to an open fence recorded strong wind. Another stood under trees and registered the impact of raindrops on its cover long after rain stopped. The team added wind shields and moved the second sensor away from the canopy."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "A second difficulty concerned averages. A daily average can conceal short noisy events, such as a delivery vehicle passing at six in the morning. The researchers therefore reported the number of times sound exceeded a chosen level, together with the length of each event."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "The sensors did not store speech. They sent sound levels and timestamps to a central system. Researchers paired these records with handwritten observations so they could distinguish a planned sports event from unexpected construction work nearby."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "After installation, complaints still rose on certain evenings even when the average level barely changed. A follow-up interview suggested the timing mattered. A brief sound shortly after an event was expected, but the same sound near bedtime was more disruptive to some residents."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "The recommendation was to set different monitoring periods for occasional events, routine maintenance and quiet hours. The council also kept a paper reporting option because some residents did not use the online portal."
+    },
+    {
+      "speaker": "Lecturer",
+      "text": "A remaining limitation is seasonal coverage. Most data were collected in spring. A new sensor deployment is planned over winter, when different vegetation and patterns of use may change the results."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "kind": "choice",
+      "prompt": "Why were sensors installed initially?",
+      "answers": [
+        "Residents reported more noise after reopening."
+      ],
+      "explanation": "Cư dân phàn nàn công viên ồn hơn sau mở lại.",
+      "evidence": 0,
+      "choices": [
+        "The council wanted to identify individual visitors.",
+        "Residents reported more noise after reopening.",
+        "Park staff wanted to remove the trees."
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "gap",
+      "prompt": "Use TWO WORDS. The team added ___ to improve measurements.",
+      "answers": [
+        "wind shields"
+      ],
+      "explanation": "Wind shields giảm ảnh hưởng của gió.",
+      "evidence": 1
+    },
+    {
+      "id": "q3",
+      "kind": "choice",
+      "prompt": "Why did the researchers report events rather than relying on daily averages?",
+      "answers": [
+        "Averages can hide brief peaks."
+      ],
+      "explanation": "Một tiếng ồn ngắn lúc 6 giờ có thể bị che trong số trung bình.",
+      "evidence": 2,
+      "choices": [
+        "Daily averages require expensive software.",
+        "Averages can hide brief peaks.",
+        "The sensors could only work for a few seconds."
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "choice",
+      "prompt": "What did the sensors send to the central system?",
+      "answers": [
+        "Sound levels and timestamps"
+      ],
+      "explanation": "Thiết bị lưu mức âm và mốc giờ, không lưu tiếng nói.",
+      "evidence": 3,
+      "choices": [
+        "Recordings of speech",
+        "Handwritten event descriptions",
+        "Sound levels and timestamps"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "gap",
+      "prompt": "Use TWO WORDS. Sensor records were combined with ___.",
+      "answers": [
+        "handwritten observations"
+      ],
+      "explanation": "Ghi chép tay giúp nhận diện nguyên nhân của âm thanh.",
+      "evidence": 3
+    },
+    {
+      "id": "q6",
+      "kind": "choice",
+      "prompt": "What helped explain differences in complaints on similar evenings?",
+      "answers": [
+        "When the sound occurred"
+      ],
+      "explanation": "Âm thanh gần giờ ngủ gây khó chịu hơn dù mức không đổi.",
+      "evidence": 4,
+      "choices": [
+        "The make of the sensor",
+        "When the sound occurred",
+        "The number of tickets sold"
+      ]
+    },
+    {
+      "id": "q7",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. A ___ reporting option remained available.",
+      "answers": [
+        "paper"
+      ],
+      "explanation": "Paper option hỗ trợ người không dùng cổng online.",
+      "evidence": 5
+    },
+    {
+      "id": "q8",
+      "kind": "gap",
+      "prompt": "Use ONE WORD. Most existing observations were made in ___.",
+      "answers": [
+        "spring"
+      ],
+      "explanation": "Spring là mùa thu chính, winter là kế hoạch tiếp theo.",
+      "evidence": 6
+    }
+  ]
+}

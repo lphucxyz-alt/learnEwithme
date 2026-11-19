@@ -10,6 +10,7 @@ Yêu cầu Node.js 22.18 trở lên.
 npm ci
 npm run dev
 npm run build
+npm test
 npx tsc --noEmit
 npm run preview
 ```
@@ -18,12 +19,13 @@ Vite phục vụ tại đường dẫn `/learnEwithme/`. URL dùng hash, ví d�
 
 ## Sử dụng
 
-- Trung tâm hiển thị XP, lịch hoạt động, streak, shield, nhiệm vụ và thẻ đến hạn. Pomodoro ghi phút khi kết thúc phiên tập trung.
-- IPA có 44 âm, biểu đồ cấu âm, bài phân biệt và phòng shadowing. Bảng âm có bản thu IPA và mẫu tổng hợp dự phòng. Bản thu từ điển được dùng khi có giọng phù hợp. Đoạn văn được gửi tới bộ đọc của trình duyệt.
+- Trung tâm có lửa chuỗi đổi màu ở các mốc 1/10/30/60/100/365, nhiệm vụ, XP, lịch và thẻ đến hạn. Mỗi 7 ngày học liên tục nhận một khiên cho một ngày bỏ lỡ. Pomodoro ghi phút khi kết thúc phiên tập trung.
+- Nền tảng có 46 bài, 243 câu có giải thích tiếng Việt theo A1–B1, từ mạo từ và giới từ đến 12 dạng thì thường học và câu phức. Câu sai chuyển vào lịch ôn SM-2.
+- IPA có 44 âm, 33 cặp luyện phân biệt, biểu đồ cấu âm và phòng shadowing. Bảng âm có bản thu IPA và mẫu tổng hợp dự phòng. Bản thu từ điển được dùng khi có giọng phù hợp. Đoạn văn được gửi tới bộ đọc của trình duyệt.
 - Động từ có 165 mục, ba dạng, ví dụ, IPA và nhóm biến đổi. CEFR trong kho là mức tham khảo. Phiên âm ban đầu được tạo bằng eSpeak NG với một số từ đa âm được chỉnh riêng.
 - Kho cấu trúc có ví dụ cơ bản và nâng cấp kèm bài ghép và biến đổi. Bài nhập chữ được so với các đáp án chấp nhận trong học liệu.
-- Kho đề có bốn bài mô phỏng tự biên soạn theo kỹ năng. Quy đổi band của mẫu Reading/Listening mang tính minh họa. Writing dùng rubric tự chấm và Speaking dùng nghe lại.
-- Luyện nhanh phối hợp thẻ đến hạn, IPA, động từ và cấu trúc. Luyện nói 4/3/2 hỗ trợ ghi âm, ghi chú cụm từ và mở bản ghi cũ để đối chiếu. Hãy tải file ghi âm trước khi rời trang.
+- Kho đề có 20 bài tự biên soạn, gồm 5 bài mỗi kỹ năng và nguồn đề chính thức IELTS để luyện thêm. Reading và Listening là các bài theo phần. Quy đổi band của mẫu Reading/Listening mang tính minh họa. Writing dùng rubric tự chấm và Speaking dùng nghe lại.
+- Luyện nhanh có chế độ ngữ pháp theo trình độ và chế độ trộn thẻ đến hạn, IPA, động từ, cấu trúc. Lựa chọn mới ưu tiên nội dung chưa gặp và lưu lịch chọn cùng tiến độ. Luyện nói 4/3/2 hỗ trợ ghi âm, ghi chú cụm từ và mở bản ghi cũ để đối chiếu. Hãy tải file ghi âm trước khi rời trang.
 - Nhấn **Ctrl+K**, **Cmd+K** hoặc **/** để mở tìm kiếm. Dùng **Space** để lật thẻ, **←/→** để chuyển flashcard, **Enter** để nộp biểu mẫu, **1–4** để chấm thẻ SRS đã lật.
 - Dùng **Cài đặt → Xuất bản sao lưu** rồi nhập JSON trên thiết bị khác. Sao lưu chứa tiến độ, lịch sử đề, sổ lỗi, cài đặt và ghi chú 4/3/2.
 

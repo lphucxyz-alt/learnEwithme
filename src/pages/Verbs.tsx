@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
+import { shuffle } from '../services/random'
 import { Listen } from '../components/Audio'
 import { Flashcard, VerbDrill } from '../features/verbs/VerbDrill'
 import { verbExample, verbGroup, verbs } from '../features/verbs/verbs'
@@ -9,9 +10,10 @@ export default function Verbs() {
   const [query, setQuery] = useState(params.get('q') ?? '')
   const [group, setGroup] = useState('')
   const [mode, setMode] = useState<'library' | 'flash' | 'typing' | 'cloze'>('library')
+  const [order, setOrder] = useState(verbs)
   const [position, setPosition] = useState(0)
   const [round, setRound] = useState(0)
-  const filtered = verbs.filter(verb => (!group || group === verbGroup(verb) || group === 'ought' && /[oa]ught$/.test(verb.past) || group === 'iau' && /i/.test(verb.base) && /a/.test(verb.past) && /u/.test(verb.part))
+  const filtered = (mode === 'library' ? verbs : order).filter(verb => (!group || group === verbGroup(verb) || group === 'ought' && /[oa]ught$/.test(verb.past) || group === 'iau' && /i/.test(verb.base) && /a/.test(verb.past) && /u/.test(verb.part))
     && [verb.base, verb.past, verb.part, verb.meaning].some(value => value.toLowerCase().includes(query.toLowerCase().trim())))
   const verb = filtered[position % (filtered.length || 1)]
   function move(direction: number) {
@@ -29,7 +31,7 @@ export default function Verbs() {
         </select>
       </div>
       <div className="row">{([['library', 'Tra cứu'], ['flash', 'Flashcard'], ['typing', 'Gõ nhanh'], ['cloze', 'Điền ngữ cảnh']] as const).map(([value, label]) =>
-        <button key={value} aria-pressed={mode === value} onClick={() => { setMode(value); setPosition(0) }}>{label}</button>)}</div>
+        <button key={value} aria-pressed={mode === value} onClick={() => { setMode(value); setOrder(shuffle(verbs)); setPosition(0); setRound(round => round + 1) }}>{label}</button>)}{mode !== 'library' && <button onClick={() => { setOrder(shuffle(verbs)); setPosition(0); setRound(value => value + 1) }}>Trộn lại</button>}</div>
       {!verb && <p>Không tìm thấy động từ phù hợp.</p>}
       {verb && mode === 'flash' && <Flashcard key={verb.base + round} verb={verb} move={move} />}
       {verb && (mode === 'typing' || mode === 'cloze') && <VerbDrill key={mode + verb.base + round} verb={verb} mode={mode} done={() => move(1)} />}

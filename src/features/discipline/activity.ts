@@ -10,44 +10,49 @@ export function shiftDay(day: string, offset: number) {
   return dayKey(date)
 }
 
-export function record(state: StudyState, domain: Domain, xp: number, seconds = 0, day = dayKey()): StudyState {
+export function isStudyDay(entry?: StudyState['activity'][string]) {
+  return entry?.qualified ?? Boolean(entry && Object.values(entry.counts).some(count => count > 0))
+}
+
+export function record(state: StudyState, domain: Domain, xp: number, seconds = 0, day = dayKey(), qualifies = true): StudyState {
   const entry = state.activity[day] ?? { xp: 0, seconds: 0, counts: {} }
   return { ...state, activity: { ...state.activity, [day]: {
     xp: entry.xp + xp, seconds: entry.seconds + seconds,
-    counts: { ...entry.counts, [domain]: (entry.counts[domain] ?? 0) + 1 }
+    counts: { ...entry.counts, [domain]: (entry.counts[domain] ?? 0) + 1 },
+    qualified: qualifies || isStudyDay(entry)
   } } }
 }
 
 export function streaks(activity: StudyState['activity'], today: string) {
-  const days = Object.keys(activity).filter(day => day <= today).sort()
+  const days = Object.keys(activity).filter(day => day <= today && isStudyDay(activity[day])).sort()
   let longest = 0
   let current = 0
   let shields = 0
-  let weekly = 0
-  let previousWeek = ''
+  let studyRun = 0
   let previous = ''
+  const protectedDays = new Set<string>()
+  function coverGap(next: string) {
+    if (!previous || next === shiftDay(previous, 1)) return
+    studyRun = 0
+    if (shields > 0) {
+      shields--
+      protectedDays.add(shiftDay(previous, 1))
+      current++
+      longest = Math.max(longest, current)
+      if (next === shiftDay(previous, 2)) return
+    }
+    current = 0
+  }
   for (const day of days) {
-    const weekday = new Date(day + 'T12:00:00').getDay()
-    const week = shiftDay(day, -((weekday + 6) % 7))
-    if (week !== previousWeek) {
-      weekly = 0
-      previousWeek = week
-    }
-    weekly++
-    if (previous && shiftDay(previous, 1) !== day) {
-      if (shields > 0 && shiftDay(previous, 2) === day) shields--
-      else current = 0
-    }
+    coverGap(day)
     current++
-    if (weekly === 7) shields++
+    studyRun++
+    if (studyRun % 7 === 0) shields++
     longest = Math.max(longest, current)
     previous = day
   }
-  if (previous && previous < shiftDay(today, -1)) {
-    if (previous === shiftDay(today, -2) && shields > 0) shields--
-    else current = 0
-  }
-  return { current, longest, shields }
+  if (previous && previous < shiftDay(today, -1)) coverGap(today)
+  return { current, longest, shields, protectedDays, studiedToday: previous === today }
 }
 
 export function clockLabel(seconds: number) {

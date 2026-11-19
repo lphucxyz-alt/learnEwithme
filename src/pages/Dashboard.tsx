@@ -4,6 +4,7 @@ import { useStudy } from '../app/StudyProvider'
 import { dayKey, shiftDay, streaks, clockLabel } from '../features/discipline/activity'
 import { useNow } from '../features/discipline/FocusTimer'
 import { ReviewCard } from '../features/discipline/Review'
+import { StreakCard } from '../features/discipline/StreakCard'
 import { FluencyPlan } from '../features/discipline/FluencyPlan'
 
 export default function Dashboard() {
@@ -16,9 +17,10 @@ export default function Dashboard() {
   const [weeks, setWeeks] = useState(12)
   const [selected, setSelected] = useState<string | null>(null)
   const activity = state.activity[today]
-  const { current, longest, shields } = streaks(state.activity, today)
+  const { current, longest, shields, protectedDays, studiedToday } = streaks(state.activity, today)
   const due = Object.values(state.cards).filter(card => card.due <= today).sort((a,b) => a.due.localeCompare(b.due))
   const rituals = [
+    { domain: 'foundations', title: 'Luyện ngữ pháp nền tảng', total: 5 },
     { domain: 'ipa', title: 'Luyện phân biệt âm IPA', total: 5 },
     { domain: 'verbs', title: 'Ôn động từ bất quy tắc', total: 10 },
     { domain: 'structures', title: 'Biến đổi câu IELTS', total: 3 },
@@ -31,21 +33,22 @@ export default function Dashboard() {
     <header className="hero">
       <div><p className="overline">{new Intl.DateTimeFormat('vi', { weekday: 'long', month: 'long', day: 'numeric' }).format(now)}</p>
       <h1>Trung tâm kỷ luật</h1><p>Tập trung vào bước tiếp theo trên đường đến band {state.targetBand.toFixed(1)}.</p></div>
-      <Link className="button primary" to="/practice">Bắt đầu luyện</Link>
+      <div className="row"><Link className="button primary" to="/foundations">Học nền tảng</Link><Link className="button hero-secondary" to="/practice">Luyện nhanh</Link></div>
     </header>
     <div className="metrics">
-      <section className="panel"><span>Chuỗi hiện tại</span><strong>{current} ngày</strong><small>Kỷ lục {longest} ngày</small></section>
+      <StreakCard days={current} longest={longest} studied={studiedToday} protectedYesterday={protectedDays.has(shiftDay(today, -1))} />
       <section className="panel"><span>XP hôm nay</span><strong>{activity?.xp ?? 0} XP</strong><small>{Math.floor((activity?.seconds ?? 0) / 60)} phút tập trung</small></section>
-      <section className="panel"><span>Khiên bảo vệ</span><strong>{shields}</strong><small>Còn {Math.floor(left / 3600)}:{clockLabel(left % 3600)} trong ngày</small></section>
+      <section className="panel"><span>Khiên bảo vệ</span><strong>{shields}</strong><small>Còn {Math.floor(left / 3600)}:{clockLabel(left % 3600)} trong ngày</small><small>Mỗi 7 ngày học liền nhận 1 khiên. Khiên giữ được một ngày nghỉ trong mỗi lần gián đoạn.</small></section>
     </div>
     <section className="panel stack">
       <div className="between"><h2>Lịch hoạt động</h2><select aria-label="Khoảng thời gian" value={weeks} onChange={event => setWeeks(Number(event.target.value))}><option value={12}>12 tuần</option><option value={53}>Một năm</option></select></div>
       <div className="heat-scroll"><div className="heatmap">{Array.from({ length: weeks * 7 }, (_, index) => {
         const day = shiftDay(start, index)
         const xp = state.activity[day]?.xp ?? 0
-        return <button key={day} type="button" disabled={day > today} data-level={Math.min(4, Math.ceil(xp / 12))} aria-label={day + ' · ' + xp + ' XP'} title={day + ' · ' + xp + ' XP'} onClick={() => setSelected(day)} />
+        const label = day + ' · ' + xp + ' XP' + (protectedDays.has(day) ? ' · Được khiên bảo vệ' : '')
+        return <button key={day} type="button" disabled={day > today} data-level={Math.min(4, Math.ceil(xp / 12))} data-protected={protectedDays.has(day)} aria-label={label} title={label} onClick={() => setSelected(day)} />
       })}</div></div>
-      <p className="muted">{selected ?? today} · {detail?.xp ?? 0} XP · {Math.floor((detail?.seconds ?? 0) / 60)} phút · {Object.values(detail?.counts ?? {}).reduce((a,b) => a+b, 0)} lượt</p>
+      <p className="muted">{selected ?? today}{protectedDays.has(selected ?? today) && ' · Được khiên bảo vệ'} · {detail?.xp ?? 0} XP · {Math.floor((detail?.seconds ?? 0) / 60)} phút · {Object.values(detail?.counts ?? {}).reduce((a,b) => a+b, 0)} lượt</p>
     </section>
     <div className="split">
       <section className="panel stack"><h2>Nhiệm vụ hằng ngày</h2>{rituals.map(ritual => {

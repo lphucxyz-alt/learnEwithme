@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const domains = ['ipa', 'verbs', 'structures', 'tests', 'review', 'practice', 'focus'] as const
+export const domains = ['foundations', 'ipa', 'verbs', 'structures', 'tests', 'review', 'practice', 'focus'] as const
 export const domainSchema = z.enum(domains)
 export type Domain = z.infer<typeof domainSchema>
 const isoDay = z.iso.date()
@@ -25,7 +25,9 @@ export const stateSchema = z.object({
   dailyMinutes: z.number().int().min(5).max(120),
   targetBand: z.number().min(4).max(9),
   fluencyNotes: z.string().default(''),
-  activity: z.record(isoDay, z.object({ xp: count, seconds: count, counts: z.partialRecord(domainSchema, count) })),
+  activity: z.record(isoDay, z.object({ xp: count, seconds: count, counts: z.partialRecord(domainSchema, count), qualified: z.boolean().optional() })),
+  lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count })).default({}),
+  recentPractice: z.array(z.string()).max(240).default([]),
   cards: z.record(z.string(), cardSchema),
   drafts: z.record(z.string(), draftSchema),
   attempts: z.array(z.object({ id: z.string(), examId: z.string(), at: z.iso.datetime(), score: count.nullable(), total: count, draft: draftSchema })),
@@ -34,6 +36,6 @@ export const stateSchema = z.object({
 export type StudyState = z.infer<typeof stateSchema>
 export const initialState: StudyState = {
   version: 1, theme: 'light', accent: 'en-GB', rate: 1, dailyMinutes: 25, targetBand: 7, fluencyNotes: '',
-  activity: {}, cards: {}, drafts: {}, attempts: [],
+  activity: {}, lessons: {}, recentPractice: [], cards: {}, drafts: {}, attempts: [],
   focus: { mode: 'work', duration: 1500, remaining: 1500, deadline: null }
 }
