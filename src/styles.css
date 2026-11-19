@@ -820,3 +820,342 @@ label:has(textarea) { width: 100%; }
 .coach-criteria div { background: var(--panel); border: 1px solid var(--line); border-radius: .6rem; padding: .45rem .65rem; }
 .coach-criteria dt { font-weight: 700; }
 .coach-criteria dd { margin: 0; color: var(--muted); }
+
+.ipa-ux-bridge {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.voice-mirror {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.voice-mirror-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.voice-rec-btn[data-recording="true"] {
+  border-color: rgba(248, 113, 113, 0.55);
+  background: rgba(220, 38, 38, 0.14);
+  color: var(--error);
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--error);
+  display: inline-block;
+}
+
+.voice-rec-btn[data-recording="true"] .rec-dot {
+  animation: rec-pulse 0.85s ease-in-out infinite;
+}
+
+@keyframes rec-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.55);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 6px rgba(248, 113, 113, 0);
+  }
+}
+
+.voice-progress {
+  height: 5px;
+  width: 100%;
+  border-radius: 999px;
+  background: var(--inset);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.voice-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--error), var(--primary));
+  transition: width 50ms linear;
+}
+
+.voice-error {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--error);
+}
+
+.ipa-tip-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.95rem;
+  background: var(--inset);
+  border: 1px solid var(--line);
+}
+
+.ipa-tip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ipa-tip-vs {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.ipa-tip-cue {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.ipa-tip-trap {
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.ipa-tip-trap strong {
+  color: var(--error);
+  font-weight: 600;
+}
+
+.ipa-tip-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--line);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.ipa-tip-pair code {
+  padding: 0.18rem 0.52rem;
+  border-radius: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.lifeline-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.lifeline-toggle {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.lifeline-toggle-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.lifeline-toggle-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lifeline-used-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.lifeline-chevron {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.lifeline-body {
+  display: grid;
+  gap: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.lifeline-topic {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.lifeline-topic strong {
+  color: var(--text);
+}
+
+.lifeline-steps {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lifeline-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.95rem 1rem;
+  border-radius: 0.9rem;
+  background: var(--inset);
+  border: 1px solid var(--line);
+}
+
+.lifeline-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.lifeline-step-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lifeline-step-time {
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.lifeline-step h3 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lifeline-step p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.lifeline-starter {
+  margin-top: auto;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--line);
+  font-style: italic;
+  color: var(--text) !important;
+}
+
+.lifeline-section-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin-bottom: 0.55rem;
+}
+
+.lifeline-trigger-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.lifeline-trigger-chip {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: var(--inset);
+  border: 1px solid var(--line);
+}
+
+.lifeline-trigger-chip strong {
+  color: var(--text);
+  margin-right: 0.25rem;
+}
+
+.lifeline-phrase-groups {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lifeline-group {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+
+.lifeline-group-title {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lifeline-chip-list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lifeline-phrase-chip {
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.72rem;
+  font-size: 0.81rem;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--inset);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color 0.16s ease, background-color 0.16s ease, transform 0.14s ease;
+}
+
+.lifeline-phrase-chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.lifeline-phrase-chip[data-used="true"] {
+  background: var(--success-soft);
+  border-color: rgba(52, 211, 153, 0.38);
+  color: var(--success);
+}
+
+@media (max-width: 960px) {
+  .lifeline-steps,
+  .lifeline-phrase-groups {
+    grid-template-columns: 1fr;
+  }
+}

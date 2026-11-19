@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { leastRecent } from '../services/random'
 import { exams } from '../features/tests/catalog'
 import { Speaking } from '../features/tests/Speaking'
+import { SpeakingLifeline } from '../features/fluency/SpeakingLifeline'
 
 const topics = exams.filter(item => item.skill === 'Speaking')
 const initialTopic = topics.find(item => item.id === 'study-routines') ?? topics[0]
@@ -25,6 +26,7 @@ export default function Fluency() {
       const [next] = leastRecent(topics.filter(item => item.id !== topic), 1, item => item.id, recent)
       if (next) selectTopic(next.id)
     }}>Đổi chủ đề ngẫu nhiên</button></section>
+    <SpeakingLifeline topic={exam.title} roundMinutes={4} defaultOpen={true} />
     <Speaking key={exam.id} parts={exam.parts} fluency />
   </>
 }
