@@ -1,0 +1,20 @@
+{
+  "id":"repair-cafe", "title":"A visit to the repair café", "skill":"Listening", "collection":"Discipline Samples", "difficulty":"Nền tảng", "seconds":480,
+  "turns":[
+    {"speaker":"Maya","text":"Good morning, Westbrook Repair Café. This is Maya speaking. How can I help?"},
+    {"speaker":"Owen","text":"I'm calling about the workshop this Saturday. I thought it was at the library on King Street. Is that still right?"},
+    {"speaker":"Maya","text":"We've moved to the community centre. It has a larger room and a separate entrance on Mill Lane."},
+    {"speaker":"Owen","text":"Great. Could I bring in a lamp? It still switches on, but the shade keeps slipping."},
+    {"speaker":"Maya","text":"A lamp is fine. Bring a photograph of the label underneath, please. That will let our volunteer check the model before taking anything apart."},
+    {"speaker":"Owen","text":"Do I need to book a time? I can be there at ten or just after lunch."},
+    {"speaker":"Maya","text":"Please book for twelve thirty. We open at ten, but our electrical volunteer won't arrive until midday."},
+    {"speaker":"Owen","text":"And how much does it cost?"},
+    {"speaker":"Maya","text":"Advice is free. If we need a replacement part, we'll tell you the price before ordering it. Bring the lamp, the label photo and a bag for any loose parts."}
+  ],
+  "questions":[
+    {"id":"q1","kind":"gap","prompt":"Use no more than two words. The entrance is on ___.","answers":["mill lane"],"explanation":"Maya confirms the new entrance is on Mill Lane.","evidence":2},
+    {"id":"q2","kind":"choice","prompt":"What is Owen asked to photograph?","choices":["The shade","The label","The entrance"],"answers":["The label"],"explanation":"A photograph of the label helps check the model first.","evidence":4},
+    {"id":"q3","kind":"gap","prompt":"Write the booking time, for example 10:00.","answers":["12:30","12.30","twelve thirty"],"explanation":"The opening time is ten, but the booking is at twelve thirty.","evidence":6},
+    {"id":"q4","kind":"choice","prompt":"What might Owen have to pay for?","choices":["Advice","The appointment","A replacement part"],"answers":["A replacement part"],"explanation":"Advice is free and a required replacement part can be charged.","evidence":8}
+  ]
+}

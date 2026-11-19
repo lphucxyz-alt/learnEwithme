@@ -1,0 +1,17 @@
+{
+  "id":"urban-trees", "title":"The shade gap", "skill":"Reading", "collection":"Discipline Samples", "difficulty":"Trung bình", "seconds":720,
+  "paragraphs":[
+    "A. On a cloudless afternoon, one side of a street can feel several degrees cooler than the other. While the air temperature changes modestly across a neighbourhood, what a pedestrian feels also depends on the radiation received from buildings, pavement and the sun. Tree crowns can reduce this exposure by shading surfaces and people. In dry conditions, however, the cooling associated with water released through leaves can decline as trees close the pores that regulate water loss.",
+    "B. Riverton's first tree inventory counted trunks rather than the area covered by crowns. That approach was quick, but it gave a newly planted sapling the same weight as a mature tree. The urban forestry team replaced it with a canopy map based on aerial photographs. A network of volunteer observers then checked locations where the photographs could not reliably distinguish a tree canopy from a dark roof.",
+    "C. The highest priority went to three routes linking housing estates with clinics and bus stops. These paths combined low canopy cover with high pedestrian demand. The team used movable shade structures at exposed stops while the new trees established. Permanent planting was avoided where underground utilities left insufficient soil for roots.",
+    "D. To assess whether the changes helped, researchers measured surface temperatures on one shaded and one unshaded side of each street. The most consistent difference appeared in late afternoon, when heat stored in uncovered paving was still being released. Their report recommended combining canopy measures with counts of pedestrians, so a successful programme would be judged partly by who could use the streets comfortably."
+  ],
+  "questions":[
+    {"id":"q1","kind":"tfng","prompt":"Tree cooling through the release of water can decrease in dry conditions.","answers":["True"],"explanation":"In dry conditions trees close pores, reducing the water release responsible for part of the cooling.","evidence":0},
+    {"id":"q2","kind":"tfng","prompt":"The first tree inventory gave mature trees more weight than saplings.","answers":["False"],"explanation":"The inventory counted trunks and gave saplings and mature trees the same weight.","evidence":1},
+    {"id":"q3","kind":"tfng","prompt":"Riverton paid its volunteers for checking the map.","answers":["Not Given"],"explanation":"The passage describes their role and gives no information about compensation.","evidence":1},
+    {"id":"q4","kind":"choice","prompt":"Why did some sites receive movable shade structures?","choices":["The new trees needed time to establish.","Residents objected to using the bus stops.","The council wanted to increase pavement temperatures."],"answers":["The new trees needed time to establish."],"explanation":"The structures are temporary shade while trees establish.","evidence":2},
+    {"id":"q5","kind":"gap","prompt":"Use two words from the passage. The forestry team made the canopy map using ___.","answers":["aerial photographs"],"explanation":"Paragraph B names the source of the canopy map.","evidence":1},
+    {"id":"q6","kind":"gap","prompt":"Use two words. The clearest pattern was observed in the ___.","answers":["late afternoon"],"explanation":"Paragraph D gives the time when the difference was most consistent.","evidence":3}
+  ]
+}

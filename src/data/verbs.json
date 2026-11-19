@@ -1,0 +1,2312 @@
+[
+  {
+    "base": "arise",
+    "past": "arose",
+    "part": "arisen",
+    "meaning": "nảy sinh",
+    "ipa": [
+      "ərˈaɪz",
+      "ərˈəʊz",
+      "ərˈɪzən"
+    ],
+    "example": "Problems ___ when the samples are stored at room temperature.",
+    "exampleForm": "base",
+    "level": "C1"
+  },
+  {
+    "base": "awake",
+    "past": "awoke",
+    "part": "awoken",
+    "meaning": "thức giấc",
+    "ipa": [
+      "əwˈeɪk",
+      "əwˈəʊk",
+      "əwˈəʊkən"
+    ],
+    "example": "The hikers ___ to find their tents covered in snow.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "be",
+    "past": "was/were",
+    "part": "been",
+    "meaning": "thì là ở",
+    "ipa": [
+      "bˈiː",
+      "wɒz / wɜː",
+      "bˌiːn"
+    ],
+    "example": "Public libraries ___ essential to this neighbourhood.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "bear",
+    "past": "bore",
+    "part": "borne",
+    "meaning": "chịu đựng",
+    "ipa": [
+      "bˈeə",
+      "bˈɔː",
+      "bˈɔːn"
+    ],
+    "example": "Families ___ much of the cost of the transition.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "beat",
+    "past": "beat",
+    "part": "beaten",
+    "meaning": "đánh bại",
+    "ipa": [
+      "bˈiːt",
+      "bˈiːt",
+      "bˈiːtən"
+    ],
+    "example": "The tennis team ___ its rivals in the final.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "become",
+    "past": "became",
+    "part": "become",
+    "meaning": "trở thành",
+    "ipa": [
+      "bɪkˈʌm",
+      "bɪkˈeɪm",
+      "bɪkˈʌm"
+    ],
+    "example": "The vacant warehouses ___ affordable studios.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "begin",
+    "past": "began",
+    "part": "begun",
+    "meaning": "bắt đầu",
+    "ipa": [
+      "bɪɡˈɪn",
+      "bɪɡˈan",
+      "bɪɡˈʌn"
+    ],
+    "example": "The researchers ___ their interviews in April.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "bend",
+    "past": "bent",
+    "part": "bent",
+    "meaning": "uốn cong",
+    "ipa": [
+      "bˈɛnd",
+      "bˈɛnt",
+      "bˈɛnt"
+    ],
+    "example": "The branches ___ under the weight of wet snow.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "bet",
+    "past": "bet",
+    "part": "bet",
+    "meaning": "đặt cược",
+    "ipa": [
+      "bˈɛt",
+      "bˈɛt",
+      "bˈɛt"
+    ],
+    "example": "I ___ five dollars on the outcome.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "bind",
+    "past": "bound",
+    "part": "bound",
+    "meaning": "ràng buộc",
+    "ipa": [
+      "bˈaɪnd",
+      "bˈaʊnd",
+      "bˈaʊnd"
+    ],
+    "example": "The agreement ___ both parties for three years.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "bite",
+    "past": "bit",
+    "part": "bitten",
+    "meaning": "cắn",
+    "ipa": [
+      "bˈaɪt",
+      "bˈɪt",
+      "bˈɪtən"
+    ],
+    "example": "A mosquito ___ my ankle beside the lake.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "bleed",
+    "past": "bled",
+    "part": "bled",
+    "meaning": "chảy máu",
+    "ipa": [
+      "blˈiːd",
+      "blˈɛd",
+      "blˈɛd"
+    ],
+    "example": "His knee ___ for several minutes after the fall.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "blow",
+    "past": "blew",
+    "part": "blown",
+    "meaning": "thổi",
+    "ipa": [
+      "blˈəʊ",
+      "blˈuː",
+      "blˈəʊn"
+    ],
+    "example": "Strong winds ___ the fence over last night.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "break",
+    "past": "broke",
+    "part": "broken",
+    "meaning": "làm vỡ",
+    "ipa": [
+      "brˈeɪk",
+      "brˈəʊk",
+      "brˈəʊkən"
+    ],
+    "example": "The storm ___ several windows in the school.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "breed",
+    "past": "bred",
+    "part": "bred",
+    "meaning": "sinh sản",
+    "ipa": [
+      "brˈiːd",
+      "brˈɛd",
+      "brˈɛd"
+    ],
+    "example": "The conservation centre ___ dozens of turtles last year.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "bring",
+    "past": "brought",
+    "part": "brought",
+    "meaning": "mang đến",
+    "ipa": [
+      "brˈɪŋ",
+      "brˈɔːt",
+      "brˈɔːt"
+    ],
+    "example": "The volunteers ___ blankets to the shelter.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "broadcast",
+    "past": "broadcast",
+    "part": "broadcast",
+    "meaning": "phát sóng",
+    "ipa": [
+      "brˈɔːdkast",
+      "brˈɔːdkast",
+      "brˈɔːdkast"
+    ],
+    "example": "The station ___ the debate live on Friday.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "build",
+    "past": "built",
+    "part": "built",
+    "meaning": "xây dựng",
+    "ipa": [
+      "bˈɪld",
+      "bˈɪlt",
+      "bˈɪlt"
+    ],
+    "example": "The council ___ a bridge across the river.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "burn",
+    "past": "burnt/burned",
+    "part": "burnt/burned",
+    "meaning": "đốt cháy",
+    "ipa": [
+      "bˈɜːn",
+      "bˈɜːnt / bˈɜːnd",
+      "bˈɜːnt / bˈɜːnd"
+    ],
+    "example": "The wildfire ___ through hundreds of hectares.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "burst",
+    "past": "burst",
+    "part": "burst",
+    "meaning": "nổ tung",
+    "ipa": [
+      "bˈɜːst",
+      "bˈɜːst",
+      "bˈɜːst"
+    ],
+    "example": "A pipe ___ during the coldest night of the year.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "buy",
+    "past": "bought",
+    "part": "bought",
+    "meaning": "mua",
+    "ipa": [
+      "bˈaɪ",
+      "bˈɔːt",
+      "bˈɔːt"
+    ],
+    "example": "The museum ___ three sculptures from a local artist.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "cast",
+    "past": "cast",
+    "part": "cast",
+    "meaning": "ném",
+    "ipa": [
+      "kˈast",
+      "kˈast",
+      "kˈast"
+    ],
+    "example": "The mountains ___ long shadows across the valley.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "catch",
+    "past": "caught",
+    "part": "caught",
+    "meaning": "bắt lấy",
+    "ipa": [
+      "kˈatʃ",
+      "kˈɔːt",
+      "kˈɔːt"
+    ],
+    "example": "The goalkeeper ___ the ball just before it crossed the line.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "choose",
+    "past": "chose",
+    "part": "chosen",
+    "meaning": "lựa chọn",
+    "ipa": [
+      "tʃˈuːz",
+      "tʃˈəʊz",
+      "tʃˈəʊzən"
+    ],
+    "example": "The panel ___ a site close to the railway station.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "cling",
+    "past": "clung",
+    "part": "clung",
+    "meaning": "bám chặt",
+    "ipa": [
+      "klˈɪŋ",
+      "klˈʌŋ",
+      "klˈʌŋ"
+    ],
+    "example": "Ice ___ to the roof well into the afternoon.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "come",
+    "past": "came",
+    "part": "come",
+    "meaning": "đến",
+    "ipa": [
+      "kˈʌm",
+      "kˈeɪm",
+      "kˈʌm"
+    ],
+    "example": "Dozens of families ___ to the meeting.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "cost",
+    "past": "cost",
+    "part": "cost",
+    "meaning": "có giá",
+    "ipa": [
+      "kˈɒst",
+      "kˈɒst",
+      "kˈɒst"
+    ],
+    "example": "The repair ___ more than the original bicycle.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "creep",
+    "past": "crept",
+    "part": "crept",
+    "meaning": "bò rón rén",
+    "ipa": [
+      "krˈiːp",
+      "krˈɛpt",
+      "krˈɛpt"
+    ],
+    "example": "The cat ___ silently towards the open door.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "cut",
+    "past": "cut",
+    "part": "cut",
+    "meaning": "cắt",
+    "ipa": [
+      "kˈʌt",
+      "kˈʌt",
+      "kˈʌt"
+    ],
+    "example": "The factory ___ its water consumption by a third.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "deal",
+    "past": "dealt",
+    "part": "dealt",
+    "meaning": "xử lý",
+    "ipa": [
+      "dˈiːl",
+      "dˈɛlt",
+      "dˈɛlt"
+    ],
+    "example": "The finance team ___ with the complaint promptly.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "dig",
+    "past": "dug",
+    "part": "dug",
+    "meaning": "đào",
+    "ipa": [
+      "dˈɪɡ",
+      "dˈʌɡ",
+      "dˈʌɡ"
+    ],
+    "example": "The team ___ two trenches to investigate the ruins.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "do",
+    "past": "did",
+    "part": "done",
+    "meaning": "làm",
+    "ipa": [
+      "dˈuː",
+      "dˈɪd",
+      "dˈʌn"
+    ],
+    "example": "The students ___ most of the work independently.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "draw",
+    "past": "drew",
+    "part": "drawn",
+    "meaning": "vẽ",
+    "ipa": [
+      "drˈɔː",
+      "drˈuː",
+      "drˈɔːn"
+    ],
+    "example": "She ___ a diagram of the proposed layout.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "dream",
+    "past": "dreamt/dreamed",
+    "part": "dreamt/dreamed",
+    "meaning": "mơ",
+    "ipa": [
+      "drˈiːm",
+      "drˈɛmpt / drˈiːmd",
+      "drˈɛmpt / drˈiːmd"
+    ],
+    "example": "I ___ about the interview the night before it happened.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "drink",
+    "past": "drank",
+    "part": "drunk",
+    "meaning": "uống",
+    "ipa": [
+      "drˈɪŋk",
+      "drˈaŋk",
+      "drˈʌŋk"
+    ],
+    "example": "The cyclists ___ several litres of water.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "drive",
+    "past": "drove",
+    "part": "driven",
+    "meaning": "lái xe",
+    "ipa": [
+      "drˈaɪv",
+      "drˈəʊv",
+      "drˈɪvən"
+    ],
+    "example": "The ambulance crew ___ through heavy rain.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "eat",
+    "past": "ate",
+    "part": "eaten",
+    "meaning": "ăn",
+    "ipa": [
+      "ˈiːt",
+      "ˈeɪt",
+      "ˈiːtən"
+    ],
+    "example": "The guests ___ before the speeches started.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "fall",
+    "past": "fell",
+    "part": "fallen",
+    "meaning": "rơi",
+    "ipa": [
+      "fˈɔːl",
+      "fˈɛl",
+      "fˈɔːlən"
+    ],
+    "example": "Housing prices ___ slightly during the winter.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "feed",
+    "past": "fed",
+    "part": "fed",
+    "meaning": "cho ăn",
+    "ipa": [
+      "fˈiːd",
+      "fˈɛd",
+      "fˈɛd"
+    ],
+    "example": "The farmer ___ the animals before sunrise.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "feel",
+    "past": "felt",
+    "part": "felt",
+    "meaning": "cảm thấy",
+    "ipa": [
+      "fˈiːl",
+      "fˈɛlt",
+      "fˈɛlt"
+    ],
+    "example": "Many residents ___ safer after the crossing opened.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "fight",
+    "past": "fought",
+    "part": "fought",
+    "meaning": "chiến đấu",
+    "ipa": [
+      "fˈaɪt",
+      "fˈɔːt",
+      "fˈɔːt"
+    ],
+    "example": "Campaigners ___ to protect the wetlands.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "find",
+    "past": "found",
+    "part": "found",
+    "meaning": "tìm thấy",
+    "ipa": [
+      "fˈaɪnd",
+      "fˈaʊnd",
+      "fˈaʊnd"
+    ],
+    "example": "The survey ___ a link between sleep and concentration.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "fit",
+    "past": "fit/fitted",
+    "part": "fit/fitted",
+    "meaning": "vừa khít",
+    "ipa": [
+      "fˈɪt",
+      "fˈɪt / fˈɪtɪd",
+      "fˈɪt / fˈɪtɪd"
+    ],
+    "example": "The installer checked that the panels ___ the frames.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "flee",
+    "past": "fled",
+    "part": "fled",
+    "meaning": "chạy trốn",
+    "ipa": [
+      "flˈiː",
+      "flˈɛd",
+      "flˈɛd"
+    ],
+    "example": "Several families ___ the village during the flood.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "fling",
+    "past": "flung",
+    "part": "flung",
+    "meaning": "quăng",
+    "ipa": [
+      "flˈɪŋ",
+      "flˈʌŋ",
+      "flˈʌŋ"
+    ],
+    "example": "The child ___ his coat across the room.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "fly",
+    "past": "flew",
+    "part": "flown",
+    "meaning": "bay",
+    "ipa": [
+      "flˈaɪ",
+      "flˈuː",
+      "flˈəʊn"
+    ],
+    "example": "Migratory birds ___ south as the weather cooled.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "forbid",
+    "past": "forbade",
+    "part": "forbidden",
+    "meaning": "cấm",
+    "ipa": [
+      "fəbˈɪd",
+      "fəbˈeɪd",
+      "fəbˈɪdən"
+    ],
+    "example": "The university ___ smoking in all its buildings.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "forecast",
+    "past": "forecast",
+    "part": "forecast",
+    "meaning": "dự báo",
+    "ipa": [
+      "fˈɔːkast",
+      "fˈɔːkast",
+      "fˈɔːkast"
+    ],
+    "example": "The economists ___ slower growth for the coming year.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "forget",
+    "past": "forgot",
+    "part": "forgotten",
+    "meaning": "quên",
+    "ipa": [
+      "fəɡˈɛt",
+      "fəɡˈɒt",
+      "fəɡˈɒtən"
+    ],
+    "example": "I ___ to attach the report to my email.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "forgive",
+    "past": "forgave",
+    "part": "forgiven",
+    "meaning": "tha thứ",
+    "ipa": [
+      "fəɡˈɪv",
+      "fəɡˈeɪv",
+      "fəɡˈɪvən"
+    ],
+    "example": "She ___ her colleague for missing the deadline.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "freeze",
+    "past": "froze",
+    "part": "frozen",
+    "meaning": "đóng băng",
+    "ipa": [
+      "frˈiːz",
+      "frˈəʊz",
+      "frˈəʊzən"
+    ],
+    "example": "The lake ___ overnight.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "get",
+    "past": "got",
+    "part": "got/gotten",
+    "meaning": "nhận",
+    "ipa": [
+      "ɡˈɛt",
+      "ɡˈɒt",
+      "ɡˈɒt / ɡˈɒtən"
+    ],
+    "example": "The applicants ___ a response within a week.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "give",
+    "past": "gave",
+    "part": "given",
+    "meaning": "cho",
+    "ipa": [
+      "ɡˈɪv",
+      "ɡˈeɪv",
+      "ɡˈɪvən"
+    ],
+    "example": "The foundation ___ grants to two community groups.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "go",
+    "past": "went",
+    "part": "gone",
+    "meaning": "đi",
+    "ipa": [
+      "ɡˈəʊ",
+      "wˈɛnt",
+      "ɡˈɒn"
+    ],
+    "example": "The group ___ to a farm to collect soil samples.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "grind",
+    "past": "ground",
+    "part": "ground",
+    "meaning": "nghiền",
+    "ipa": [
+      "ɡrˈaɪnd",
+      "ɡrˈaʊnd",
+      "ɡrˈaʊnd"
+    ],
+    "example": "The machine ___ coffee beans for the entire cafe.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "grow",
+    "past": "grew",
+    "part": "grown",
+    "meaning": "phát triển",
+    "ipa": [
+      "ɡrˈəʊ",
+      "ɡrˈuː",
+      "ɡrˈəʊn"
+    ],
+    "example": "The neighbourhood ___ rapidly after the railway opened.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "hang",
+    "past": "hung",
+    "part": "hung",
+    "meaning": "treo",
+    "ipa": [
+      "hˈaŋ",
+      "hˈʌŋ",
+      "hˈʌŋ"
+    ],
+    "example": "The curator ___ the portrait near the entrance.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "have",
+    "past": "had",
+    "part": "had",
+    "meaning": "có",
+    "ipa": [
+      "hˈav",
+      "hˌad",
+      "hˌad"
+    ],
+    "example": "The old town ___ a market every Tuesday.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "hear",
+    "past": "heard",
+    "part": "heard",
+    "meaning": "nghe",
+    "ipa": [
+      "hˈiə",
+      "hˈɜːd",
+      "hˈɜːd"
+    ],
+    "example": "The crew ___ unusual sounds beneath the deck.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "hide",
+    "past": "hid",
+    "part": "hidden",
+    "meaning": "giấu",
+    "ipa": [
+      "hˈaɪd",
+      "hˈɪd",
+      "hˈɪdən"
+    ],
+    "example": "The family ___ the letters in a wooden box.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "hit",
+    "past": "hit",
+    "part": "hit",
+    "meaning": "đánh trúng",
+    "ipa": [
+      "hˈɪt",
+      "hˈɪt",
+      "hˈɪt"
+    ],
+    "example": "A delivery van ___ the barrier last night.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "hold",
+    "past": "held",
+    "part": "held",
+    "meaning": "giữ",
+    "ipa": [
+      "hˈəʊld",
+      "hˈɛld",
+      "hˈɛld"
+    ],
+    "example": "The union ___ talks with the school board.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "hurt",
+    "past": "hurt",
+    "part": "hurt",
+    "meaning": "làm đau",
+    "ipa": [
+      "hˈɜːt",
+      "hˈɜːt",
+      "hˈɜːt"
+    ],
+    "example": "The fall ___ his shoulder.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "keep",
+    "past": "kept",
+    "part": "kept",
+    "meaning": "giữ lại",
+    "ipa": [
+      "kˈiːp",
+      "kˈɛpt",
+      "kˈɛpt"
+    ],
+    "example": "The technician ___ a copy on a separate drive.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "kneel",
+    "past": "knelt/kneeled",
+    "part": "knelt/kneeled",
+    "meaning": "quỳ",
+    "ipa": [
+      "nˈiːl",
+      "nˈɛlt / nˈiːld",
+      "nˈɛlt / nˈiːld"
+    ],
+    "example": "The mechanic ___ beside the vehicle.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "know",
+    "past": "knew",
+    "part": "known",
+    "meaning": "biết",
+    "ipa": [
+      "nˈəʊ",
+      "njˈuː",
+      "nˈəʊn"
+    ],
+    "example": "The farmers ___ how to recognise early signs of disease.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "lay",
+    "past": "laid",
+    "part": "laid",
+    "meaning": "đặt xuống",
+    "ipa": [
+      "lˈeɪ",
+      "lˈeɪd",
+      "lˈeɪd"
+    ],
+    "example": "The workers ___ new pipes beneath the street.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "lead",
+    "past": "led",
+    "part": "led",
+    "meaning": "dẫn dắt",
+    "ipa": [
+      "liːd",
+      "led",
+      "led"
+    ],
+    "example": "The project ___ to cheaper public transport.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "lean",
+    "past": "leant/leaned",
+    "part": "leant/leaned",
+    "meaning": "ngả người",
+    "ipa": [
+      "lˈiːn",
+      "lˈɛnt / lˈiːnd",
+      "lˈɛnt / lˈiːnd"
+    ],
+    "example": "She ___ against the railing while waiting.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "leap",
+    "past": "leapt/leaped",
+    "part": "leapt/leaped",
+    "meaning": "nhảy vọt",
+    "ipa": [
+      "lˈiːp",
+      "lˈɛpt / lˈiːpt",
+      "lˈɛpt / lˈiːpt"
+    ],
+    "example": "The deer ___ over the fence.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "learn",
+    "past": "learnt/learned",
+    "part": "learnt/learned",
+    "meaning": "học",
+    "ipa": [
+      "lˈɜːn",
+      "lˈɜːnt / lˈɜːnd",
+      "lˈɜːnt / lˈɜːnd"
+    ],
+    "example": "The children ___ how to analyse a bar chart.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "leave",
+    "past": "left",
+    "part": "left",
+    "meaning": "rời đi",
+    "ipa": [
+      "lˈiːv",
+      "lˈɛft",
+      "lˈɛft"
+    ],
+    "example": "The last bus ___ at half past eleven.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "lend",
+    "past": "lent",
+    "part": "lent",
+    "meaning": "cho mượn",
+    "ipa": [
+      "lˈɛnd",
+      "lˈɛnt",
+      "lˈɛnt"
+    ],
+    "example": "The library ___ us a copy of the guide.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "let",
+    "past": "let",
+    "part": "let",
+    "meaning": "cho phép",
+    "ipa": [
+      "lˈɛt",
+      "lˈɛt",
+      "lˈɛt"
+    ],
+    "example": "The venue ___ the students use the hall for free.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "lie",
+    "past": "lay",
+    "part": "lain",
+    "meaning": "nằm",
+    "ipa": [
+      "laɪ",
+      "leɪ",
+      "leɪn"
+    ],
+    "example": "The village ___ at the foot of the mountain for centuries.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "light",
+    "past": "lit/lighted",
+    "part": "lit/lighted",
+    "meaning": "thắp sáng",
+    "ipa": [
+      "lˈaɪt",
+      "lˈɪt / lˈaɪtɪd",
+      "lˈɪt / lˈaɪtɪd"
+    ],
+    "example": "The guide ___ a lamp before entering the cave.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "lose",
+    "past": "lost",
+    "part": "lost",
+    "meaning": "mất",
+    "ipa": [
+      "lˈuːz",
+      "lˈɒst",
+      "lˈɒst"
+    ],
+    "example": "The company ___ several contracts during the downturn.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "make",
+    "past": "made",
+    "part": "made",
+    "meaning": "tạo ra",
+    "ipa": [
+      "mˈeɪk",
+      "mˈeɪd",
+      "mˈeɪd"
+    ],
+    "example": "The team ___ changes to the design after the safety review.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "mean",
+    "past": "meant",
+    "part": "meant",
+    "meaning": "có nghĩa",
+    "ipa": [
+      "mˈiːn",
+      "mˈɛnt",
+      "mˈɛnt"
+    ],
+    "example": "The switch to online booking ___ shorter queues.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "meet",
+    "past": "met",
+    "part": "met",
+    "meaning": "gặp",
+    "ipa": [
+      "mˈiːt",
+      "mˈɛt",
+      "mˈɛt"
+    ],
+    "example": "The committee ___ twice to discuss the proposal.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "mistake",
+    "past": "mistook",
+    "part": "mistaken",
+    "meaning": "nhầm",
+    "ipa": [
+      "mɪstˈeɪk",
+      "mɪstˈʊk",
+      "mɪstˈeɪkən"
+    ],
+    "example": "The driver ___ the building for the station.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "mow",
+    "past": "mowed",
+    "part": "mown/mowed",
+    "meaning": "cắt cỏ",
+    "ipa": [
+      "mˈəʊ",
+      "mˈəʊd",
+      "mˈəʊn / mˈəʊd"
+    ],
+    "example": "They ___ the grass before the tournament.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "offset",
+    "past": "offset",
+    "part": "offset",
+    "meaning": "bù đắp",
+    "ipa": [
+      "ˈɒfsɛt",
+      "ˈɒfsɛt",
+      "ˈɒfsɛt"
+    ],
+    "example": "Reduced fuel use ___ part of the installation cost.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "overcome",
+    "past": "overcame",
+    "part": "overcome",
+    "meaning": "vượt qua",
+    "ipa": [
+      "ˌəʊvəkˈʌm",
+      "ˌəʊvəkˈeɪm",
+      "ˌəʊvəkˈʌm"
+    ],
+    "example": "The group ___ several obstacles to complete the project.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "overtake",
+    "past": "overtook",
+    "part": "overtaken",
+    "meaning": "vượt lên",
+    "ipa": [
+      "ˌəʊvətˈeɪk",
+      "ˌəʊvətˈʊk",
+      "ˌəʊvətˈeɪkən"
+    ],
+    "example": "Online orders ___ in-store sales last autumn.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "pay",
+    "past": "paid",
+    "part": "paid",
+    "meaning": "trả tiền",
+    "ipa": [
+      "pˈeɪ",
+      "pˈeɪd",
+      "pˈeɪd"
+    ],
+    "example": "The association ___ for the new playground.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "prove",
+    "past": "proved",
+    "part": "proven/proved",
+    "meaning": "chứng minh",
+    "ipa": [
+      "prˈuːv",
+      "prˈuːvd",
+      "prˈuːvən / prˈuːvd"
+    ],
+    "example": "The trial ___ that the material could withstand heat.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "put",
+    "past": "put",
+    "part": "put",
+    "meaning": "đặt",
+    "ipa": [
+      "pˈʊt",
+      "pˈʊt",
+      "pˈʊt"
+    ],
+    "example": "The assistant ___ the documents in a locked drawer.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "quit",
+    "past": "quit/quitted",
+    "part": "quit/quitted",
+    "meaning": "từ bỏ",
+    "ipa": [
+      "kwˈɪt",
+      "kwˈɪt / kwˈɪtɪd",
+      "kwˈɪt / kwˈɪtɪd"
+    ],
+    "example": "Several participants ___ the programme after two weeks.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "read",
+    "past": "read",
+    "part": "read",
+    "meaning": "đọc",
+    "ipa": [
+      "riːd",
+      "red",
+      "red"
+    ],
+    "example": "The researcher ___ the report before conducting the interview.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "rebuild",
+    "past": "rebuilt",
+    "part": "rebuilt",
+    "meaning": "xây lại",
+    "ipa": [
+      "rɪbˈɪld",
+      "rɪbˈɪlt",
+      "rɪbˈɪlt"
+    ],
+    "example": "The residents ___ the community centre after the flood.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "redo",
+    "past": "redid",
+    "part": "redone",
+    "meaning": "làm lại",
+    "ipa": [
+      "rˈiːduː",
+      "rɪdˈɪd",
+      "riːdˈʌn"
+    ],
+    "example": "We ___ the calculations with the corrected figures.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "repay",
+    "past": "repaid",
+    "part": "repaid",
+    "meaning": "hoàn trả",
+    "ipa": [
+      "rɪpˈeɪ",
+      "rɪpˈeɪd",
+      "rɪpˈeɪd"
+    ],
+    "example": "The company ___ the loan ahead of schedule.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "reset",
+    "past": "reset",
+    "part": "reset",
+    "meaning": "đặt lại",
+    "ipa": [
+      "rɪsˈɛt",
+      "rɪsˈɛt",
+      "rɪsˈɛt"
+    ],
+    "example": "The technician ___ the controls after the power cut.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "ride",
+    "past": "rode",
+    "part": "ridden",
+    "meaning": "cưỡi",
+    "ipa": [
+      "rˈaɪd",
+      "rˈəʊd",
+      "rˈɪdən"
+    ],
+    "example": "The students ___ to campus instead of taking the bus.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "ring",
+    "past": "rang",
+    "part": "rung",
+    "meaning": "reo",
+    "ipa": [
+      "rˈɪŋ",
+      "rˈaŋ",
+      "rˈʌŋ"
+    ],
+    "example": "The bell ___ just before noon.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "rise",
+    "past": "rose",
+    "part": "risen",
+    "meaning": "tăng lên",
+    "ipa": [
+      "rˈaɪz",
+      "rˈəʊz",
+      "rˈɪzən"
+    ],
+    "example": "Average wages ___ by two per cent last year.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "run",
+    "past": "ran",
+    "part": "run",
+    "meaning": "chạy",
+    "ipa": [
+      "rˈʌn",
+      "rˈan",
+      "rˈʌn"
+    ],
+    "example": "The team ___ the experiment twice.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "say",
+    "past": "said",
+    "part": "said",
+    "meaning": "nói",
+    "ipa": [
+      "sˈeɪ",
+      "sˈɛd",
+      "sˈɛd"
+    ],
+    "example": "The witness ___ that the lights were off.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "see",
+    "past": "saw",
+    "part": "seen",
+    "meaning": "nhìn thấy",
+    "ipa": [
+      "sˈiː",
+      "sˈɔː",
+      "sˈiːn"
+    ],
+    "example": "Residents ___ changes along the coastline.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "seek",
+    "past": "sought",
+    "part": "sought",
+    "meaning": "tìm kiếm",
+    "ipa": [
+      "sˈiːk",
+      "sˈɔːt",
+      "sˈɔːt"
+    ],
+    "example": "The council ___ advice from climate scientists.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sell",
+    "past": "sold",
+    "part": "sold",
+    "meaning": "bán",
+    "ipa": [
+      "sˈɛl",
+      "sˈəʊld",
+      "sˈəʊld"
+    ],
+    "example": "The farmer ___ vegetables at the Saturday market.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "send",
+    "past": "sent",
+    "part": "sent",
+    "meaning": "gửi",
+    "ipa": [
+      "sˈɛnd",
+      "sˈɛnt",
+      "sˈɛnt"
+    ],
+    "example": "The department ___ the results by email.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "set",
+    "past": "set",
+    "part": "set",
+    "meaning": "thiết lập",
+    "ipa": [
+      "sˈɛt",
+      "sˈɛt",
+      "sˈɛt"
+    ],
+    "example": "The planner ___ a deadline for the consultation.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shake",
+    "past": "shook",
+    "part": "shaken",
+    "meaning": "lắc",
+    "ipa": [
+      "ʃˈeɪk",
+      "ʃˈʊk",
+      "ʃˈeɪkən"
+    ],
+    "example": "The earthquake ___ several buildings.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shed",
+    "past": "shed",
+    "part": "shed",
+    "meaning": "rụng",
+    "ipa": [
+      "ʃˈɛd",
+      "ʃˈɛd",
+      "ʃˈɛd"
+    ],
+    "example": "The trees ___ their leaves early last autumn.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shine",
+    "past": "shone",
+    "part": "shone",
+    "meaning": "chiếu sáng",
+    "ipa": [
+      "ʃˈaɪn",
+      "ʃˈɒn",
+      "ʃˈɒn"
+    ],
+    "example": "Sunlight ___ through the new skylights.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shoot",
+    "past": "shot",
+    "part": "shot",
+    "meaning": "bắn",
+    "ipa": [
+      "ʃˈuːt",
+      "ʃˈɒt",
+      "ʃˈɒt"
+    ],
+    "example": "The filmmaker ___ most of the scenes in winter.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "show",
+    "past": "showed",
+    "part": "shown",
+    "meaning": "cho thấy",
+    "ipa": [
+      "ʃˈəʊ",
+      "ʃˈəʊd",
+      "ʃˈəʊn"
+    ],
+    "example": "The chart ___ a steady decline in traffic.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shrink",
+    "past": "shrank/shrunk",
+    "part": "shrunk",
+    "meaning": "co lại",
+    "ipa": [
+      "ʃrˈɪŋk",
+      "ʃrˈaŋk / ʃrˈʌŋk",
+      "ʃrˈʌŋk"
+    ],
+    "example": "The workforce ___ during the recession.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "shut",
+    "past": "shut",
+    "part": "shut",
+    "meaning": "đóng",
+    "ipa": [
+      "ʃˈʌt",
+      "ʃˈʌt",
+      "ʃˈʌt"
+    ],
+    "example": "The library ___ its doors early.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sing",
+    "past": "sang",
+    "part": "sung",
+    "meaning": "hát",
+    "ipa": [
+      "sˈɪŋ",
+      "sˈaŋ",
+      "sˈʌŋ"
+    ],
+    "example": "The choir ___ at the community festival.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sink",
+    "past": "sank/sunk",
+    "part": "sunk",
+    "meaning": "chìm",
+    "ipa": [
+      "sˈɪŋk",
+      "sˈaŋk / sˈʌŋk",
+      "sˈʌŋk"
+    ],
+    "example": "A fishing boat ___ near the harbour.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sit",
+    "past": "sat",
+    "part": "sat",
+    "meaning": "ngồi",
+    "ipa": [
+      "sˈɪt",
+      "sˈat",
+      "sˈat"
+    ],
+    "example": "The students ___ in groups for the discussion.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "sleep",
+    "past": "slept",
+    "part": "slept",
+    "meaning": "ngủ",
+    "ipa": [
+      "slˈiːp",
+      "slˈɛpt",
+      "slˈɛpt"
+    ],
+    "example": "The travellers ___ on the train.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "slide",
+    "past": "slid",
+    "part": "slid",
+    "meaning": "trượt",
+    "ipa": [
+      "slˈaɪd",
+      "slˈɪd",
+      "slˈɪd"
+    ],
+    "example": "The cupboard ___ across the floor during the tremor.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "smell",
+    "past": "smelt/smelled",
+    "part": "smelt/smelled",
+    "meaning": "ngửi",
+    "ipa": [
+      "smˈɛl",
+      "smˈɛlt / smˈɛld",
+      "smˈɛlt / smˈɛld"
+    ],
+    "example": "The room ___ of fresh paint.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sow",
+    "past": "sowed",
+    "part": "sown/sowed",
+    "meaning": "gieo",
+    "ipa": [
+      "sˈəʊ",
+      "sˈəʊd",
+      "sˈəʊn / sˈəʊd"
+    ],
+    "example": "The farmers ___ wheat in early October.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "speak",
+    "past": "spoke",
+    "part": "spoken",
+    "meaning": "nói",
+    "ipa": [
+      "spˈiːk",
+      "spˈəʊk",
+      "spˈəʊkən"
+    ],
+    "example": "The researcher ___ about coastal flooding.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "speed",
+    "past": "sped/speeded",
+    "part": "sped/speeded",
+    "meaning": "tăng tốc",
+    "ipa": [
+      "spˈiːd",
+      "spˈɛd / spˈiːdɪd",
+      "spˈɛd / spˈiːdɪd"
+    ],
+    "example": "The train ___ across the plains after leaving the station.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spell",
+    "past": "spelt/spelled",
+    "part": "spelt/spelled",
+    "meaning": "đánh vần",
+    "ipa": [
+      "spˈɛl",
+      "spˈɛlt / spˈɛld",
+      "spˈɛlt / spˈɛld"
+    ],
+    "example": "The pupil ___ the unfamiliar word correctly.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spend",
+    "past": "spent",
+    "part": "spent",
+    "meaning": "chi tiêu",
+    "ipa": [
+      "spˈɛnd",
+      "spˈɛnt",
+      "spˈɛnt"
+    ],
+    "example": "The department ___ most of its budget on staff.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spill",
+    "past": "spilt/spilled",
+    "part": "spilt/spilled",
+    "meaning": "làm đổ",
+    "ipa": [
+      "spˈɪl",
+      "spˈɪlt / spˈɪld",
+      "spˈɪlt / spˈɪld"
+    ],
+    "example": "A visitor ___ water on the floor.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spin",
+    "past": "spun",
+    "part": "spun",
+    "meaning": "quay",
+    "ipa": [
+      "spˈɪn",
+      "spˈʌn",
+      "spˈʌn"
+    ],
+    "example": "The turbine ___ faster as the wind picked up.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spit",
+    "past": "spat/spit",
+    "part": "spat/spit",
+    "meaning": "nhổ",
+    "ipa": [
+      "spˈɪt",
+      "spˈat / spˈɪt",
+      "spˈat / spˈɪt"
+    ],
+    "example": "The child ___ out the bitter medicine.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "split",
+    "past": "split",
+    "part": "split",
+    "meaning": "chia tách",
+    "ipa": [
+      "splˈɪt",
+      "splˈɪt",
+      "splˈɪt"
+    ],
+    "example": "A new road ___ the neighbourhood in two.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spoil",
+    "past": "spoilt/spoiled",
+    "part": "spoilt/spoiled",
+    "meaning": "làm hỏng",
+    "ipa": [
+      "spˈɔɪl",
+      "spˈɔɪlt / spˈɔɪld",
+      "spˈɔɪlt / spˈɔɪld"
+    ],
+    "example": "The power cut ___ the food in the fridge.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spread",
+    "past": "spread",
+    "part": "spread",
+    "meaning": "lan rộng",
+    "ipa": [
+      "sprˈɛd",
+      "sprˈɛd",
+      "sprˈɛd"
+    ],
+    "example": "News of the closure ___ quickly.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "spring",
+    "past": "sprang/sprung",
+    "part": "sprung",
+    "meaning": "bật lên",
+    "ipa": [
+      "sprˈɪŋ",
+      "sprˈaŋ / sprˈʌŋ",
+      "sprˈʌŋ"
+    ],
+    "example": "Water ___ from a crack in the pipe.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "stand",
+    "past": "stood",
+    "part": "stood",
+    "meaning": "đứng",
+    "ipa": [
+      "stˈand",
+      "stˈʊd",
+      "stˈʊd"
+    ],
+    "example": "The visitors ___ outside until the museum opened.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "steal",
+    "past": "stole",
+    "part": "stolen",
+    "meaning": "đánh cắp",
+    "ipa": [
+      "stˈiːl",
+      "stˈəʊl",
+      "stˈəʊlən"
+    ],
+    "example": "A thief ___ a bicycle from the station.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "stick",
+    "past": "stuck",
+    "part": "stuck",
+    "meaning": "dính",
+    "ipa": [
+      "stˈɪk",
+      "stˈʌk",
+      "stˈʌk"
+    ],
+    "example": "The label ___ to the glass even after washing.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sting",
+    "past": "stung",
+    "part": "stung",
+    "meaning": "chích",
+    "ipa": [
+      "stˈɪŋ",
+      "stˈʌŋ",
+      "stˈʌŋ"
+    ],
+    "example": "A bee ___ the gardener.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "stink",
+    "past": "stank/stunk",
+    "part": "stunk",
+    "meaning": "bốc mùi",
+    "ipa": [
+      "stˈɪŋk",
+      "stˈaŋk / stˈʌŋk",
+      "stˈʌŋk"
+    ],
+    "example": "The drain ___ after the storm.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "stride",
+    "past": "strode",
+    "part": "stridden",
+    "meaning": "sải bước",
+    "ipa": [
+      "strˈaɪd",
+      "strˈəʊd",
+      "strˈɪdən"
+    ],
+    "example": "The ranger ___ across the field to meet us.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "strike",
+    "past": "struck",
+    "part": "struck",
+    "meaning": "đánh",
+    "ipa": [
+      "strˈaɪk",
+      "strˈʌk",
+      "strˈʌk"
+    ],
+    "example": "Lightning ___ a tree beside the road.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "string",
+    "past": "stringed/strung",
+    "part": "strung",
+    "meaning": "xâu",
+    "ipa": [
+      "strˈɪŋ",
+      "strˈɪŋɡd / strˈʌŋ",
+      "strˈʌŋ"
+    ],
+    "example": "The volunteers ___ lights between the trees.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "strive",
+    "past": "strove/strived",
+    "part": "striven/strived",
+    "meaning": "phấn đấu",
+    "ipa": [
+      "strˈaɪv",
+      "strˈəʊv / strˈaɪvd",
+      "strˈɪvən / strˈaɪvd"
+    ],
+    "example": "The charity ___ to reach isolated residents.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "swear",
+    "past": "swore",
+    "part": "sworn",
+    "meaning": "thề",
+    "ipa": [
+      "swˈeə",
+      "swˈɔː",
+      "swˈɔːn"
+    ],
+    "example": "The witness ___ that she had seen the bicycle.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "sweep",
+    "past": "swept",
+    "part": "swept",
+    "meaning": "quét",
+    "ipa": [
+      "swˈiːp",
+      "swˈɛpt",
+      "swˈɛpt"
+    ],
+    "example": "The caretaker ___ the floor before opening the hall.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "swim",
+    "past": "swam",
+    "part": "swum",
+    "meaning": "bơi",
+    "ipa": [
+      "swˈɪm",
+      "swˈam",
+      "swˈʌm"
+    ],
+    "example": "The athlete ___ across the channel.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "swing",
+    "past": "swung",
+    "part": "swung",
+    "meaning": "đung đưa",
+    "ipa": [
+      "swˈɪŋ",
+      "swˈʌŋ",
+      "swˈʌŋ"
+    ],
+    "example": "The crane ___ to the left to unload the steel.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "take",
+    "past": "took",
+    "part": "taken",
+    "meaning": "lấy",
+    "ipa": [
+      "tˈeɪk",
+      "tˈʊk",
+      "tˈeɪkən"
+    ],
+    "example": "The survey ___ almost a year to complete.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "teach",
+    "past": "taught",
+    "part": "taught",
+    "meaning": "dạy",
+    "ipa": [
+      "tˈiːtʃ",
+      "tˈɔːt",
+      "tˈɔːt"
+    ],
+    "example": "The programme ___ adults how to use a computer.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "tear",
+    "past": "tore",
+    "part": "torn",
+    "meaning": "xé",
+    "ipa": [
+      "teə",
+      "tɔː",
+      "tɔːn"
+    ],
+    "example": "The wind ___ a hole in the canvas.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "tell",
+    "past": "told",
+    "part": "told",
+    "meaning": "kể",
+    "ipa": [
+      "tˈɛl",
+      "tˈəʊld",
+      "tˈəʊld"
+    ],
+    "example": "The directors ___ staff about the reorganisation.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "think",
+    "past": "thought",
+    "part": "thought",
+    "meaning": "suy nghĩ",
+    "ipa": [
+      "θˈɪŋk",
+      "θˈɔːt",
+      "θˈɔːt"
+    ],
+    "example": "The designers ___ carefully about accessibility.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "throw",
+    "past": "threw",
+    "part": "thrown",
+    "meaning": "ném",
+    "ipa": [
+      "θrˈəʊ",
+      "θrˈuː",
+      "θrˈəʊn"
+    ],
+    "example": "The organisers ___ away damaged equipment.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "thrust",
+    "past": "thrust",
+    "part": "thrust",
+    "meaning": "đẩy mạnh",
+    "ipa": [
+      "θrˈʌst",
+      "θrˈʌst",
+      "θrˈʌst"
+    ],
+    "example": "A strong current ___ the boat towards the rocks.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "tread",
+    "past": "trod",
+    "part": "trodden",
+    "meaning": "giẫm",
+    "ipa": [
+      "trˈɛd",
+      "trˈɒd",
+      "trˈɒdən"
+    ],
+    "example": "The hikers ___ carefully across the ice.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "undergo",
+    "past": "underwent",
+    "part": "undergone",
+    "meaning": "trải qua",
+    "ipa": [
+      "ˌʌndəɡˈəʊ",
+      "ˌʌndəwˈɛnt",
+      "ˌʌndəɡˈɒn"
+    ],
+    "example": "The school ___ major repairs last year.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "understand",
+    "past": "understood",
+    "part": "understood",
+    "meaning": "hiểu",
+    "ipa": [
+      "ˌʌndəstˈand",
+      "ˌʌndəstˈʊd",
+      "ˌʌndəstˈʊd"
+    ],
+    "example": "The manager ___ why some residents opposed the plan.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "undertake",
+    "past": "undertook",
+    "part": "undertaken",
+    "meaning": "đảm nhận",
+    "ipa": [
+      "ˌʌndətˈeɪk",
+      "ˌʌndətˈʊk",
+      "ˌʌndətˈeɪkən"
+    ],
+    "example": "The institute ___ a review of its admissions process.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "undo",
+    "past": "undid",
+    "part": "undone",
+    "meaning": "tháo gỡ",
+    "ipa": [
+      "ʌndˈuː",
+      "ʌndˈɪd",
+      "ʌndˈʌn"
+    ],
+    "example": "The worker ___ the knots before lifting the tarp.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "upset",
+    "past": "upset",
+    "part": "upset",
+    "meaning": "làm buồn",
+    "ipa": [
+      "ʌpsˈɛt",
+      "ʌpsˈɛt",
+      "ʌpsˈɛt"
+    ],
+    "example": "The unexpected decision ___ many residents.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "wake",
+    "past": "woke",
+    "part": "woken",
+    "meaning": "thức dậy",
+    "ipa": [
+      "wˈeɪk",
+      "wˈəʊk",
+      "wˈəʊkən"
+    ],
+    "example": "The passengers ___ as the bus pulled into the station.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "wear",
+    "past": "wore",
+    "part": "worn",
+    "meaning": "mặc",
+    "ipa": [
+      "wˈeə",
+      "wˈɔː",
+      "wˈɔːn"
+    ],
+    "example": "The volunteers ___ protective gloves.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "weave",
+    "past": "wove",
+    "part": "woven",
+    "meaning": "dệt",
+    "ipa": [
+      "wˈiːv",
+      "wˈəʊv",
+      "wˈəʊvən"
+    ],
+    "example": "The artist ___ coloured fibres into a large panel.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "weep",
+    "past": "wept",
+    "part": "wept",
+    "meaning": "khóc",
+    "ipa": [
+      "wˈiːp",
+      "wˈɛpt",
+      "wˈɛpt"
+    ],
+    "example": "She ___ quietly after hearing the news.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "win",
+    "past": "won",
+    "part": "won",
+    "meaning": "thắng",
+    "ipa": [
+      "wˈɪn",
+      "wˈʌn",
+      "wˈʌn"
+    ],
+    "example": "The project ___ an award for its environmental impact.",
+    "exampleForm": "past",
+    "level": "A2"
+  },
+  {
+    "base": "wind",
+    "past": "wound",
+    "part": "wound",
+    "meaning": "cuộn",
+    "ipa": [
+      "waɪnd",
+      "waʊnd",
+      "waʊnd"
+    ],
+    "example": "She ___ the cable around a wooden reel.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "withdraw",
+    "past": "withdrew",
+    "part": "withdrawn",
+    "meaning": "rút lui",
+    "ipa": [
+      "wɪθdrˈɔː",
+      "wɪθdrˈuː",
+      "wɪθdrˈɔːn"
+    ],
+    "example": "The applicant ___ from the competition.",
+    "exampleForm": "past",
+    "level": "B1–B2"
+  },
+  {
+    "base": "withstand",
+    "past": "withstood",
+    "part": "withstood",
+    "meaning": "chống chịu",
+    "ipa": [
+      "wɪðstˈand",
+      "wɪðstˈʊd",
+      "wɪðstˈʊd"
+    ],
+    "example": "The bridge ___ years of heavy traffic.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "wring",
+    "past": "wrung",
+    "part": "wrung",
+    "meaning": "vắt",
+    "ipa": [
+      "rˈɪŋ",
+      "rˈʌŋ",
+      "rˈʌŋ"
+    ],
+    "example": "The cleaner ___ water from the cloth.",
+    "exampleForm": "past",
+    "level": "C1"
+  },
+  {
+    "base": "write",
+    "past": "wrote",
+    "part": "written",
+    "meaning": "viết",
+    "ipa": [
+      "rˈaɪt",
+      "rˈəʊt",
+      "rˈɪtən"
+    ],
+    "example": "The student ___ an essay about public transport.",
+    "exampleForm": "past",
+    "level": "A2"
+  }
+]
