@@ -131,6 +131,29 @@ export function Speaking({ parts, fluency = false, onRecording }: {
       }}>{minutes} phút</button>)}
       <strong>{clockLabel(phase ? remaining : duration)}</strong>
     </div>}
+    {fluency && <details className="panel" style={{ background: 'rgba(99, 102, 241, 0.08)', borderColor: 'rgba(99, 102, 241, 0.25)', padding: '0.85rem 1.1rem' }}>
+      <summary style={{ fontWeight: 600, color: 'var(--accent)', cursor: 'pointer' }}>
+        🆘 Phao cứu sinh: Sườn bài & Câu nối chống "đóng băng não" khi nói
+      </summary>
+      <div className="stack" style={{ gap: '0.55rem', marginTop: '0.65rem', fontSize: '0.88rem' }}>
+        <div>
+          <strong>1. Trả lời trực tiếp (Direct Answer):</strong>
+          <p className="muted" style={{ margin: '0.15rem 0 0' }}>"To be completely honest, when it comes to this topic, I would say that..."</p>
+        </div>
+        <div>
+          <strong>2. Giải thích & Cho ví dụ cá nhân (Reason & Example):</strong>
+          <p className="muted" style={{ margin: '0.15rem 0 0' }}>"The main reason is that... For example, I remember a specific time when..."</p>
+        </div>
+        <div>
+          <strong>3. So sánh quá khứ vs hiện tại để kéo dài thời gian:</strong>
+          <p className="muted" style={{ margin: '0.15rem 0 0' }}>"In the past, I used to... but nowadays, things have changed because..."</p>
+        </div>
+        <div>
+          <strong>4. Câu câu giờ tự nhiên khi cần suy nghĩ (Natural Fillers):</strong>
+          <p className="muted" style={{ margin: '0.15rem 0 0' }}>"That's an intriguing question..." · "What I really want to emphasize is..." · "If I'm not mistaken..."</p>
+        </div>
+      </div>
+    </details>}
     {fluency && lastAdvice && <div className="lesson-rule"><h3>Gợi ý cho lượt tiếp theo</h3><p>{lastAdvice}</p></div>}
     <div className="row"><button className="primary" disabled={active || requesting} onClick={() => void startRecording()}>{requesting ? 'Đang yêu cầu quyền' : 'Ghi âm'}</button><button disabled={!active} onClick={() => {
       if (recorder.current?.state === 'recording') recorder.current.stop()

@@ -45,12 +45,12 @@ export default function Dashboard() {
 
         <section className="next-study">
           <div className="stack">
-            <h2 className="next-study-eyebrow">Bài nên làm tiếp</h2>
+            <h2 className="next-study-eyebrow">⚡ BƯỚC TIẾP THEO HÔM NAY</h2>
             <p className="next-study-title">{plan.title}</p>
             <p className="next-study-detail">{plan.detail}</p>
           </div>
-          <Link className="button primary" to={plan.path}>
-            {plan.label}
+          <Link className="button primary" to={plan.path} style={{ fontSize: '0.95rem', padding: '0.7rem 1.1rem' }}>
+            Bắt đầu học: {plan.label} →
           </Link>
         </section>
       </header>
@@ -189,6 +189,9 @@ export default function Dashboard() {
               Nhận xét AI đã lưu
             </Link>
           </div>
+          <small className="muted" style={{ marginTop: '-0.3rem' }}>
+            Hệ thống SM-2 tự động nhắc lại những câu bạn từng làm sai đúng lúc não bộ sắp quên.
+          </small>
 
           {due[0] ? (
             <ReviewCard key={due[0].id} card={due[0]} />
