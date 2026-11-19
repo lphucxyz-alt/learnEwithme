@@ -1526,3 +1526,61 @@ label:has(textarea) { width: 100%; }
     background: var(--accent);
   }
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.34);
+  color: var(--text);
+}
+
+button,
+a,
+select,
+summary {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button:active,
+.quest:active,
+.lifeline-phrase-chip:active {
+  transform: scale(0.975);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
