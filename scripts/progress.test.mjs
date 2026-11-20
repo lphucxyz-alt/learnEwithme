@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { dayKey, record, shiftDay, streaks } from '../src/features/discipline/activity.ts'
+import { dayKey, record, secondsUntilVietnamMidnight, shiftDay, streaks } from '../src/features/discipline/activity.ts'
 import { leastRecent, rememberPractice, shuffle } from '../src/services/random.ts'
 
 const start = '2026-11-25'
@@ -56,6 +56,15 @@ test('calendar days cross leap day and year boundaries', () => {
   assert.equal(shiftDay('2028-02-28', 1), '2028-02-29')
   assert.equal(dayKey(new Date(2026, 11, 31, 23, 55)), '2026-12-31')
   assert.equal(shiftDay('2026-12-31', 1), '2027-01-01')
+})
+
+test('daily progress and midnight countdown use Vietnam local time independent of UTC date', () => {
+  const beforeMidnight = Date.parse('2026-11-20T16:59:30.000Z')
+  const afterMidnight = Date.parse('2026-11-20T17:00:30.000Z')
+  assert.equal(dayKey(new Date(beforeMidnight)), '2026-11-20')
+  assert.equal(dayKey(new Date(afterMidnight)), '2026-11-21')
+  assert.equal(secondsUntilVietnamMidnight(beforeMidnight), 30)
+  assert.equal(secondsUntilVietnamMidnight(afterMidnight), 86370)
 })
 
 test('least-recent selection yields unseen items first and history stays bounded', () => {

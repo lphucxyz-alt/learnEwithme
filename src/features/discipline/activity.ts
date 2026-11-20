@@ -1,13 +1,39 @@
 import type { Domain, StudyState } from '../../types/study'
 
+export const STUDY_TIME_ZONE = 'Asia/Ho_Chi_Minh'
+
 export function dayKey(date = new Date()) {
-  return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(value => String(value).padStart(2, '0')).join('-')
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: STUDY_TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(date)
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]))
+  return `${values.year}-${values.month}-${values.day}`
 }
 
 export function shiftDay(day: string, offset: number) {
-  const date = new Date(day + 'T12:00:00')
-  date.setDate(date.getDate() + offset)
-  return dayKey(date)
+  const date = new Date(day + 'T12:00:00Z')
+  date.setUTCDate(date.getUTCDate() + offset)
+  return date.toISOString().slice(0, 10)
+}
+
+export function weekdayOf(day: string) {
+  return new Date(day + 'T12:00:00Z').getUTCDay()
+}
+
+export function formatVietnamDate(date: Date, options: Intl.DateTimeFormatOptions = {}) {
+  return new Intl.DateTimeFormat('vi-VN', { timeZone: STUDY_TIME_ZONE, ...options }).format(date)
+}
+
+export function formatVietnamTime(date: Date) {
+  return new Intl.DateTimeFormat('vi-VN', {
+    timeZone: STUDY_TIME_ZONE, hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+  }).format(date)
+}
+
+export function secondsUntilVietnamMidnight(now: number) {
+  const today = dayKey(new Date(now))
+  const tomorrowUtc = Date.parse(shiftDay(today, 1) + 'T00:00:00Z')
+  return Math.max(0, Math.floor((tomorrowUtc - now) / 1000) - 7 * 60 * 60)
 }
 
 export function isStudyDay(entry?: StudyState['activity'][string]) {

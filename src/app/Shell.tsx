@@ -24,7 +24,9 @@ const routes: { path: string; iconKey: NavIconKey; title: string; mobile: string
 const paths: Record<string, string> = {
   settings: 'M4 6h16M4 12h16M4 18h16M8 4v4m8 2v4m-7 2v4',
   search: 'M16 16l5 5M10 3a7 7 0 100 14 7 7 0 000-14z',
-  panel: 'M3 4h18v16H3zM9 4v16'
+  panel: 'M3 4h18v16H3zM9 4v16',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  close: 'M6 6l12 12M18 6L6 18'
 }
 
 function Icon({ name }: { name: string }) {
@@ -47,6 +49,7 @@ function normalize(query: string) {
 export function Shell() {
   const { state, update, storageError } = useStudy()
   const [collapsed, setCollapsed] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [cursor, setCursor] = useState(0)
   const dialog = useRef<HTMLDialogElement>(null)
@@ -75,29 +78,44 @@ export function Shell() {
   useEffect(() => {
     stopAudio()
     window.scrollTo(0, 0)
+    setMobileMenuOpen(false)
   }, [location.pathname])
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [mobileMenuOpen])
+
   return (
-    <div className="shell" data-collapsed={collapsed}>
+    <div className="shell" data-collapsed={collapsed} data-mobile-open={mobileMenuOpen}>
       <a href="#main-content" className="skip" onClick={event => { event.preventDefault(); document.getElementById('main-content')?.focus() }}>
         Đến nội dung
       </a>
 
-      <aside className="sidebar">
+      <aside id="mobile-sidebar" className="sidebar" aria-label="Điều hướng chính">
         <Link className="brand" to="/">
           <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
           <span>IELTS Discipline <strong>OS</strong></span>
         </Link>
         <nav aria-label="Điều hướng chính">
           {routes.map(route => (
-            <NavLink key={route.path} end={route.path === '/'} to={route.path} title={route.title} aria-label={route.title}>
+            <NavLink key={route.path} end={route.path === '/'} to={route.path} title={route.title} aria-label={route.title} onClick={() => setMobileMenuOpen(false)}>
               <NavIcon name={route.iconKey} />
               <span className="nav-label">{route.title}</span>
             </NavLink>
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <NavLink to="/settings" title="Cài đặt">
+          <NavLink to="/settings" title="Cài đặt" onClick={() => setMobileMenuOpen(false)}>
             <Icon name="settings" />
             <span className="nav-label">Cài đặt</span>
           </NavLink>
@@ -114,7 +132,10 @@ export function Shell() {
             <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
             <strong>IELTS OS</strong>
           </Link>
-          <button className="search-button" onClick={openSearch}>
+          <button className="mobile-menu-toggle icon-only" type="button" aria-label={mobileMenuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'} aria-expanded={mobileMenuOpen} aria-controls="mobile-sidebar" onClick={() => setMobileMenuOpen(value => !value)}>
+            <Icon name={mobileMenuOpen ? 'close' : 'menu'} />
+          </button>
+          <button className="search-button" aria-label="Tìm nội dung" onClick={openSearch}>
             <Icon name="search" />
             <span>Tìm nội dung</span>
             <kbd>Ctrl K</kbd>
@@ -140,14 +161,7 @@ export function Shell() {
         </main>
       </div>
 
-      <nav className="bottom-nav" aria-label="Điều hướng di động">
-        {routes.map(route => (
-          <NavLink key={route.path} end={route.path === '/'} to={route.path} title={route.mobile} aria-label={route.mobile}>
-            <NavIcon name={route.iconKey} />
-            <span className="nav-label">{route.mobile}</span>
-          </NavLink>
-        ))}
-      </nav>
+      {mobileMenuOpen && <button className="mobile-scrim" type="button" aria-label="Đóng menu điều hướng" onClick={() => setMobileMenuOpen(false)} />}
 
       <dialog ref={dialog} aria-label="Tìm nội dung" className="palette" onKeyDown={event => {
         if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {

@@ -12,7 +12,7 @@ const starterExams = starterExamIds.flatMap(id => exams.filter(exam => exam.id =
 
 export function getStudyPlan(state: StudyState) {
   const remainingLessons = starterLessons.filter(lesson =>
-    (state.lessons[lesson.id]?.best ?? 0) < Math.ceil(lesson.questions.length * 0.65))
+    ((state.lessons[lesson.id]?.best ?? 0) / (state.lessons[lesson.id]?.total ?? lesson.questions.length)) < 0.65)
   const firstLesson = remainingLessons[0]
   const firstExam = starterExams.find(exam => !state.attempts.some(attempt => attempt.examId === exam.id
     && Object.values(attempt.draft.answers).some(answer => answer.trim())))

@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useStudy } from '../app/StudyProvider'
 import { leastRecent, rememberPractice } from '../services/random'
 import { starterExamIds } from '../features/discipline/study-plan'
 import { bandEstimate, exams, questionsOf } from '../features/tests/catalog'
 import { ExamHistory, ExamSession } from '../features/tests/ExamSession'
+import { PersonalExamShelf } from '../features/tests/PersonalExamShelf'
 
 export function TestRoute() {
   const { id } = useParams()
@@ -24,8 +25,9 @@ export function TestHistoryRoute() {
 export default function Tests() {
   const { state, update } = useStudy()
   const navigate = useNavigate()
-  const [skill, setSkill] = useState('')
-  const [difficulty, setDifficulty] = useState('Gợi ý 6.5')
+  const location = useLocation()
+  const [skill, setSkill] = useState(() => new URLSearchParams(location.search).get('skill') ?? '')
+  const [difficulty, setDifficulty] = useState(() => new URLSearchParams(location.search).has('skill') ? '' : 'Gợi ý 6.5')
   const [collection, setCollection] = useState('')
   const [status, setStatus] = useState('')
   const [query, setQuery] = useState('')
@@ -46,7 +48,10 @@ export default function Tests() {
     navigate('/tests/' + next.exam.id)
   }
   return <>
-    <header className="page-head"><p className="overline">MÔ PHỎNG THI MÁY</p><h1>Kho đề IELTS</h1><p>Bắt đầu với một bài gợi ý cho mỗi kỹ năng. Đổi bộ lọc để tìm thêm bài.</p></header>
+    <header className="page-head"><p className="overline">MÔ PHỎNG THI MÁY</p><h1>Kho đề IELTS</h1><p>Bắt đầu với một bài gợi ý cho mỗi kỹ năng. Đổi bộ lọc để tìm thêm bài.</p>
+      <p className="exam-source-note"><strong>Ghi rõ nguồn:</strong> 20 bài mô phỏng trong ứng dụng do dự án tự biên soạn, không phải đề Cambridge hay đề thi IELTS chính thức. Để làm đề thật bạn đang sở hữu ngay tại đây, thêm PDF ở khung bên dưới.</p>
+    </header>
+    <PersonalExamShelf />
     <section className="panel stack"><div className="between">
       <input type="search" aria-label="Tìm đề" placeholder="Tìm tên đề" value={query} onChange={event => { setQuery(event.target.value); if (difficulty === 'Gợi ý 6.5' && event.target.value.trim()) setDifficulty('') }} />
       <button className="primary" disabled={!entries.length} onClick={chooseRandom}>Chọn đề ngẫu nhiên</button>
@@ -70,11 +75,5 @@ export default function Tests() {
       <div className="row"><Link className="button primary" to={'/tests/' + exam.id}>{label === 'Đang làm' ? 'Tiếp tục' : 'Mở đề'}</Link>
       {attempts.length > 0 && <Link className="button" to={'/tests/' + exam.id + '/history'}>Lịch sử ({attempts.length})</Link>}</div>
     </article>)}</div></section>
-    <section className="panel stack"><h2>Đề mẫu chính thức IELTS</h2>
-      <div className="row">
-        <a className="text-link" href="https://ielts.org/take-a-test/preparation-resources/sample-test-questions/academic-test" target="_blank" rel="noreferrer">IELTS Academic</a>
-        <a className="text-link" href="https://ielts.org/take-a-test/preparation-resources/sample-test-questions/general-training-test" target="_blank" rel="noreferrer">IELTS General Training</a>
-      </div>
-    </section>
   </>
 }

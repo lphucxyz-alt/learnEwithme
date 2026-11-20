@@ -32,7 +32,7 @@ export function FocusTimer() {
         })
       }
       const duration = work ? 300 : previous.dailyMinutes * 60
-      const updated = work ? record(previous, 'focus', 20, session.duration, dayKey(new Date(session.deadline))) : previous
+      const updated = work ? record(previous, 'focus', 20, session.duration, dayKey(new Date())) : previous
       return { ...updated, focus: { mode: work ? 'break' : 'work', duration, remaining: duration, deadline: null } }
     })
   }, [focus.deadline, seconds, update])

@@ -18,6 +18,9 @@ export default function Ipa() {
   const sound = sounds.find(item => item.symbol === params.get('sound')) ?? sounds[0]
   const [pair, setPair] = useState(0)
   const [round, setRound] = useState(0)
+  const [earPosition, setEarPosition] = useState(0)
+  const [earScore, setEarScore] = useState(0)
+  const [earStarted, setEarStarted] = useState(false)
 
   function randomPair() {
     const key = (index: number) => 'ipa:' + pairs[index].words.join(':')
@@ -126,7 +129,13 @@ export default function Ipa() {
         </select>
         <button className="button" onClick={randomPair}>Cặp âm ngẫu nhiên</button>
       </div>
-      <EarDrill key={pair + ':' + round} pair={pairs[pair]} done={() => setRound(value => value + 1)} />
+      {!earStarted && <><p className="muted">Một lượt gồm 20 câu nghe ngẫu nhiên các cặp âm, có tính điểm và lưu câu sai để ôn lại.</p><button className="primary" onClick={() => { setEarStarted(true); setEarPosition(0); setEarScore(0); setRound(value => value + 1) }}>Bắt đầu 20 câu</button></>}
+      {earStarted && earPosition < 20 && <><span className="pill">{earPosition + 1}/20</span><EarDrill key={pair + ':' + round} pair={pairs[pair]} done={correct => {
+        setEarScore(value => value + Number(correct))
+        setEarPosition(value => value + 1)
+        randomPair()
+      }} /></>}
+      {earStarted && earPosition === 20 && <div role="status" className="stack"><p>Kết quả: <strong>{earScore}/20</strong>. Câu sai đã được thêm vào hàng đợi ôn.</p><button className="primary" onClick={() => { setEarStarted(false); setEarPosition(0); setEarScore(0) }}>Luyện lại 20 câu</button></div>}
     </section>
 
     <AudioSandbox />

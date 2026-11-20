@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import { useStudy } from '../app/StudyProvider'
-import { dayKey, shiftDay, streaks, clockLabel } from '../features/discipline/activity'
+import { dayKey, shiftDay, streaks, clockLabel, secondsUntilVietnamMidnight, weekdayOf } from '../features/discipline/activity'
 import { useNow } from '../features/discipline/FocusTimer'
+import { ActivityCalendar } from '../features/discipline/ActivityCalendar'
 import { ReviewCard } from '../features/discipline/Review'
 import { StreakCard } from '../features/discipline/StreakCard'
 import { getStudyPlan } from '../features/discipline/study-plan'
@@ -13,25 +13,16 @@ export default function Dashboard() {
   const { state } = useStudy()
   const now = useNow()
   const today = dayKey(new Date(now))
-  const tomorrow = new Date(now)
-  tomorrow.setHours(24, 0, 0, 0)
-  const left = Math.max(0, Math.floor((tomorrow.getTime() - now) / 1000))
-  const [weeks, setWeeks] = useState(12)
-  const [selected, setSelected] = useState<string | null>(null)
+  const left = secondsUntilVietnamMidnight(now)
   const activity = state.activity[today]
   const plan = getStudyPlan(state)
   const { current, longest, shields, protectedDays, studiedToday } = streaks(state.activity, today)
   const due = Object.values(state.cards)
     .filter(card => card.due <= today)
     .sort((a, b) => a.due.localeCompare(b.due))
-  const mondayOffset = (new Date(today + 'T12:00:00').getDay() + 6) % 7
-  const start = shiftDay(today, -mondayOffset - (weeks - 1) * 7)
-  const activeDay = selected ?? today
-  const detail = state.activity[activeDay]
   const progressPct = plan.basicsTotal > 0 ? Math.round((plan.basicsDone / plan.basicsTotal) * 100) : 0
   const foundationsCount = Math.min(activity?.counts.foundations ?? 0, 3)
   const practiceCount = Math.min(activity?.counts.practice ?? 0, 1)
-  const detailTurns = Object.values(detail?.counts ?? {}).reduce((a, b) => a + b, 0)
   const isBrandNew = Object.keys(state.activity).length === 0 && Object.keys(state.cards).length === 0
 
   return (
@@ -56,6 +47,8 @@ export default function Dashboard() {
           </Link>
         </section>
       </header>
+
+      <FluencyPlan weekday={weekdayOf(today)} dateKey={today} />
 
       {isBrandNew && <OnboardingWelcomeCard />}
 
@@ -109,65 +102,7 @@ export default function Dashboard() {
         </section>
       </div>
 
-      <section className="panel stack heatmap-panel">
-        <div className="between">
-          <h2>Lịch hoạt động</h2>
-          <select
-            className="heatmap-select"
-            aria-label="Khoảng thời gian"
-            value={weeks}
-            onChange={event => setWeeks(Number(event.target.value))}
-          >
-            <option value={12}>12 tuần</option>
-            <option value={53}>Một năm</option>
-          </select>
-        </div>
-
-        <div className="heat-scroll">
-          <div className="heatmap">
-            {Array.from({ length: weeks * 7 }, (_, index) => {
-              const day = shiftDay(start, index)
-              const xp = state.activity[day]?.xp ?? 0
-              const label =
-                day +
-                ' · ' +
-                xp +
-                ' XP' +
-                (protectedDays.has(day) ? ' · Được khiên bảo vệ' : '')
-              return (
-                <button
-                  key={day}
-                  type="button"
-                  disabled={day > today}
-                  data-level={Math.min(4, Math.ceil(xp / 12))}
-                  data-protected={protectedDays.has(day)}
-                  data-selected={day === activeDay}
-                  aria-label={label}
-                  title={label}
-                  onClick={() => setSelected(day)}
-                />
-              )
-            })}
-          </div>
-        </div>
-
-        <div className="heatmap-footer">
-          <p className="heatmap-summary">
-            <strong>{activeDay}</strong>
-            {protectedDays.has(activeDay) && ' · Được khiên bảo vệ'} · {detail?.xp ?? 0} XP ·{' '}
-            {Math.floor((detail?.seconds ?? 0) / 60)} phút · {detailTurns} lượt
-          </p>
-          <div className="heatmap-legend" aria-hidden="true">
-            <span>Ít</span>
-            <span className="heatmap-swatch" data-level="0" />
-            <span className="heatmap-swatch" data-level="1" />
-            <span className="heatmap-swatch" data-level="2" />
-            <span className="heatmap-swatch" data-level="3" />
-            <span className="heatmap-swatch" data-level="4" />
-            <span>Nhiều</span>
-          </div>
-        </div>
-      </section>
+      <ActivityCalendar activity={state.activity} protectedDays={protectedDays} today={today} now={now} />
 
       <div className="split">
         <section className="panel stack">
@@ -226,8 +161,6 @@ export default function Dashboard() {
           )}
         </section>
       </div>
-
-      <FluencyPlan weekday={new Date(now).getDay()} />
     </div>
   )
 }

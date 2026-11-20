@@ -28,7 +28,7 @@ export const stateSchema = z.object({
   targetBand: z.number().min(4).max(9).default(targetBand).transform(() => targetBand),
   fluencyNotes: z.string().default(''),
   activity: z.record(isoDay, z.object({ xp: count, seconds: count, counts: z.partialRecord(domainSchema, count), qualified: z.boolean().optional() })),
-  lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count })).default({}),
+  lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count, total: count.default(6) })).default({}),
   coachHistory: z.array(coachEntrySchema).max(30).default([]),
   recentPractice: z.array(z.string()).max(240).default([]),
   cards: z.record(z.string(), cardSchema),
