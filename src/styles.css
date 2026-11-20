@@ -953,6 +953,26 @@ label:has(textarea) { width: 100%; }
   border: 1px solid var(--line);
 }
 
+.ipa-guide { display: grid; gap: 1rem; margin-block: .5rem 1rem; overflow: hidden; }
+.ipa-guide-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: .75rem; }
+.ipa-guide-heading h2 { margin: .25rem 0; }
+.ipa-guide-heading p:last-child { margin: .35rem 0 0; }
+.ipa-guide-tabs { display: flex; gap: .45rem; overflow-x: auto; padding: 0 0 .35rem; scrollbar-width: thin; }
+.ipa-guide-tab { display: flex; flex: 0 0 auto; gap: .5rem; align-items: center; min-height: 44px; border: 1px solid var(--line); border-radius: .7rem; padding: .45rem .7rem; background: var(--inset); color: var(--muted); font-size: .82rem; }
+.ipa-guide-tab span { color: var(--primary); font-variant-numeric: tabular-nums; }
+.ipa-guide-tab[aria-selected="true"] { color: var(--text); border-color: var(--primary); background: color-mix(in srgb, var(--primary) 9%, var(--panel)); }
+.ipa-guide-content { display: grid; grid-template-columns: minmax(14rem, .72fr) minmax(0, 1.28fr); align-items: start; gap: clamp(.8rem, 3vw, 1.5rem); }
+.ipa-guide-copy { display: grid; align-content: start; gap: .55rem; }
+.ipa-guide-copy h3, .ipa-guide-copy p { margin: 0; }
+.ipa-guide-copy > p:not(.overline) { color: var(--muted); line-height: 1.6; }
+.ipa-guide-sounds { display: flex; flex-wrap: wrap; gap: .4rem; margin-block: .35rem; }
+.ipa-guide-sound { min-height: 44px; min-width: 58px; border: 1px solid var(--line); border-radius: .65rem; background: var(--inset); color: var(--text); font-size: 1rem; }
+.ipa-guide-sound span { color: var(--primary); font-size: .75rem; }
+.ipa-guide-figure { display: grid; gap: .45rem; margin: 0; padding: .55rem; border: 1px solid var(--line); border-radius: .85rem; background: #fffaf2; }
+.ipa-guide-figure img { display: block; width: 100%; max-height: 75vh; object-fit: contain; border-radius: .5rem; }
+.ipa-guide-figure figcaption { color: #766655; font-size: .75rem; text-align: center; }
+@media (max-width: 760px) { .ipa-guide-content { grid-template-columns: minmax(0, 1fr); } .ipa-guide-figure img { max-height: 65vh; } }
+
 .lifeline-panel {
   display: grid;
   gap: 1rem;

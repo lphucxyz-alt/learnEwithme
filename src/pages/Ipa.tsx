@@ -9,6 +9,7 @@ import { pairs, sounds } from '../data/ipa'
 import { EarDrill } from '../features/ipa/EarDrill'
 import { Mouth } from '../features/ipa/Mouth'
 import { IpaTipCard, VoiceMirror } from '../features/ipa/VoiceMirror'
+import { IpaIllustratedGuide } from '../features/ipa/IpaIllustratedGuide'
 
 export default function Ipa() {
   const { state, update } = useStudy()
@@ -42,11 +43,17 @@ export default function Ipa() {
     <header className="page-head">
       <p className="overline">PHÁT ÂM</p>
       <h1>Phòng lab IPA chuẩn 44 âm</h1>
-      <p>Khảo sát khẩu hình trực quan, nghe mẫu bản xứ và đối chiếu giọng bạn ngay lập tức.</p>
+      <p>Học khẩu hình từ hình minh họa, nghe từng âm và tự ghi âm để luyện chắc phát âm.</p>
     </header>
 
+    <IpaIllustratedGuide onSelectSound={symbol => {
+      setAudioStatus('')
+      setParams({ sound: symbol })
+      window.setTimeout(() => document.getElementById('ipa-sound-lab')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
+    }} />
+
     <div className="split">
-      <section className="panel stack">
+      <section className="panel stack" id="ipa-sound-lab">
         <h2>Bảng 44 ký hiệu IPA</h2>
         {[...new Set(sounds.map(item => item.group))].map(group =>
           <div key={group}>
