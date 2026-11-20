@@ -54,7 +54,7 @@ test('processing a long gap gives the same shield usage before and after returni
 
 test('calendar days cross leap day and year boundaries', () => {
   assert.equal(shiftDay('2028-02-28', 1), '2028-02-29')
-  assert.equal(dayKey(new Date(2026, 11, 31, 23, 55)), '2026-12-31')
+  assert.equal(dayKey(new Date('2026-12-31T16:55:00.000Z')), '2026-12-31')
   assert.equal(shiftDay('2026-12-31', 1), '2027-01-01')
 })
 
