@@ -18,7 +18,8 @@ export default function Structures() {
   const saved = Boolean(state.cards['structure:' + item.id])
   const quizPool = useMemo(() => filtered, [category])
   function startSession() {
-    const queue = Array.from({ length: 20 }, (_, index) => quizPool[index % quizPool.length])
+    const uniquePool = [...shuffle(quizPool), ...shuffle(structures.filter(entry => !quizPool.some(selected => selected.id === entry.id)))]
+    const queue = Array.from({ length: 20 }, (_, index) => uniquePool[index % uniquePool.length])
     setSession(shuffle(queue))
     setPosition(0)
     setScore(0)
@@ -42,7 +43,7 @@ export default function Structures() {
       </section>
     </div>
     <section className="panel stack"><div className="between"><h2>Áp dụng cấu trúc</h2>{session.length > 0 && position < session.length && <span className="pill">{position + 1}/20</span>}</div>
-      {!session.length && <><p className="muted">Luyện 20 lượt theo nhóm đang chọn, gồm biến đổi câu và ghép câu. Khi nhóm có ít chủ điểm, một số cấu trúc sẽ được ôn lại ở cùng lượt.</p><button className="primary" onClick={startSession}>Bắt đầu 20 lượt</button></>}
+      {!session.length && <><p className="muted">Luyện 20 câu, ưu tiên nhóm đang chọn rồi trộn thêm các cấu trúc khác để giảm lặp. Mỗi câu có thể làm theo dạng biến đổi hoặc ghép câu.</p><button className="primary" onClick={startSession}>Bắt đầu 20 câu</button></>}
       {session[position] && <StructureDrill key={session[position].id + ':' + position} item={session[position]} done={correct => {
         setScore(value => value + Number(correct))
         setPosition(value => value + 1)

@@ -44,6 +44,7 @@ export function GrammarDrill({ question, done, onAnswer, final = false }: {
   }}>
     <fieldset className="question stack">
       <legend>{mode === 'choice' ? question.prompt : mode === 'gap' ? 'Điền từ hoặc cụm từ còn thiếu.' : mode === 'correction' ? 'Tìm và sửa lỗi trong câu.' : 'Sắp xếp các từ để hoàn thành câu.'}</legend>
+      {'topicTitle' in question && <span className="pill">{question.topicTitle}</span>}
       {mode === 'choice' && <div className="lesson-choices">{choices.map(choice => <label key={choice}
         data-correct={result !== null && choice === question.answer}
         data-wrong={result === false && choice === selected}>

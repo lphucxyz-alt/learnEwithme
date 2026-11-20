@@ -24,7 +24,7 @@ export default function Foundations() {
   const next = results.find(item => !state.lessons[item.id]?.attempts)
   return <>
     <header className="hero"><div><p className="overline">TIẾNG ANH TỪ GỐC · A1–B1</p><h1>Nền tảng tiếng Anh</h1>
-      <p>{lessons.length} bài · 20 lượt luyện mỗi bài · 4 cách làm có giải thích tiếng Việt.</p></div>
+      <p>{lessons.length} bài · 20 câu luyện mỗi phiên · 4 cách làm có giải thích tiếng Việt.</p></div>
       {next && <Link className="button primary" to={'/foundations/' + next.id}>Học bài tiếp theo</Link>}
     </header>
     <section className="panel stack">
@@ -45,7 +45,7 @@ export default function Foundations() {
           const progress = state.lessons[item.id]
           return <Link key={item.id} className="button lesson-link" to={'/foundations/' + item.id}>
             <span><strong>{item.title}</strong><small>{item.group}</small></span>
-            <span className="pill">{progress ? progress.best + '/' + (progress.total ?? 6) + ' tốt nhất' : '20 lượt · 4 dạng'}</span>
+            <span className="pill">{progress ? progress.best + '/' + (progress.total ?? 6) + ' tốt nhất' : '20 câu · 4 dạng'}</span>
           </Link>
         })}</div>
       </div>)}
@@ -64,9 +64,10 @@ function LessonPage({ lesson }: { lesson: Lesson }) {
   const [score, setScore] = useState(0)
   const progress = state.lessons[lesson.id]
   const next = lessons[lessons.indexOf(lesson) + 1]
+  const groupQuestions = lessons.filter(item => item.level === lesson.level && item.group === lesson.group).flatMap(item => item.questions.map(question => ({ question, topicTitle: item.title })))
   const question = quiz[position]
   function start() {
-    const questions = leastRecent(createLessonQuiz(lesson), 20, item => item.id, state.recentPractice)
+    const questions = leastRecent(createLessonQuiz(lesson, 20, groupQuestions), 20, item => item.id, state.recentPractice)
     update(previous => ({ ...previous, recentPractice: rememberPractice(previous.recentPractice, questions.map(item => item.id)) }))
     setQuiz(questions)
     setPosition(0)
@@ -86,7 +87,7 @@ function LessonPage({ lesson }: { lesson: Lesson }) {
       </section>
       <section className="panel stack">
         <div className="between"><h2>Luyện ngay</h2>{question && <span className="pill">{position + 1}/{quiz.length}</span>}</div>
-        {!quiz.length && <><p className="muted">20 lượt luyện theo 4 dạng: chọn đáp án, điền từ, sửa lỗi và sắp xếp từ. Câu hỏi được tạo từ ngân hàng bài học, có thể gặp lại cùng điểm ngữ pháp ở dạng khác.</p><button className="primary" onClick={start}>Bắt đầu 20 lượt</button></>}
+        {!quiz.length && <><p className="muted">20 câu theo nhóm {lesson.group}, lấy từ các bài cùng trình độ trước khi lặp. Có 4 dạng: chọn đáp án, điền từ, sửa lỗi và sắp xếp từ. Ngân hàng hiện có {groupQuestions.length} câu trong nhóm này.</p><button className="primary" onClick={start}>Bắt đầu 20 câu</button></>}
         {question && <GrammarDrill key={question.id} question={question} final={position + 1 === quiz.length}
           onAnswer={correct => {
             const total = score + Number(correct)
