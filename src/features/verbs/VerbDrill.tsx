@@ -3,7 +3,9 @@ import { Listen } from '../../components/Audio'
 import { useStudy } from '../../app/StudyProvider'
 import { accepts, clozeAnswer, verbCard, verbExample, type Verb } from './verbs'
 
-export function VerbDrill({ verb, mode, done, qualifies }: { verb: Verb; qualifies: boolean; mode: 'typing' | 'cloze'; done: (correct: boolean) => void }) {
+export function VerbDrill({ verb, mode, done, qualifies, onAnswer }: {
+  verb: Verb; qualifies: boolean; mode: 'typing' | 'cloze'; done: (correct: boolean) => void; onAnswer?: (correct: boolean) => void
+}) {
   const { complete } = useStudy()
   const start = useRef(Date.now())
   const [values, setValues] = useState(['', ''])
@@ -16,6 +18,7 @@ export function VerbDrill({ verb, mode, done, qualifies }: { verb: Verb; qualifi
     const correct = cloze ? accepts(values[0], clozeAnswer(verb)) : accepts(values[0], verb.past) && accepts(values[1], verb.part)
     setResult(correct)
     complete('verbs', correct ? 8 : 2, Math.min(120, Math.round((Date.now() - start.current) / 1000)), correct ? [] : [verbCard(verb)], qualifies)
+    onAnswer?.(correct)
   }}>
     <p>{cloze ? verb.example : <strong>{verb.base} · {verb.meaning}</strong>}</p>
     <div className="row">{(cloze ? ['Từ cần điền'] : ['V2', 'V3']).map((label, index) => <label key={label}>{label}

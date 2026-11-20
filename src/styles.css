@@ -236,7 +236,8 @@ kbd { border: 1px solid var(--line); background: var(--inset); padding: .1rem .3
 .flash { display: grid; gap: .5rem; text-align: center; width: 100%; min-height: 12rem; background: var(--inset); touch-action: pan-y; }
 .flash strong { font-size: 2rem; }
 .formula { font-family: ui-monospace, monospace; color: var(--accent); }
-.exam-bar { position: sticky; top: 0; z-index: 2; padding-block: .45rem; }
+.exam-toolbar { position: sticky; top: 0; z-index: 2; display: grid; gap: .35rem; }
+.exam-bar { padding-block: .45rem; }
 .reading .passage, .reading .questions { max-height: 75dvh; overflow-y: auto; }
 .passage p { line-height: 1.75; user-select: text; }
 mark { background: #ffe38a; color: #272018; }
@@ -263,7 +264,8 @@ audio { max-width: 100%; }
   .catalog, .comparison { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 960px) {
-  .mobile-tabs { display: flex; }
+  .mobile-tabs { display: flex; padding: .2rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--page); }
+  .mobile-tabs button { flex: 1; }
   .reading[data-tab="passage"] .questions, .reading[data-tab="questions"] .passage { display: none; }
   .reading .passage, .reading .questions { max-height: none; overflow: visible; }
 }

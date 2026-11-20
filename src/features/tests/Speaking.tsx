@@ -18,7 +18,7 @@ export function Speaking({ parts, fluency, onRecording }: {
 }) {
   const { state, update } = useStudy()
   const [round, setRound] = useState(0)
-  const [clips, setClips] = useState<Record<number, Clip>>({})
+  const [clipsByPart, setClipsByPart] = useState<Record<number, Record<number, Clip>>>({})
   const [reference, setReference] = useState('')
   const clipUrls = useRef<string[]>([])
   const rounds = fluency === 'weekly-story' ? [3] : roundMinutes
@@ -27,13 +27,14 @@ export function Speaking({ parts, fluency, onRecording }: {
   const [phase, setPhase] = useState<{ prepEnd: number; speakEnd: number } | null>(null)
   const [active, setActive] = useState(false)
   const [requesting, setRequesting] = useState(false)
-  const [recording, setRecording] = useState<Clip>()
   const [error, setError] = useState('')
   const recorder = useRef<MediaRecorder | null>(null)
   const mounted = useRef(true)
   const generation = useRef(0)
   const now = useNow()
   const part = parts[index]
+  const clips = clipsByPart[index] ?? {}
+  const recording = clips[0]
   const lastAdvice = state.coachHistory.find(entry => entry.mode === 'speaking' && entry.topic === part.title && entry.feedback.sufficient)
     ?.feedback.nextAction
   useEffect(() => {
@@ -47,7 +48,6 @@ export function Speaking({ parts, fluency, onRecording }: {
       clipUrls.current.forEach(clip => URL.revokeObjectURL(clip))
     }
   }, [])
-  useEffect(() => () => { if (recording) URL.revokeObjectURL(recording.url) }, [recording])
   useEffect(() => () => { if (reference) URL.revokeObjectURL(reference) }, [reference])
   const remaining = phase ? Math.max(0, Math.ceil(((now < phase.prepEnd ? phase.prepEnd : phase.speakEnd) - now) / 1000)) : 0
   useEffect(() => {
@@ -71,26 +71,29 @@ export function Speaking({ parts, fluency, onRecording }: {
       }
       const current = new MediaRecorder(stream)
       const chunks: BlobPart[] = []
+      let failed = false
       current.ondataavailable = event => { if (event.data.size) chunks.push(event.data) }
       const started = Date.now()
       current.onstop = () => {
         current.stream.getTracks().forEach(track => track.stop())
         if (!mounted.current || request !== generation.current) return
         setActive(false)
-        if (chunks.length) {
+        if (fluency) setPhase(null)
+        if (!failed && chunks.length) {
           const blob = new Blob(chunks, { type: current.mimeType })
           const seconds = Math.max(1, Math.round((Date.now() - started) / 1000))
           const day = dayKey()
           const clip = { id: crypto.randomUUID(), url: URL.createObjectURL(blob), blob, seconds, day }
+          const slot = fluency ? round : 0
+          const replaced = clips[slot]?.url
+          if (replaced) {
+            URL.revokeObjectURL(replaced)
+            clipUrls.current = clipUrls.current.filter(item => item !== replaced)
+          }
+          clipUrls.current.push(clip.url)
+          const nextClips = { ...clips, [slot]: clip }
+          setClipsByPart(previous => ({ ...previous, [index]: nextClips }))
           if (fluency) {
-            const replaced = clips[round]?.url
-            if (replaced) {
-              URL.revokeObjectURL(replaced)
-              clipUrls.current = clipUrls.current.filter(item => item !== replaced)
-            }
-            clipUrls.current.push(clip.url)
-            const nextClips = { ...clips, [round]: clip }
-            setClips(nextClips)
             const qualifyingSeconds = rounds.flatMap((minutes, index) => {
               const sample = nextClips[index]
               return sample?.day === day && sample.seconds >= minimumWork(minutes * 60)
@@ -100,12 +103,12 @@ export function Speaking({ parts, fluency, onRecording }: {
               update(previous => saveRoutineRecording(previous, fluency, qualifyingSeconds.reduce((total, time) => total + time, 0), day))
             }
           } else {
-            setRecording(clip)
             onRecording?.(index, seconds)
           }
         }
       }
       current.onerror = () => {
+        failed = true
         setError('Có lỗi trong khi ghi âm.')
         if (current.state === 'recording') current.stop()
         current.stream.getTracks().forEach(track => track.stop())
@@ -125,13 +128,9 @@ export function Speaking({ parts, fluency, onRecording }: {
   return <section className="panel stack">
     {parts.length > 1 && <div className="row">{parts.map((item, position) => <button key={item.title} disabled={requesting || active} aria-pressed={index === position} onClick={() => {
       if (index === position) return
-      clipUrls.current.forEach(clip => URL.revokeObjectURL(clip))
-      clipUrls.current = []
       setIndex(position)
       setPhase(null)
-      setRecording(undefined)
       setRound(0)
-      setClips({})
     }}>Part {position + 1}</button>)}</div>}
     <h2>{part.title}</h2><ul>{part.prompts.map(prompt => <li key={prompt}>{prompt} <Listen text={prompt} /></li>)}</ul>
     {index === 1 && !fluency && <div className="row"><button onClick={() => {
@@ -174,7 +173,7 @@ export function Speaking({ parts, fluency, onRecording }: {
       if (recorder.current?.state === 'recording') recorder.current.stop()
     }}>Dừng ghi âm</button>{active && <span role="status">Đang ghi âm</span>}</div>
     {error && <p className="error" role="status">{error}</p>}
-    {recording && <div className="stack">
+    {recording && !fluency && <div className="stack">
       <div className="row"><audio controls src={recording.url} /><a className="button" href={recording.url} download="ielts-speaking">Tải bản ghi</a></div>
       <CoachReview key={recording.id} id={recording.id} audio={recording.blob} exercise={{
         mode: 'speaking', topic: part.title, prompt: part.prompts.join('\n'), seconds: recording.seconds

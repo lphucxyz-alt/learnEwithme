@@ -15,6 +15,7 @@ export type Card = z.infer<typeof cardSchema>
 export type CardSeed = Pick<Card, 'id' | 'domain' | 'prompt' | 'answer'>
 export const draftSchema = z.object({
   deadline: count, answers: z.record(z.string(), z.string()),
+  activeMs: count.optional(),
   highlights: z.array(z.object({ paragraph: count, start: count, end: count, color: z.enum(['amber', 'green', 'pink']) })),
   ratings: z.record(z.string(), z.number().min(0).max(9))
 })

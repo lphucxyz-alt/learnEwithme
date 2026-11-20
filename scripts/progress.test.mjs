@@ -3,6 +3,7 @@ import { test } from 'node:test'
 import { dayKey, record, secondsUntilVietnamMidnight, shiftDay, streaks } from '../src/features/discipline/activity.ts'
 import { leastRecent, rememberPractice, shuffle } from '../src/services/random.ts'
 import { examProgress, hasExamCredit, minimumWork } from '../src/features/discipline/study-credit.ts'
+import { finishExam } from '../src/features/tests/exam-attempt.ts'
 
 const start = '2026-11-25'
 const studyDays = offsets => Object.fromEntries(offsets.map(offset => [shiftDay(start, offset), {
@@ -95,4 +96,37 @@ test('writing and speaking require enough words or recordings rather than openin
   const speaking = { skill: 'Speaking', parts: [{}, {}, {}] }
   assert.equal(hasExamCredit(speaking, { 'part-1': '30', 'part-2': '29' }), false)
   assert.equal(hasExamCredit(speaking, { 'part-1': '30', 'part-2': '30' }), true)
+})
+
+const auditExam = {
+  id: 'audit-reading', skill: 'Reading', seconds: 900, paragraphs: ['Source'],
+  questions: ['a', 'b', 'c', 'd', 'e'].map(id => ({ id, prompt: id, answers: ['yes'], evidence: 0, explanation: 'Explanation' }))
+}
+const deadline = Date.parse('2026-11-20T17:00:01.000Z')
+const expiry = { deadline, now: deadline + 60_000, attemptId: 'audit-attempt' }
+const examState = (answers, activeMs = 0) => ({
+  activity: {}, cards: {}, attempts: [],
+  drafts: { [auditExam.id]: { deadline, answers, activeMs, ratings: {}, highlights: [] } }
+})
+
+test('expired exams remove empty drafts and file partial answers without study credit', () => {
+  const empty = finishExam(examState({ a: ' ' }), auditExam, expiry)
+  assert.deepEqual(empty.drafts, {})
+  assert.deepEqual(empty.attempts, [])
+  const working = examState({ a: 'yes' }, 3200)
+  assert.equal(finishExam(working, auditExam, { ...expiry, now: deadline - 100 }), working)
+  const ended = finishExam(working, auditExam, expiry)
+  assert.equal(ended.attempts.length, 1)
+  assert.deepEqual(ended.activity, {})
+  assert.deepEqual(ended.cards, {})
+  assert.equal(finishExam(ended, auditExam, expiry), ended)
+})
+
+test('completed exams count active time and save only attempted mistakes on the Vietnam deadline date', () => {
+  const working = examState({ a: 'yes', b: 'no', c: 'yes' }, 5200)
+  const ended = finishExam(working, auditExam, { ...expiry, additionalMs: 800 })
+  assert.equal(ended.activity['2026-11-21'].seconds, 6)
+  assert.equal(ended.activity['2026-11-21'].qualified, true)
+  assert.equal(ended.attempts[0].at, new Date(deadline).toISOString())
+  assert.deepEqual(Object.keys(ended.cards), ['exam:audit-reading:b'])
 })

@@ -14,15 +14,36 @@ function segments(text: string, highlights: Highlight[]) {
   })
 }
 
-export function Reading({ paragraphs, highlights, patch, children }: {
-  paragraphs: string[]; highlights: Highlight[]; patch: (highlights: Highlight[]) => void; children: ReactNode
+export function Reading({ toolbar, paragraphs, highlights, patch, children }: {
+  toolbar: ReactNode; paragraphs: string[]; highlights: Highlight[]; patch: (highlights: Highlight[]) => void; children: ReactNode
 }) {
-  const [tab, setTab] = useState('passage')
+  const [tab, setTab] = useState<'passage' | 'questions'>('passage')
   const [color, setColor] = useState<Highlight['color']>('amber')
   const [selection, setSelection] = useState<Omit<Highlight, 'color'> | null>(null)
   const [selectedText, setSelectedText] = useState('')
   const [lookupResult, setLookupResult] = useState<{ word: string; phonetic?: string; meaning?: string; loading?: boolean } | null>(null)
   const passage = useRef<HTMLElement>(null)
+  const panels = useRef<HTMLDivElement>(null)
+  const tools = useRef<HTMLDivElement>(null)
+  const scrollOffsets = useRef({ passage: 0, questions: 0 })
+  const lookup = useRef<AbortController>(null)
+
+  function switchTab(next: typeof tab) {
+    if (next === tab) return
+    const parent = panels.current?.parentElement
+    const gap = parent ? Number.parseFloat(getComputedStyle(parent).rowGap) || 0 : 0
+    const top = (panels.current?.getBoundingClientRect().top ?? 0) + window.scrollY
+      - (tools.current?.offsetHeight ?? 0) - gap
+    const scrolled = window.scrollY >= top - 1
+    scrollOffsets.current[tab] = Math.max(0, window.scrollY - top)
+    setSelection(null)
+    setSelectedText('')
+    window.getSelection()?.removeAllRanges()
+    setTab(next)
+    if (scrolled || scrollOffsets.current[next] > 0) {
+      requestAnimationFrame(() => window.scrollTo(0, Math.max(0, top + scrollOffsets.current[next])))
+    }
+  }
 
   useEffect(() => {
     function selectionChanged() {
@@ -31,9 +52,13 @@ export function Reading({ paragraphs, highlights, patch, children }: {
         return
       }
       const range = current.getRangeAt(0)
-      const paragraph = Array.from(passage.current?.querySelectorAll('p') ?? [])
+      const paragraph = Array.from(passage.current?.querySelectorAll<HTMLParagraphElement>('p[data-paragraph]') ?? [])
         .find(element => element.contains(range.startContainer) && element.contains(range.endContainer))
-      if (!paragraph) return
+      if (!paragraph || !range.toString().trim()) {
+        setSelection(null)
+        setSelectedText('')
+        return
+      }
       const text = range.toString().trim()
       setSelectedText(text)
       const prefix = range.cloneRange()
@@ -45,14 +70,18 @@ export function Reading({ paragraphs, highlights, patch, children }: {
     document.addEventListener('selectionchange', selectionChanged)
     return () => document.removeEventListener('selectionchange', selectionChanged)
   }, [])
+  useEffect(() => () => lookup.current?.abort(), [])
 
   async function handleLookup() {
-    const cleanWord = selectedText.replace(/^[^a-zA-Z]+|[^a-zA-Z]+$/g, '').toLowerCase()
+    const cleanWord = selectedText.match(/^[^a-z]*([a-z]+(?:['-][a-z]+)*)[^a-z]*$/i)?.[1].toLowerCase()
     if (!cleanWord) return
+    lookup.current?.abort()
+    const controller = new AbortController()
+    lookup.current = controller
 
     setLookupResult({ word: cleanWord, loading: true })
     try {
-      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`)
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord)}`, { signal: controller.signal })
       if (!res.ok) {
         setLookupResult({
           word: cleanWord,
@@ -61,6 +90,7 @@ export function Reading({ paragraphs, highlights, patch, children }: {
         return
       }
       const data = await res.json()
+      if (controller.signal.aborted) return
       const first = data[0]
       const partOfSpeech = first?.meanings?.[0]?.partOfSpeech ?? ''
       const def = first?.meanings?.[0]?.definitions?.[0]?.definition ?? 'Không tìm thấy định nghĩa.'
@@ -71,6 +101,7 @@ export function Reading({ paragraphs, highlights, patch, children }: {
         meaning: `[${partOfSpeech}] ${def}`
       })
     } catch {
+      if (controller.signal.aborted) return
       setLookupResult({
         word: cleanWord,
         meaning: 'Không thể kết nối từ điển trực tuyến. Bấm xem dịch bên dưới.'
@@ -79,12 +110,15 @@ export function Reading({ paragraphs, highlights, patch, children }: {
   }
 
   return <>
-    <div className="row mobile-tabs">
-      <button aria-pressed={tab === 'passage'} onClick={() => setTab('passage')}>Bài đọc</button>
-      <button aria-pressed={tab === 'questions'} onClick={() => setTab('questions')}>Câu hỏi</button>
+    <div ref={tools} className="exam-toolbar">
+      {toolbar}
+      <div className="row mobile-tabs">
+        <button aria-pressed={tab === 'passage'} onClick={() => switchTab('passage')}>Bài đọc</button>
+        <button aria-pressed={tab === 'questions'} onClick={() => switchTab('questions')}>Câu hỏi</button>
+      </div>
     </div>
 
-    <div className="split reading" data-tab={tab}>
+    <div ref={panels} className="split reading" data-tab={tab}>
       <section ref={passage} className="panel stack passage">
         <div className="between">
           <h2>Bài đọc</h2>
@@ -114,7 +148,7 @@ export function Reading({ paragraphs, highlights, patch, children }: {
 
           <button
             className="button"
-            disabled={!selectedText}
+            disabled={!/^[^a-z]*[a-z]+(?:['-][a-z]+)*[^a-z]*$/i.test(selectedText)}
             onClick={handleLookup}
             style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
           >
@@ -126,7 +160,6 @@ export function Reading({ paragraphs, highlights, patch, children }: {
           </button>
         </div>
 
-        {/* Khung tra từ nhanh popover */}
         {lookupResult && (
           <div
             className="panel"
@@ -144,8 +177,8 @@ export function Reading({ paragraphs, highlights, patch, children }: {
               <button
                 type="button"
                 className="button icon-only"
-                style={{ minHeight: '30px', height: '30px', width: '30px', padding: 0 }}
-                onClick={() => setLookupResult(null)}
+                aria-label="Đóng phần tra từ"
+                onClick={() => { lookup.current?.abort(); setLookupResult(null) }}
               >
                 ✕
               </button>

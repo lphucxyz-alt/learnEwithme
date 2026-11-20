@@ -1,4 +1,4 @@
-import { dayKey, shiftDay } from '../features/discipline/activity'
+import { dayKey, shiftDay } from '../features/discipline/activity.ts'
 import type { Card, CardSeed } from '../types/study'
 
 export function seedCard(seed: CardSeed, current?: Card): Card {

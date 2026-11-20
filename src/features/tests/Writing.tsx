@@ -3,6 +3,7 @@ import { CoachReview } from '../coach/CoachReview'
 import { Listen } from '../../components/Audio'
 import type { Draft } from '../../types/study'
 import type { Exam } from '../../types/exam'
+import { countWords } from '../discipline/study-credit'
 
 const criteria = [
   ['TA/TR', 'Trả lời đúng yêu cầu, phát triển các ý chính.'],
@@ -24,19 +25,19 @@ export function Writing({ tasks, draft, patch, review }: {
   const task = tasks[index]
   const id = 'task-' + index
   const answer = draft.answers[id] ?? ''
-  const words = answer.trim().split(/\s+/).filter(Boolean).length
+  const words = countWords(answer)
   return <div className="stack">
     <div className="row">{tasks.map((item, position) => <button key={item.title} aria-pressed={index === position} onClick={() => setIndex(position)}>{item.title}</button>)}</div>
     <div className="split"><section className="panel stack"><h2>{task.title}</h2><p>{task.prompt}</p>
       {review && <details><summary>Bài mẫu</summary><p>{task.sample}</p><Listen text={task.sample} /></details>}
       <h3>Tự đánh giá</h3>{criteria.map(([criterion, detail]) => <label key={criterion} className="rubric">
         <span><strong>{criterion}</strong> · {detail}</span>
-        <select aria-label={criterion} disabled={!patch} value={draft.ratings[id + criterion] ?? 0} onChange={event => patch?.({ ratings: { ...draft.ratings, [id + criterion]: Number(event.target.value) } })}>
+        <select aria-label={criterion} disabled={!patch} value={draft.ratings[id + criterion] ?? 0} onChange={event => patch?.({ ratings: { [id + criterion]: Number(event.target.value) } })}>
           <option value={0}>Chưa chấm</option>{Array.from({length: 21}, (_, slot) => 4 + slot * 0.25).filter(value => Number.isInteger(value * 2)).map(value => <option key={value}>{value}</option>)}
         </select>
       </label>)}
     </section><section className="panel stack"><h2>Bài viết của bạn</h2>
-      <textarea aria-label={task.title} rows={17} readOnly={review} value={answer} onChange={event => patch?.({ answers: { ...draft.answers, [id]: event.target.value } })} />
+      <textarea aria-label={task.title} rows={17} readOnly={review} value={answer} onChange={event => patch?.({ answers: { [id]: event.target.value } })} />
       <p className={words < task.minWords ? 'error' : 'answer'}>{words} / {task.minWords} từ · {words < task.minWords ? 'Chưa đạt tối thiểu' : 'Đạt số từ tối thiểu'}</p>
     </section></div>
     {review && answer.trim() && <CoachReview key={writingId(task.title, answer)} id={writingId(task.title, answer)}

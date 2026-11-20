@@ -19,30 +19,35 @@ export default function Practice() {
   const [level, setLevel] = useState<'A1' | 'A2' | 'B1' | 'all'>('A1')
   const [reviewed, setReviewed] = useState(0)
   const [index, setIndex] = useState(0)
-  const [answers, setAnswers] = useState<boolean[]>([])
+  const [answers, setAnswers] = useState<Partial<Record<number, boolean>>>({})
   const [deadline, setDeadline] = useState(0)
   const [xpStart, setXpStart] = useState(0)
-  const [xpGained, setXpGained] = useState(0)
   const [finished, setFinished] = useState(false)
   const now = useNow()
   const step = session[index]
   const remaining = Math.max(0, Math.ceil((deadline - now) / 1000))
   const totalXp = Object.values(state.activity).reduce((sum, entry) => sum + entry.xp, 0)
-  const completedSteps = answers.length + reviewed
+  const graded = Object.values(answers)
+  const completedSteps = graded.length + reviewed
   const requiredSteps = minimumWork(session.length)
   const qualifies = completedSteps + 1 >= requiredSteps
-  function finish(attempts = answers.length + reviewed) {
+  function finish(attempts = completedSteps) {
     if (finished) return
     const bonus = attempts >= requiredSteps ? 15 : 0
     if (bonus) complete('practice', bonus)
-    setXpGained(totalXp - xpStart + bonus)
     setFinished(true)
   }
-  function next(correct?: boolean, review = false) {
-    if (correct !== undefined) setAnswers(previous => [...previous, correct])
-    if (review) setReviewed(value => value + 1)
+  function rememberAnswer(correct: boolean) {
+    setAnswers(previous => ({ ...previous, [index]: correct }))
+  }
+  function next() {
     setIndex(value => value + 1)
-    if (index + 1 === session.length) finish(answers.length + reviewed + Number(correct !== undefined || review))
+    if (index + 1 === session.length) finish()
+  }
+  function finishReview() {
+    setReviewed(value => value + 1)
+    setIndex(value => value + 1)
+    if (index + 1 === session.length) finish(completedSteps + 1)
   }
   function start(minutes: number) {
     const due = Object.values(state.cards).filter(card => card.due <= dayKey()).sort((a, b) => a.due.localeCompare(b.due))
@@ -51,7 +56,7 @@ export default function Practice() {
     setSession(next)
     setReviewed(0)
     setIndex(0)
-    setAnswers([])
+    setAnswers({})
     setXpStart(totalXp)
     setDeadline(Date.now() + minutes * 60_000)
     setFinished(false)
@@ -74,14 +79,14 @@ export default function Practice() {
       <div className="between"><h2>{{ review: 'Ôn thẻ đến hạn', grammar: 'Ngữ pháp nền tảng', ipa: 'Phân biệt âm', verb: 'Động từ', structure: 'Biến đổi câu' }[step.kind]}</h2><strong>{index + 1}/{session.length} · {clockLabel(remaining)}</strong></div>
       <progress value={completedSteps} max={session.length} aria-label="Tiến độ bài luyện" />
       <small>Đã làm {completedSteps}/{session.length} lượt · Làm ít nhất {requiredSteps} lượt để giữ chuỗi.</small>
-      {step.kind === 'review' && <ReviewCard key={index} card={step.card} qualifies={qualifies} onDone={() => next(undefined, true)} />}
-      {step.kind === 'grammar' && <GrammarDrill key={index} question={step.question} qualifies={qualifies} done={next} />}
-      {step.kind === 'ipa' && <EarDrill key={index} pair={step.pair} qualifies={qualifies} done={next} />}
-      {step.kind === 'verb' && <VerbDrill key={index} verb={step.verb} mode={step.mode} qualifies={qualifies} done={next} />}
-      {step.kind === 'structure' && <StructureDrill key={index} item={step.structure} qualifies={qualifies} done={next} />}
-      <div className="row"><button onClick={() => next()}>Bỏ qua bước</button>{remaining === 0 && <button onClick={() => finish()}>Kết thúc theo thời lượng</button>}</div>
+      {step.kind === 'review' && <ReviewCard key={index} card={step.card} qualifies={qualifies} onDone={finishReview} />}
+      {step.kind === 'grammar' && <GrammarDrill key={index} question={step.question} qualifies={qualifies} onAnswer={rememberAnswer} done={next} />}
+      {step.kind === 'ipa' && <EarDrill key={index} pair={step.pair} qualifies={qualifies} onAnswer={rememberAnswer} done={next} />}
+      {step.kind === 'verb' && <VerbDrill key={index} verb={step.verb} mode={step.mode} qualifies={qualifies} onAnswer={rememberAnswer} done={next} />}
+      {step.kind === 'structure' && <StructureDrill key={index} item={step.structure} qualifies={qualifies} onAnswer={rememberAnswer} done={next} />}
+      <div className="row">{answers[index] === undefined && <button onClick={next}>Bỏ qua bước</button>}{remaining === 0 && <button onClick={() => finish()}>Kết thúc theo thời lượng</button>}</div>
     </section>}
-    {finished && <section className="panel stack"><h2>Tổng kết phiên học</h2><p>{answers.filter(Boolean).length}/{answers.length} câu đã trả lời đúng · {reviewed} thẻ đã ôn · +{xpGained} XP</p>
+    {finished && <section className="panel stack"><h2>Tổng kết phiên học</h2><p>{graded.filter(Boolean).length}/{graded.length} câu đã trả lời đúng · {reviewed} thẻ đã ôn · +{Math.max(0, totalXp - xpStart)} XP</p>
       {completedSteps < requiredSteps && <p className="muted">Bạn đã làm {completedSteps}/{session.length} lượt. Cần làm ít nhất {requiredSteps} lượt để giữ chuỗi.</p>}
       <div className="row"><Link className="button primary" to="/">Về trung tâm</Link><button onClick={() => setSession([])}>Chọn phiên mới</button></div>
     </section>}

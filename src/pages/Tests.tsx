@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useStudy } from '../app/StudyProvider'
 import { leastRecent, rememberPractice } from '../services/random'
@@ -7,6 +7,8 @@ import { bandEstimate, exams, questionsOf } from '../features/tests/catalog'
 import { ExamHistory, ExamSession } from '../features/tests/ExamSession'
 import { PersonalExamShelf } from '../features/tests/PersonalExamShelf'
 import { hasExamCredit } from '../features/discipline/study-credit'
+import { useNow } from '../features/discipline/FocusTimer'
+import { finishExam } from '../features/tests/exam-attempt'
 
 export function TestRoute() {
   const { id } = useParams()
@@ -33,10 +35,19 @@ export default function Tests() {
   const [status, setStatus] = useState('')
   const [query, setQuery] = useState('')
   const [view, setView] = useState<'simulations' | 'pdf'>('simulations')
+  const now = useNow()
+  useEffect(() => {
+    const ended = exams.flatMap(exam => {
+      const deadline = state.drafts[exam.id]?.deadline
+      return deadline !== undefined && deadline <= now ? [{ exam, deadline, attemptId: crypto.randomUUID() }] : []
+    })
+    if (ended.length) update(previous => ended.reduce((current, { exam, ...options }) => finishExam(current, exam, { ...options, now }), previous))
+  }, [now, state.drafts, update])
   const entries = exams.map(exam => {
     const attempts = state.attempts.filter(item => item.examId === exam.id)
     const latestCompleted = attempts.find(item => hasExamCredit(exam, item.draft.answers))
-    return { exam, attempts, latestCompleted, status: state.drafts[exam.id] ? 'Đang làm' : latestCompleted ? 'Đã xong' : attempts.length ? 'Chưa đủ' : 'Chưa làm' }
+    const deadline = state.drafts[exam.id]?.deadline
+    return { exam, attempts, latestCompleted, status: deadline !== undefined && deadline > now ? 'Đang làm' : latestCompleted ? 'Đã nộp' : attempts.length ? 'Chưa đủ' : 'Chưa làm' }
   }).filter(({ exam, status: examStatus }) => {
     const matchesDifficulty = difficulty === 'Gợi ý 6.5' ? starterExamIds.includes(exam.id) : !difficulty || exam.difficulty === difficulty
     return matchesDifficulty && (!skill || exam.skill === skill) && (!collection || exam.collection === collection)
@@ -68,7 +79,7 @@ export default function Tests() {
         ['Kỹ năng', skill, setSkill, ['Reading', 'Listening', 'Writing', 'Speaking']],
         ['Độ khó', difficulty, setDifficulty, ['Gợi ý 6.5', 'Nền tảng', 'Trung bình', 'Nâng cao']],
         ['Bộ đề', collection, (value: string) => { setCollection(value); if (value && difficulty === 'Gợi ý 6.5') setDifficulty('') }, [...new Set(exams.map(item => item.collection))]],
-        ['Trạng thái', status, setStatus, ['Chưa làm', 'Đang làm', 'Đã xong', 'Chưa đủ']]
+        ['Trạng thái', status, setStatus, ['Chưa làm', 'Đang làm', 'Đã nộp', 'Chưa đủ']]
       ] as const).map(([label, value, set, options]) =>
         <select key={label} aria-label={label} value={value} onChange={event => set(event.target.value)}>
           <option value="">{label === 'Độ khó' ? 'Mọi mức' : label}</option>{options.map(option => <option key={option}>{option}</option>)}

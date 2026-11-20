@@ -172,7 +172,7 @@ export function Shell() {
 
         <main id="main-content" tabIndex={-1} className="main">
           {storageError && <p className="panel error" role="alert">Thiết bị không lưu được tiến độ. Hãy xuất bản sao lưu trong Cài đặt.</p>}
-          <Outlet key={location.pathname === '/verbs' ? location.search : undefined} />
+          <Outlet key={location.pathname === '/verbs' || location.pathname === '/tests' ? location.search : undefined} />
         </main>
       </div>
 

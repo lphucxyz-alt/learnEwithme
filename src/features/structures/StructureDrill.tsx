@@ -7,7 +7,9 @@ function normalize(text: string) {
   return text.trim().toLowerCase().replace(/[.!?]+$/, '').replace(/\s+/g, ' ')
 }
 
-export function StructureDrill({ item, done, qualifies }: { item: Structure; done: (correct: boolean) => void; qualifies: boolean }) {
+export function StructureDrill({ item, done, qualifies, onAnswer }: {
+  item: Structure; done: (correct: boolean) => void; qualifies: boolean; onAnswer?: (correct: boolean) => void
+}) {
   const { complete } = useStudy()
   const [value, setValue] = useState('')
   const [result, setResult] = useState<boolean | null>(null)
@@ -22,6 +24,7 @@ export function StructureDrill({ item, done, qualifies }: { item: Structure; don
     const correct = item.answers.some(answer => normalize(answer) === normalize(text))
     setResult(correct)
     complete('structures', correct ? 10 : 2, 0, correct ? [] : [structureCard(item)], qualifies)
+    onAnswer?.(correct)
   }}>
     <div className="row"><button type="button" aria-pressed={!order} disabled={result !== null} onClick={() => setOrder(false)}>Biến đổi câu</button><button type="button" aria-pressed={order} disabled={result !== null} onClick={() => setOrder(true)}>Ghép câu</button></div>
     <p>{item.prompt}</p><label><strong>{item.prefix} …</strong>

@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import type { pairs } from '../../data/ipa'
 import { useStudy } from '../../app/StudyProvider'
 import { shuffle } from '../../services/random'
-import { speakWord } from '../../services/audio'
+import { speakWord, stopAudio } from '../../services/audio'
 
-export function EarDrill({ pair, done, qualifies }: { pair: typeof pairs[number]; done: (correct: boolean) => void; qualifies: boolean }) {
+export function EarDrill({ pair, done, qualifies, onAnswer }: {
+  pair: typeof pairs[number]; done: (correct: boolean) => void; qualifies: boolean; onAnswer?: (correct: boolean) => void
+}) {
   const { state, complete } = useStudy()
   const [index] = useState(() => Math.floor(Math.random() * 2))
   const [order] = useState(() => shuffle([0, 1]))
@@ -13,7 +15,10 @@ export function EarDrill({ pair, done, qualifies }: { pair: typeof pairs[number]
   const [error, setError] = useState('')
   const playbackTimeout = useRef<number | undefined>(undefined)
   const word = pair.words[index]
-  useEffect(() => () => window.clearTimeout(playbackTimeout.current), [])
+  useEffect(() => () => {
+    if (playbackTimeout.current !== undefined) stopAudio()
+    window.clearTimeout(playbackTimeout.current)
+  }, [])
   function finishPlayback() {
     window.clearTimeout(playbackTimeout.current)
     setPlayed(true)
@@ -39,6 +44,7 @@ export function EarDrill({ pair, done, qualifies }: { pair: typeof pairs[number]
           id: 'ipa:' + pair.words.join(':'), domain: 'ipa', prompt: 'Phân biệt /' + pair.sounds.join('/ và /') + '/',
           answer: pair.words.join(' · ')
         }], qualifies)
+        onAnswer?.(choice === index)
       }}>{pair.words[choice]}</button>)}
     </div>
     {error && <p role="status" className="error">{error}</p>}
