@@ -21,7 +21,8 @@ Vite phục vụ tại đường dẫn `/learnEwithme/`. URL dùng hash, ví d�
 
 - Trung tâm có lửa chuỗi đổi màu ở các mốc 1/10/30/60/100/365, nhiệm vụ, XP, lịch và thẻ đến hạn. Mỗi 7 ngày học liên tục nhận một khiên cho một ngày bỏ lỡ. Pomodoro ghi phút khi kết thúc phiên tập trung.
 - Nền tảng có 46 bài, 243 câu có giải thích tiếng Việt theo A1–B1, từ mạo từ và giới từ đến 12 dạng thì thường học và câu phức. Câu sai chuyển vào lịch ôn SM-2.
-- IPA có 44 âm, 33 cặp luyện phân biệt, biểu đồ cấu âm và phòng shadowing. Bảng âm có bản thu IPA và mẫu tổng hợp dự phòng. Bản thu từ điển được dùng khi có giọng phù hợp. Đoạn văn được gửi tới bộ đọc của trình duyệt.
+- IPA có 44 âm với khẩu hình chính diện, mặt cắt khoang miệng và thanh tua chuyển động. Mỗi âm có ba từ để luyện nhận diện hoặc nghe chép. Làm đúng ít nhất hai câu trong lượt để lưu tiến độ. Sổ ôn nhận câu làm sai. Bài nghe phân biệt 20 câu vẫn có sẵn.
+- Shadowing là mục riêng gồm sáu bài A1–B1. Bài có lời tiếng Anh, bản dịch, mẫu nghe cả bài hoặc từng câu, tốc độ và bản ghi tự đối chiếu. Tiến độ Shadowing lưu riêng trong trình duyệt. Camera và bản ghi tự đối chiếu chỉ dùng trên thiết bị trong phiên học.
 - Động từ có 165 mục, ba dạng, ví dụ, IPA và nhóm biến đổi. CEFR trong kho là mức tham khảo. Phiên âm ban đầu được tạo bằng eSpeak NG với một số từ đa âm được chỉnh riêng.
 - Kho cấu trúc có ví dụ cơ bản và nâng cấp kèm bài ghép và biến đổi. Bài nhập chữ được so với các đáp án chấp nhận trong học liệu.
 - Kho đề có 20 bài tự biên soạn, gồm 5 bài mỗi kỹ năng và nguồn đề chính thức IELTS để luyện thêm. Reading và Listening là các bài theo phần. Quy đổi band của mẫu Reading/Listening mang tính minh họa. Writing dùng rubric tự chấm và Speaking dùng nghe lại.
@@ -30,6 +31,12 @@ Vite phục vụ tại đường dẫn `/learnEwithme/`. URL dùng hash, ví d�
 - Dùng **Cài đặt → Xuất bản sao lưu** rồi nhập JSON trên thiết bị khác. Sao lưu chứa tiến độ, lịch sử đề, sổ lỗi, cài đặt và ghi chú 4/3/2.
 
 Micro cần HTTPS hoặc localhost và quyền trình duyệt. Cài app qua menu **Thêm vào màn hình chính**. App shell có thể mở ngoại tuyến sau lần tải đầu. Âm thanh từ điển cần mạng và đọc văn bản tùy giọng có sẵn trên thiết bị.
+
+### Giọng mẫu IPA và Shadowing
+
+Từ và câu dựng sẵn dùng Kokoro 1.0 với giọng `bf_emma` và `af_heart`. GitHub Pages phát tệp MP3 trực tiếp. Mã và trọng số mô hình chỉ dùng khi tạo học liệu. [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) · [Bản ONNX](https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0)
+
+Để tạo lại các tệp, dùng môi trường Python có `kokoro-onnx==0.4.9` và `soundfile`, cùng Node và FFmpeg. Chạy `python scripts/render-ipa-voice.py /path/kokoro-v1.0.int8.onnx /path/voices-v1.0.bin`. Thêm `--force` nếu cần tạo lại mẫu đã có.
 
 ## AI góp ý cho Speaking và Writing
 

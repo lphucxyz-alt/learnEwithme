@@ -1,4 +1,4 @@
-const cacheName = 'ielts-discipline-os-v4'
+const cacheName = 'ielts-discipline-os-v5'
 const base = new URL(self.registration.scope)
 
 self.addEventListener('install', event => {
@@ -26,7 +26,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request = event.request
   const url = new URL(request.url)
-  if (request.method !== 'GET' || url.origin !== base.origin || !url.pathname.startsWith(base.pathname)) return
+  if (request.method !== 'GET' || url.origin !== base.origin || !url.pathname.startsWith(base.pathname) || request.headers.has('range')) return
   event.respondWith((async () => {
     const cache = await caches.open(cacheName)
     if (request.mode === 'navigate') {
@@ -42,7 +42,7 @@ self.addEventListener('fetch', event => {
     const cached = await cache.match(request, { ignoreVary: isHashedAsset })
     if (cached) return cached
     const response = await fetch(request)
-    if (response.ok) await cache.put(request, response.clone())
+    if (response.status === 200) await cache.put(request, response.clone())
     return response
   })())
 })

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import type { pairs } from '../../data/ipa'
 import { useStudy } from '../../app/StudyProvider'
 import { shuffle } from '../../services/random'
-import { speakWord, stopAudio } from '../../services/audio'
+import { stopAudio } from '../../services/audio'
+import { playIpaWord } from './ipa-audio'
 
 export function EarDrill({ pair, done, qualifies, onAnswer }: {
   pair: typeof pairs[number]; done: (correct: boolean) => void; qualifies: boolean; onAnswer?: (correct: boolean) => void
@@ -33,7 +34,7 @@ export function EarDrill({ pair, done, qualifies, onAnswer }: {
       playbackTimeout.current = window.setTimeout(() => {
         setError('Chưa xác nhận được âm thanh. Hãy phát lại hoặc đổi cặp âm.')
       }, 4500)
-      speakWord(word, state.accent, state.rate, { end: finishPlayback, boundary: finishPlayback, error: message => {
+      playIpaWord(word, state.accent, state.rate, { end: finishPlayback, error: message => {
         window.clearTimeout(playbackTimeout.current)
         setError(message)
       } })

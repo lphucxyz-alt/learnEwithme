@@ -16,6 +16,7 @@ const routes: { path: string; iconKey: NavIconKey; title: string }[] = [
   { path: '/foundations', iconKey: 'foundations', title: 'Nền tảng' },
   { path: '/practice', iconKey: 'practice', title: 'Luyện nhanh' },
   { path: '/ipa', iconKey: 'ipa', title: 'Phòng lab IPA' },
+  { path: '/shadowing', iconKey: 'fluency', title: 'Shadowing' },
   { path: '/verbs', iconKey: 'verbs', title: 'Động từ' },
   { path: '/structures', iconKey: 'structures', title: 'Kho cấu trúc' },
   { path: '/tests', iconKey: 'tests', title: 'Kho đề IELTS' }

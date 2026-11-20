@@ -9,6 +9,7 @@ import Ipa from './pages/Ipa'
 import Fluency from './pages/Fluency'
 import Practice from './pages/Practice'
 import Settings from './pages/Settings'
+import Shadowing from './pages/Shadowing'
 import Structures from './pages/Structures'
 import Tests, { TestHistoryRoute, TestRoute } from './pages/Tests'
 import Verbs from './pages/Verbs'
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path="foundations" element={<Foundations />} />
       <Route path="foundations/:id" element={<FoundationLesson />} />
       <Route path="ipa" element={<Ipa />} />
+    <Route path="shadowing" element={<Shadowing />} />
       <Route path="verbs" element={<Verbs />} />
       <Route path="structures" element={<Structures />} />
       <Route path="tests" element={<Tests />} />

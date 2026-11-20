@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { examSchema } from '../src/types/exam.ts'
 import { pairs, sounds } from '../src/data/ipa.ts'
+import { ipaExamples, splitPhones } from '../src/data/ipa-words.ts'
+import { shadowLessons } from '../src/data/shadowing.ts'
 
 import { grammarQuestions, lessons } from '../src/data/foundations/catalog.ts'
 
@@ -12,6 +14,7 @@ assert.ok(grammarQuestions.every(item => item.prompt.match(/___/g)?.length === i
   && item.explanation && new Set([item.answer, ...item.distractors]).size === 3))
 
 const readJson = path => JSON.parse(readFileSync(path, 'utf8'))
+const ipaVoice = readJson(new URL('../src/data/ipa-audio.json', import.meta.url))
 const testsDir = new URL('../src/data/tests/', import.meta.url)
 const exams = readdirSync(testsDir).filter(file => file.endsWith('.json')).map(file => examSchema.parse(readJson(new URL(file, testsDir))))
 assert.equal(new Set(exams.map(exam => exam.id)).size, exams.length)
@@ -30,5 +33,24 @@ assert.ok(pairs.every(pair => pair.sounds.every(symbol => sounds.some(sound => s
 for (const sound of sounds) {
   const file = [...sound.symbol].map(character => character.codePointAt(0).toString(16)).join('-')
   assert.ok(existsSync(new URL('../public/phonemes/' + file + '.mp3', import.meta.url)), sound.symbol)
+  assert.equal(ipaExamples[sound.symbol]?.length, 3, sound.symbol)
+  for (const [word, phonetic, meaning] of ipaExamples[sound.symbol]) {
+    assert.ok(meaning && splitPhones(phonetic).filter(phone => phone === sound.symbol).length === 1, word)
+  }
+}
+assert.equal(new Set(shadowLessons.map(lesson => lesson.id)).size, shadowLessons.length)
+assert.deepEqual([...new Set(shadowLessons.map(lesson => lesson.level))].sort(), ['A1', 'A2', 'B1'])
+for (const accent of ['en-GB', 'en-US']) {
+  const words = new Set([...Object.values(ipaExamples).flat().map(([word]) => word), ...pairs.flatMap(pair => pair.words)])
+  for (const word of words) {
+    assert.ok(ipaVoice.words.includes(word), `Missing voice for ${word}`)
+    assert.ok(existsSync(new URL(`../public/ipa-voice/${accent}/word-${word}.mp3`, import.meta.url)), word)
+  }
+  for (const lesson of shadowLessons) {
+    assert.ok(lesson.lines.length >= 4, lesson.id)
+    lesson.lines.forEach(({ en, vi }, index) => {
+      assert.ok(en && vi && existsSync(new URL(`../public/shadow-voice/${accent}/${lesson.id}-${index + 1}.mp3`, import.meta.url)), lesson.id)
+    })
+  }
 }
 console.log(`Kiểm tra học liệu đạt · ${verbs.length} động từ · ${sounds.length} âm · ${exams.length} đề · ${lessons.length} bài nền tảng · ${grammarQuestions.length} câu ngữ pháp`)

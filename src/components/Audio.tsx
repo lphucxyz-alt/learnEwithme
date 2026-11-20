@@ -19,7 +19,7 @@ export function AudioSandbox() {
   const [status, setStatus] = useState('')
   useEffect(() => stopAudio, [])
   return <section className="panel stack">
-    <h2>Phòng Shadowing</h2>
+    <h2>Đọc văn bản tiếng Anh</h2>
     <textarea aria-label="Văn bản tiếng Anh" value={text} onChange={event => setText(event.target.value)} rows={3} />
     <div className="row">
       <select aria-label="Giọng đọc" value={state.accent} onChange={event => update(current => ({ ...current, accent: event.target.value as typeof state.accent }))}>
