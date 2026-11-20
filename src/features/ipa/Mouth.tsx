@@ -1,182 +1,109 @@
 import { useId, useState } from 'react'
 import type { Sound } from '../../data/ipa'
 
-const places: Record<string, [number, number]> = {
-  front: [233, 107], central: [200, 110], back: [157, 116], lips: [308, 116],
-  'lip-teeth': [292, 116], teeth: [279, 103], ridge: [260, 90], postalveolar: [238, 77],
-  palate: [204, 69], velum: [153, 82], glottis: [131, 185]
+const tonguePositions: Record<string, [number, number, string]> = {
+  front: [112, 151, 'Đầu và mặt lưỡi phía trước'],
+  central: [170, 146, 'Thân lưỡi ở giữa'],
+  back: [226, 155, 'Cuống lưỡi phía sau'],
+  lips: [74, 153, 'Hai môi'],
+  'lip-teeth': [86, 151, 'Răng trên và môi dưới'],
+  teeth: [96, 148, 'Đầu lưỡi gần răng'],
+  ridge: [111, 137, 'Đầu lưỡi chạm lợi trên'],
+  postalveolar: [132, 128, 'Phiến lưỡi sau lợi'],
+  palate: [178, 119, 'Thân lưỡi gần ngạc cứng'],
+  velum: [232, 137, 'Cuống lưỡi chạm ngạc mềm'],
+  glottis: [286, 206, 'Hơi đi qua thanh môn'],
 }
 
-const placeLabels: Record<string, string> = {
+const places: Record<string, string> = {
   lips: 'Hai môi',
-  'lip-teeth': 'Răng & môi',
+  'lip-teeth': 'Răng trên và môi dưới',
   teeth: 'Răng',
   ridge: 'Lợi trên',
   postalveolar: 'Sau lợi',
   palate: 'Ngạc cứng',
   velum: 'Ngạc mềm',
   glottis: 'Thanh môn',
-  front: 'Khoang trước',
-  central: 'Khoang giữa',
-  back: 'Khoang sau'
+  front: 'Phần trước lưỡi',
+  central: 'Thân lưỡi',
+  back: 'Cuống lưỡi',
 }
 
 export function Mouth({ sound }: { sound: Sound }) {
   const [endingFor, setEndingFor] = useState('')
   const ending = endingFor === sound.symbol
   const marker = useId()
-  const glowId = useId()
   const [place, opening, round] = ending && sound.end ? sound.end : sound.shape
-  const [x, y] = places[place] ?? [200, 110]
+  const [focusX, focusY, focusLabel] = tonguePositions[place] ?? tonguePositions.central
   const nasal = sound.manner === 'nasal'
-  const closed = ['stop', 'nasal', 'affricate'].includes(sound.manner)
+  const blocked = ['stop', 'affricate'].includes(sound.manner)
   const vowel = sound.manner === 'vowel'
-  const jaw = (vowel ? opening : 2) * 5
-  const tongueX = Math.min(270, Math.max(148, x))
-  const tongueY = vowel ? 83 + opening * 11 : y + (closed ? 1 : 10)
-  const tight = place === 'lips' && closed
+  const jawOpen = vowel ? opening : sound.symbol === 'p' || sound.symbol === 'b' ? 0 : 1
+  const lipRound = vowel ? round > 1 : /^(w|ʃ|ʒ|tʃ|dʒ)$/.test(sound.symbol)
+  const tongueY = vowel ? 163 - (5 - opening) * 5 : 157
+  const tonguePath = `M258 186 Q222 177 194 171 Q${focusX + 33} ${tongueY + 17} ${focusX} ${tongueY} Q91 143 77 151 Q75 162 91 ${177 + jawOpen * 3} Q160 ${198 + jawOpen * 4} 258 191Z`
 
   return (
     <div className="mouth">
       <svg
-        viewBox="0 0 350 230"
+        viewBox="0 0 440 270"
         role="img"
-        aria-label={'Sơ đồ cấu âm /' + sound.symbol + '/'}
+        aria-label={`Mặt cắt khoang miệng khi phát âm /${sound.symbol}/. ${focusLabel}. ${sound.voiced ? 'Dây thanh rung.' : 'Dây thanh không rung.'} ${nasal ? 'Hơi thoát qua mũi.' : 'Hơi thoát qua miệng.'}`}
         className="mouth-svg"
       >
         <defs>
-          <marker id={marker} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-            <path d="M0 0L8 4L0 8Z" fill="#34d399" />
+          <marker id={marker} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0L9 4.5L0 9Z" fill={nasal ? '#4776d0' : '#db456f'} />
           </marker>
-
-          <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#818cf8" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
-          </radialGradient>
-
-          <linearGradient id="tongueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#fb7185" />
-            <stop offset="100%" stopColor="#e11d48" />
-          </linearGradient>
-
-          <linearGradient id="headGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--panel)" />
-            <stop offset="100%" stopColor="var(--inset)" />
-          </linearGradient>
         </defs>
 
-        {/* Khuôn mặt & Vỏ đầu */}
-        <path
-          d="M86 9Q202 0 267 40L314 66Q319 73 304 78L298 98Q319 105 315 118L310 129Q316 140 303 158Q293 202 230 218H120Q110 196 112 158L118 108Q95 74 86 9Z"
-          fill="url(#headGradient)"
-          stroke="var(--line-strong)"
-          strokeWidth="1.5"
-        />
+        <path d="M113 39Q196 24 267 45Q322 63 348 113L340 175Q325 220 270 238H157Q127 219 108 193L87 174L54 160L35 149L59 140L73 126L83 95Q89 60 113 39Z" className="mouth-head" />
+        <path d="M84 116Q118 80 174 73Q235 66 291 87L324 104Q305 113 284 105Q225 83 176 94Q126 104 100 133Z" className="mouth-nose" />
+        <path d="M87 130Q112 117 143 111Q212 95 278 115L291 128L280 150Q217 166 166 169L113 166Q92 157 87 145Z" className="mouth-cavity" />
 
-        {/* Khoang mũi (Nasal cavity) */}
-        <path
-          d="M137 69Q182 36 240 46L286 68Q276 81 242 71Q187 50 147 86L141 175H123L125 105Z"
-          fill="var(--inset)"
-          stroke="var(--line)"
-          strokeWidth="1"
-        />
+        <path d="M93 124Q119 108 151 101Q218 84 277 106" className="mouth-hard-palate" />
+        <path d={nasal ? 'M277 106Q294 118 286 139' : 'M277 106Q291 103 300 114'} className={`mouth-velum${nasal ? ' is-open' : ''}`} />
 
-        {/* Khoang miệng (Oral cavity) */}
-        <path
-          d="M143 100Q220 39 283 101L300 115L298 144Q252 179 162 160L138 183L126 176Z"
-          fill="rgba(15, 23, 42, 0.45)"
-          stroke="var(--line)"
-          strokeWidth="1"
-        />
+        <path d="M88 130L105 128L111 146L97 150Z" className="mouth-tooth" />
+        <path d={`M88 ${151 + jawOpen * 4}L104 ${151 + jawOpen * 4}L111 ${165 + jawOpen * 4}L96 ${164 + jawOpen * 4}Z`} className="mouth-tooth" />
+        <path d={tonguePath} className="mouth-tongue" />
 
-        {/* Răng trên & Răng dưới */}
-        <path d="M277 96L289 100L284 114L273 109Z" fill="#ffffff" stroke="var(--line-strong)" strokeWidth="0.8" />
-        <path
-          d={`M272 ${112 + jaw}L284 ${111 + jaw}L289 ${120 + jaw}L275 ${124 + jaw}Z`}
-          fill="#ffffff"
-          stroke="var(--line-strong)"
-          strokeWidth="0.8"
-        />
+        <path d={lipRound ? 'M73 130Q53 126 50 139M73 148Q52 152 50 143' : 'M73 132L54 137M73 147L54 143'} className="mouth-lips" />
+        <path d="M276 194Q286 202 278 214M281 194Q291 202 283 214" className={`mouth-vocal-cords${sound.voiced ? ' is-voiced' : ''}`} />
 
-        {/* Ngạc mềm (Velum) - nâng lên hoặc hạ xuống để mở mũi */}
-        <path
-          d={nasal ? 'M169 77Q151 98 149 111' : 'M171 77Q151 77 134 91'}
-          fill="none"
-          stroke="#f43f5e"
-          strokeWidth="8"
-          strokeLinecap="round"
-        />
-
-        {/* Lưỡi (Tongue anatomy) */}
-        <path
-          className="anatomy"
-          d={`M139 174Q146 153 158 141Q${tongueX - 24} ${tongueY} ${tongueX} ${tongueY}Q${Math.min(
-            286,
-            tongueX + 20
-          )} ${117 + jaw} 276 ${129 + jaw}Q${209} ${156 + jaw} 161 160L145 184Z`}
-          fill="url(#tongueGradient)"
-          stroke="#e11d48"
-          strokeWidth="1.2"
-        />
-
-        {/* Môi trên & Môi dưới */}
-        <path
-          d={`M292 106Q${318 + round * 2} 103 ${308 + round * 2} 115M292 ${
-            tight ? 115 : 120 + jaw
-          }Q${319 + round * 2} ${tight ? 115 : 127 + jaw} ${307 + round * 2} ${
-            tight ? 114 : 118 + jaw
-          }`}
-          fill="none"
-          stroke="#fb7185"
-          strokeWidth="7"
-          strokeLinecap="round"
-        />
-
-        {/* Luồng hơi (Airflow) */}
-        {(!closed || nasal) && (
+        {!blocked && (
           <path
-            className="air"
-            d={
-              nasal
-                ? 'M133 177Q130 115 150 79Q191 43 285 67'
-                : 'M134 175Q140 111 173 101Q225 74 294 114'
-            }
-            markerEnd={'url(#' + marker + ')'}
+            d={nasal ? 'M278 157Q295 143 301 121Q310 99 333 91' : 'M238 177Q187 169 143 158Q108 151 77 142'}
+            className={`mouth-air${nasal ? ' is-nasal' : ''}`}
+            markerEnd={`url(#${marker})`}
           />
         )}
 
-        {/* Điểm cấu âm chính (Focus ring & dot) */}
-        <circle cx={x} cy={y} r="14" fill={`url(#${glowId})`} className="anatomy" opacity="0.6" />
-        <circle
-          className="anatomy"
-          cx={x}
-          cy={y}
-          r="6"
-          fill="#818cf8"
-          stroke="#ffffff"
-          strokeWidth="1.5"
-        />
+        <circle cx={focusX} cy={focusY} r="15" className="mouth-focus-halo" />
+        <circle cx={focusX} cy={focusY} r="7" className="mouth-focus" />
 
-        {/* Dây thanh âm (Vocal cords) */}
-        <g className={sound.voiced ? 'vocal' : ''}>
-          <path d="M121 186l18 -3" stroke={sound.voiced ? '#34d399' : 'var(--muted)'} strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M122 195l17 -3" stroke={sound.voiced ? '#34d399' : 'var(--muted)'} strokeWidth="3.5" strokeLinecap="round" />
+        <g className="mouth-callouts" aria-hidden="true">
+          <path d="M58 119L74 136" /><text x="12" y="115">Môi</text>
+          <path d="M111 116L101 130" /><text x="105" y="111">Răng</text>
+          <path d="M166 77L177 99" /><text x="130" y="67">Ngạc cứng</text>
+          <path d="M319 101L289 112" /><text x="320" y="98">Ngạc mềm</text>
+          <path d="M159 213L171 183" /><text x="137" y="229">Lưỡi</text>
+          <path d="M311 218L286 207" /><text x="312" y="225">Dây thanh</text>
         </g>
-
-        {/* Chú thích giải phẫu nhỏ tinh tế */}
-        <text x="14" y="24" fill="var(--muted)" fontSize="11" fontWeight="600" letterSpacing="0.04em">
-          VỊ TRÍ: {placeLabels[place] ?? place.toUpperCase()}
-        </text>
-        <text x="14" y="40" fill={sound.voiced ? '#34d399' : 'var(--muted)'} fontSize="11" fontWeight="500">
-          {sound.voiced ? '● Dây thanh rung' : '○ Không rung'}
-        </text>
-        <text x="14" y="56" fill={nasal ? '#38bdf8' : '#cbd5e1'} fontSize="11" fontWeight="500">
-          {nasal ? '↗ Luồng hơi qua mũi' : '→ Luồng hơi qua miệng'}
-        </text>
+        <text x="18" y="252" className="mouth-flow-label">{nasal ? 'HƠI QUA MŨI' : blocked ? 'CHẶN HƠI RỒI NHẢ' : 'HƠI QUA MIỆNG'}</text>
+        <text x="324" y="252" className="mouth-place-label">{places[place] ?? focusLabel}</text>
       </svg>
 
+      <div className="mouth-legend" aria-label="Chú giải sơ đồ">
+        <span><i className="legend-lips" /> Môi và răng</span>
+        <span><i className="legend-palate" /> Vòm miệng</span>
+        <span><i className="legend-tongue" /> Lưỡi và vị trí đặt lưỡi</span>
+        <span><i className={nasal ? 'legend-air-nasal' : 'legend-air'} /> {nasal ? 'Luồng hơi qua mũi' : 'Luồng hơi qua miệng'}</span>
+        <span><i className={sound.voiced ? 'legend-voice-on' : 'legend-voice-off'} /> Dây thanh {sound.voiced ? 'đang rung' : 'không rung'}</span>
+      </div>
+
       <div className="row">
-        <span className="pill">{nasal ? 'Hơi qua mũi' : closed ? 'Chặn và nhả hơi' : 'Hơi qua miệng'}</span>
+        <span className="pill">{nasal ? 'Hơi qua mũi' : blocked ? 'Chặn và nhả hơi' : 'Hơi qua miệng'}</span>
         <span className="pill">{sound.voiced ? 'Dây thanh rung (Hữu thanh)' : 'Dây thanh không rung (Vô thanh)'}</span>
         {sound.end && (
           <button className="button" type="button" onClick={() => setEndingFor(ending ? '' : sound.symbol)}>

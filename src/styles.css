@@ -157,18 +157,47 @@ kbd { border: 1px solid var(--line); background: var(--inset); padding: .1rem .3
 .sound-grid button { min-width: 44px; }
 .mouth-svg {
   width: 100%;
-  max-height: 19rem;
-  background: var(--inset);
+  height: auto;
+  max-height: none;
+  background: #fff9f4;
   border: 1px solid var(--line);
-  border-radius: 1rem;
+  border-radius: .85rem;
   box-shadow: var(--shadow-panel);
 }
+.mouth-head { fill: #f3e2d7; stroke: #c6a99c; stroke-width: 2; stroke-linejoin: round; }
+.mouth-nose { fill: #e7f0f4; stroke: #c0d1d8; stroke-width: 1.5; }
+.mouth-cavity { fill: #fff; stroke: #d6c4bc; stroke-width: 1.4; }
+.mouth-hard-palate { fill: none; stroke: #bd9d83; stroke-width: 12; stroke-linecap: round; }
+.mouth-velum { fill: none; stroke: #b58b64; stroke-width: 11; stroke-linecap: round; transition: d .25s ease; }
+.mouth-velum.is-open { stroke: #4776d0; }
+.mouth-tooth { fill: #fff; stroke: #9a8b83; stroke-width: 1.5; }
+.mouth-tongue { fill: #ee8d9e; stroke: #c84e68; stroke-width: 2; stroke-linejoin: round; transition: d .25s ease; }
+.mouth-lips { fill: none; stroke: #bb4564; stroke-width: 7; stroke-linecap: round; }
+.mouth-vocal-cords { fill: none; stroke: #96949c; stroke-width: 4; stroke-linecap: round; }
+.mouth-vocal-cords.is-voiced { stroke: #28876d; animation: vibrate .15s alternate infinite; transform-origin: 282px 204px; }
+.mouth-air { fill: none; stroke: #db456f; stroke-width: 4; stroke-dasharray: 8 6; animation: flow .8s linear infinite; }
+.mouth-air.is-nasal { stroke: #4776d0; }
+.mouth-focus-halo { fill: #f14270; opacity: .2; animation: focus-breathe 1.4s ease-in-out infinite; }
+.mouth-focus { fill: #d52d5c; stroke: white; stroke-width: 2.5; }
+.mouth-callouts { fill: #413b39; font: 600 11px system-ui, sans-serif; }
+.mouth-callouts path { fill: none; stroke: #71615a; stroke-width: 1.2; }
+.mouth-flow-label, .mouth-place-label { fill: #6d4a52; font: 700 10px system-ui, sans-serif; letter-spacing: .06em; }
+.mouth-place-label { text-anchor: end; }
+.mouth-legend { display: flex; flex-wrap: wrap; gap: .45rem 1rem; padding: .65rem .75rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--inset); }
+.mouth-legend span { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .78rem; }
+.mouth-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #bb4564; }
+.mouth-legend .legend-lips { background: #bb4564; }
+.mouth-legend .legend-palate { background: #bd9d83; }
+.mouth-legend .legend-tongue { background: #d52d5c; }
+.mouth-legend .legend-air, .mouth-legend .legend-air-nasal { width: 17px; height: 0; border-top: 3px dashed #db456f; border-radius: 0; background: transparent; }
+.mouth-legend .legend-air-nasal { border-color: #4776d0; }
+.mouth-legend .legend-voice-on { background: #28876d; box-shadow: 0 0 0 3px #28876d30; }
+.mouth-legend .legend-voice-off { background: #96949c; }
 .mouth .row { margin-top: .6rem; }
-.anatomy { transition: cx .25s ease, cy .25s ease, d .25s ease; }
-.air { fill: none; stroke: #148278; stroke-width: 3; stroke-dasharray: 5 4; animation: flow .8s linear infinite; }
-.vocal { animation: vibrate .15s alternate infinite; }
+.mouth-focus, .mouth-focus-halo { transition: cx .25s ease, cy .25s ease; }
 @keyframes flow { to { stroke-dashoffset: -18; } }
 @keyframes vibrate { to { transform: translate(1px, -2px); } }
+@keyframes focus-breathe { 50% { r: 20px; opacity: .12; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation: none !important; transition: none !important; } }
 .spoken { color: var(--primary-text); background: var(--primary); border-radius: .2rem; }
 .inline-action { display: inline-flex; align-items: center; gap: .35rem; flex-wrap: wrap; }
