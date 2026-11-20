@@ -25,14 +25,14 @@ export function FocusTimer() {
       const work = session.mode === 'work'
       if (work) {
         triggerCelebration({
-          xp: 20,
-          title: '+20 XP! Hoàn thành phiên Pomodoro',
-          subtitle: 'Bạn đã giữ vững nhịp tập trung — nghỉ ngơi 5 phút nhé!',
-          confetti: true
+          xp: 0,
+          title: 'Hoàn thành phiên Pomodoro',
+          subtitle: 'Đã ghi thời gian tập trung. Bạn có thể nghỉ 5 phút.',
+          confetti: false
         })
       }
       const duration = work ? 300 : previous.dailyMinutes * 60
-      const updated = work ? record(previous, 'focus', 20, session.duration, dayKey(new Date())) : previous
+      const updated = work ? record(previous, 'focus', 0, session.duration, dayKey(new Date(session.deadline)), false) : previous
       return { ...updated, focus: { mode: work ? 'break' : 'work', duration, remaining: duration, deadline: null } }
     })
   }, [focus.deadline, seconds, update])

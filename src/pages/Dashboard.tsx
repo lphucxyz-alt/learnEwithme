@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useStudy } from '../app/StudyProvider'
 import { dayKey, shiftDay, streaks, clockLabel, secondsUntilVietnamMidnight, weekdayOf } from '../features/discipline/activity'
@@ -15,11 +16,11 @@ export default function Dashboard() {
   const today = dayKey(new Date(now))
   const left = secondsUntilVietnamMidnight(now)
   const activity = state.activity[today]
-  const plan = getStudyPlan(state)
-  const { current, longest, shields, protectedDays, studiedToday } = streaks(state.activity, today)
-  const due = Object.values(state.cards)
+  const plan = useMemo(() => getStudyPlan(state), [state])
+  const { current, longest, shields, protectedDays, studiedToday } = useMemo(() => streaks(state.activity, today), [state.activity, today])
+  const due = useMemo(() => Object.values(state.cards)
     .filter(card => card.due <= today)
-    .sort((a, b) => a.due.localeCompare(b.due))
+    .sort((a, b) => a.due.localeCompare(b.due)), [state.cards, today])
   const progressPct = plan.basicsTotal > 0 ? Math.round((plan.basicsDone / plan.basicsTotal) * 100) : 0
   const foundationsCount = Math.min(activity?.counts.foundations ?? 0, 3)
   const practiceCount = Math.min(activity?.counts.practice ?? 0, 1)
@@ -27,24 +28,19 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-view">
-      <header className="hero hero-study">
-        <div className="hero-intro">
-          <p className="overline">MỤC TIÊU IELTS {state.targetBand.toFixed(1)}</p>
-          <h1>Trung tâm kỷ luật</h1>
-          <p className="hero-subtitle">
-            Học chắc câu cơ bản, luyện ngắn mỗi ngày, rồi làm quen với đề IELTS.
-          </p>
+      <header className="panel study-home">
+        <div>
+          <h1>Góc học tiếng Anh</h1>
+          <p className="muted">Mục tiêu IELTS {state.targetBand.toFixed(1)}</p>
         </div>
 
-        <section className="next-study">
-          <div className="stack">
-            <h2 className="next-study-eyebrow">⚡ BƯỚC TIẾP THEO HÔM NAY</h2>
-            <p className="next-study-title">{plan.title}</p>
-            <p className="next-study-detail">{plan.detail}</p>
+        <section className="study-home-next">
+          <div>
+            <small>Gợi ý học tiếp</small>
+            <h2>{plan.title}</h2>
+            <p className="muted">{plan.detail}</p>
           </div>
-          <Link className="button primary" to={plan.path} style={{ fontSize: '0.95rem', padding: '0.7rem 1.1rem' }}>
-            Bắt đầu học: {plan.label} →
-          </Link>
+          <Link className="button primary" to={plan.path}>{plan.label}</Link>
         </section>
       </header>
 
@@ -102,11 +98,11 @@ export default function Dashboard() {
         </section>
       </div>
 
-      <ActivityCalendar activity={state.activity} protectedDays={protectedDays} today={today} now={now} />
+      <ActivityCalendar activity={state.activity} protectedDays={protectedDays} due={due} today={today} now={now} />
 
-      <div className="split">
+      <div className="dashboard-review-grid">
         <section className="panel stack">
-          <h2>Hôm nay</h2>
+          <h2>Lượt luyện hôm nay</h2>
           <div className="quest-list">
             <Link className="quest" to="/foundations" data-done={foundationsCount >= 3}>
               <span>Học 3 câu ngữ pháp</span>
@@ -119,24 +115,20 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="panel stack">
+        <section className="panel stack" id="review-bank" tabIndex={-1} aria-labelledby="review-bank-title">
           <div className="between">
-            <h2>
+            <h2 id="review-bank-title">
               Sổ tay lỗi sai <span className="pill">{due.length} đến hạn</span>
             </h2>
             <Link className="text-link" to="/coach">
               Nhận xét AI đã lưu
             </Link>
           </div>
-          <small className="muted" style={{ marginTop: '-0.3rem' }}>
-            Hệ thống SM-2 tự động nhắc lại những câu bạn từng làm sai đúng lúc não bộ sắp quên.
-          </small>
-
           {Object.keys(state.cards).length === 0 ? (
             <EmptyStateCard
               badge="Sổ tay sạch tinh"
               title="Chưa có lỗi sai nào được lưu"
-              description="Mỗi khi làm sai ở phần Nền tảng hoặc Luyện ngắn, thẻ ôn tập SM-2 sẽ tự động xuất hiện tại đây."
+              description="Các câu làm sai và thẻ bạn đánh dấu khó sẽ được lưu để ôn lại."
               actionLabel="Bắt đầu luyện 5 phút"
               actionTo="/practice"
             />

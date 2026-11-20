@@ -31,6 +31,12 @@ export const stateSchema = z.object({
   lessons: z.record(z.string(), z.object({ attempts: count, best: count, last: count, total: count.default(6) })).default({}),
   coachHistory: z.array(coachEntrySchema).max(30).default([]),
   recentPractice: z.array(z.string()).max(240).default([]),
+  routineWork: z.record(isoDay, z.object({
+    'new-words': z.tuple([z.string(), z.string()]).optional(),
+    'self-talk': z.tuple([z.string(), z.string()]).optional(),
+    'speak-432': count.optional(),
+    'weekly-story': count.optional()
+  })).default({}),
   cards: z.record(z.string(), cardSchema),
   drafts: z.record(z.string(), draftSchema),
   attempts: z.array(z.object({ id: z.string(), examId: z.string(), at: z.iso.datetime(), score: count.nullable(), total: count, draft: draftSchema })),
@@ -39,6 +45,6 @@ export const stateSchema = z.object({
 export type StudyState = z.infer<typeof stateSchema>
 export const initialState: StudyState = {
   version: 1, theme: 'light', accent: 'en-GB', rate: 1, dailyMinutes: 25, targetBand, fluencyNotes: '',
-  activity: {}, lessons: {}, coachHistory: [], recentPractice: [], cards: {}, drafts: {}, attempts: [],
+  activity: {}, lessons: {}, coachHistory: [], recentPractice: [], routineWork: {}, cards: {}, drafts: {}, attempts: [],
   focus: { mode: 'work', duration: 1500, remaining: 1500, deadline: null }
 }

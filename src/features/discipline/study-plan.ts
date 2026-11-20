@@ -1,6 +1,7 @@
 import { lessons } from '../../data/foundations/catalog'
 import { exams } from '../tests/catalog'
 import type { StudyState } from '../../types/study'
+import { hasExamCredit } from './study-credit'
 
 const foundationalOrder = [
   'articles-indefinite', 'articles-definite', 'time-prepositions', 'place-prepositions',
@@ -15,12 +16,12 @@ export function getStudyPlan(state: StudyState) {
     ((state.lessons[lesson.id]?.best ?? 0) / (state.lessons[lesson.id]?.total ?? lesson.questions.length)) < 0.65)
   const firstLesson = remainingLessons[0]
   const firstExam = starterExams.find(exam => !state.attempts.some(attempt => attempt.examId === exam.id
-    && Object.values(attempt.draft.answers).some(answer => answer.trim())))
+    && hasExamCredit(exam, attempt.draft.answers)))
   const basicsDone = starterLessons.length - remainingLessons.length
   if (firstLesson) return {
     basicsDone, basicsTotal: starterLessons.length, title: firstLesson.title,
     path: '/foundations/' + firstLesson.id, label: 'Học bài này',
-    detail: 'Đọc ví dụ, rồi làm ' + firstLesson.questions.length + ' câu.'
+    detail: 'Đọc ví dụ, rồi luyện 20 câu cùng nhóm ngữ pháp.'
   }
   if (firstExam) return {
     basicsDone, basicsTotal: starterLessons.length, title: firstExam.skill + ' · ' + firstExam.title,

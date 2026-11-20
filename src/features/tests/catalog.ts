@@ -1,6 +1,7 @@
 import { examSchema, type Exam, type Question } from '../../types/exam'
 import { shuffle } from '../../services/random'
 import type { CardSeed, Draft } from '../../types/study'
+import { hasAnswer } from '../discipline/study-credit'
 
 const modules = import.meta.glob<unknown>('../../data/tests/*.json', { eager: true, import: 'default' })
 export const exams = Object.values(modules).map(source => examSchema.parse(source))
@@ -38,7 +39,7 @@ export function matches(question: Question, value: string) {
 export function scoreExam(exam: Exam, draft: Draft) {
   const questions = questionsOf(exam)
   const wrong = questions.filter(question => !matches(question, draft.answers[question.id] ?? ''))
-  const errors: CardSeed[] = wrong.map(question => ({
+  const errors: CardSeed[] = wrong.filter(question => hasAnswer(draft.answers[question.id])).map(question => ({
     id: 'exam:' + exam.id + ':' + question.id, domain: 'tests', prompt: question.prompt,
     answer: question.answers[0] + ' · ' + question.explanation + ' · ' + evidence(exam, question.evidence)
   }))

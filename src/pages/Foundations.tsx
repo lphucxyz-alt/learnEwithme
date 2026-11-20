@@ -7,6 +7,7 @@ import { lessons } from '../data/foundations/catalog'
 import { GrammarDrill } from '../features/foundations/GrammarDrill'
 import { createLessonQuiz, type GrammarTask } from '../features/foundations/lesson-quiz'
 import { triggerCelebration } from '../features/discipline/CelebrationHost'
+import { minimumWork } from '../features/discipline/study-credit'
 import { leastRecent, rememberPractice } from '../services/random'
 
 const levels = ['A1', 'A2', 'B1'] as const
@@ -58,7 +59,7 @@ export default function Foundations() {
 }
 
 function LessonPage({ lesson }: { lesson: Lesson }) {
-  const { state, update } = useStudy()
+  const { state, update, complete } = useStudy()
   const [quiz, setQuiz] = useState<GrammarTask[]>([])
   const [position, setPosition] = useState(0)
   const [score, setScore] = useState(0)
@@ -88,11 +89,12 @@ function LessonPage({ lesson }: { lesson: Lesson }) {
       <section className="panel stack">
         <div className="between"><h2>Luyện ngay</h2>{question && <span className="pill">{position + 1}/{quiz.length}</span>}</div>
         {!quiz.length && <><p className="muted">20 câu theo nhóm {lesson.group}, lấy từ các bài cùng trình độ trước khi lặp. Có 4 dạng: chọn đáp án, điền từ, sửa lỗi và sắp xếp từ. Ngân hàng hiện có {groupQuestions.length} câu trong nhóm này.</p><button className="primary" onClick={start}>Bắt đầu 20 câu</button></>}
-        {question && <GrammarDrill key={question.id} question={question} final={position + 1 === quiz.length}
+        {question && <GrammarDrill key={question.id} question={question} qualifies={position + 1 >= minimumWork(quiz.length)} final={position + 1 === quiz.length}
           onAnswer={correct => {
             const total = score + Number(correct)
             setScore(total)
             if (position + 1 === quiz.length) {
+              complete('foundations', 15)
               triggerCelebration({
                 xp: 15,
                 title: '+15 XP! Hoàn thành bài học',

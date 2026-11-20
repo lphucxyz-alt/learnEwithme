@@ -4,6 +4,7 @@ import { useStudy } from '../app/StudyProvider'
 import { clockLabel, dayKey } from '../features/discipline/activity'
 import { useNow } from '../features/discipline/FocusTimer'
 import { ReviewCard } from '../features/discipline/Review'
+import { minimumWork } from '../features/discipline/study-credit'
 import { EarDrill } from '../features/ipa/EarDrill'
 import { GrammarDrill } from '../features/foundations/GrammarDrill'
 import { rememberPractice } from '../services/random'
@@ -27,9 +28,12 @@ export default function Practice() {
   const step = session[index]
   const remaining = Math.max(0, Math.ceil((deadline - now) / 1000))
   const totalXp = Object.values(state.activity).reduce((sum, entry) => sum + entry.xp, 0)
+  const completedSteps = answers.length + reviewed
+  const requiredSteps = minimumWork(session.length)
+  const qualifies = completedSteps + 1 >= requiredSteps
   function finish(attempts = answers.length + reviewed) {
     if (finished) return
-    const bonus = attempts > 0 ? 15 : 0
+    const bonus = attempts >= requiredSteps ? 15 : 0
     if (bonus) complete('practice', bonus)
     setXpGained(totalXp - xpStart + bonus)
     setFinished(true)
@@ -68,15 +72,17 @@ export default function Practice() {
     </section>)}</div>}
     {session.length > 0 && !finished && step && <section className="panel stack">
       <div className="between"><h2>{{ review: 'Ôn thẻ đến hạn', grammar: 'Ngữ pháp nền tảng', ipa: 'Phân biệt âm', verb: 'Động từ', structure: 'Biến đổi câu' }[step.kind]}</h2><strong>{index + 1}/{session.length} · {clockLabel(remaining)}</strong></div>
-      <progress value={index} max={session.length} aria-label="Tiến độ bài luyện" />
-      {step.kind === 'review' && <ReviewCard key={index} card={step.card} onDone={() => next(undefined, true)} />}
-      {step.kind === 'grammar' && <GrammarDrill key={index} question={step.question} done={next} />}
-      {step.kind === 'ipa' && <EarDrill key={index} pair={step.pair} done={next} />}
-      {step.kind === 'verb' && <VerbDrill key={index} verb={step.verb} mode={step.mode} done={next} />}
-      {step.kind === 'structure' && <StructureDrill key={index} item={step.structure} done={next} />}
+      <progress value={completedSteps} max={session.length} aria-label="Tiến độ bài luyện" />
+      <small>Đã làm {completedSteps}/{session.length} lượt · Làm ít nhất {requiredSteps} lượt để giữ chuỗi.</small>
+      {step.kind === 'review' && <ReviewCard key={index} card={step.card} qualifies={qualifies} onDone={() => next(undefined, true)} />}
+      {step.kind === 'grammar' && <GrammarDrill key={index} question={step.question} qualifies={qualifies} done={next} />}
+      {step.kind === 'ipa' && <EarDrill key={index} pair={step.pair} qualifies={qualifies} done={next} />}
+      {step.kind === 'verb' && <VerbDrill key={index} verb={step.verb} mode={step.mode} qualifies={qualifies} done={next} />}
+      {step.kind === 'structure' && <StructureDrill key={index} item={step.structure} qualifies={qualifies} done={next} />}
       <div className="row"><button onClick={() => next()}>Bỏ qua bước</button>{remaining === 0 && <button onClick={() => finish()}>Kết thúc theo thời lượng</button>}</div>
     </section>}
     {finished && <section className="panel stack"><h2>Tổng kết phiên học</h2><p>{answers.filter(Boolean).length}/{answers.length} câu đã trả lời đúng · {reviewed} thẻ đã ôn · +{xpGained} XP</p>
+      {completedSteps < requiredSteps && <p className="muted">Bạn đã làm {completedSteps}/{session.length} lượt. Cần làm ít nhất {requiredSteps} lượt để giữ chuỗi.</p>}
       <div className="row"><Link className="button primary" to="/">Về trung tâm</Link><button onClick={() => setSession([])}>Chọn phiên mới</button></div>
     </section>}
   </>

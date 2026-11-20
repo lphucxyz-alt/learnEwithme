@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { leastRecent } from '../services/random'
 import { exams } from '../features/tests/catalog'
 import { Speaking } from '../features/tests/Speaking'
@@ -7,8 +7,14 @@ import { SpeakingLifeline } from '../features/fluency/SpeakingLifeline'
 
 const topics = exams.filter(item => item.skill === 'Speaking')
 const initialTopic = topics.find(item => item.id === 'study-routines') ?? topics[0]
+const weeklyPrompts = [{
+  title: 'My week in three minutes',
+  prompts: ['What happened this week?', 'What was the most memorable moment?', 'What will you do differently next week?'],
+  sample: 'I spent most of this week preparing for an exam. A friend helped me revise on Wednesday, which made it easier to get started. Next week, I want to practise a little each morning.'
+}]
 
 export default function Fluency() {
+  const [params] = useSearchParams()
   const [topic, setTopic] = useState(initialTopic.id)
   const [recent, setRecent] = useState([initialTopic.id])
   const exam = topics.find(item => item.id === topic) ?? initialTopic
@@ -16,6 +22,11 @@ export default function Fluency() {
     setTopic(value)
     setRecent(previous => [...previous.filter(id => id !== value), value])
   }
+  if (params.get('mode') === 'weekly-story') return <>
+    <header className="page-head"><Link className="text-link" to="/">Kế hoạch hôm nay</Link><h1>Kể lại tuần này</h1>
+      <p>Ghi âm bằng tiếng Anh. Một bản ghi từ 1 phút 30 giây sẽ được tính vào kế hoạch hôm nay.</p></header>
+    <Speaking key="weekly-story" parts={weeklyPrompts} fluency="weekly-story" />
+  </>
   return <>
     <header className="page-head"><Link className="text-link" to="/practice">Luyện nhanh</Link><h1>Luyện nói 4/3/2</h1>
       <p>Giữ cùng một đề qua ba lượt. Sau mỗi lượt, bấm Chấm với AI và chọn một lỗi để sửa khi nói lại.</p>
@@ -27,6 +38,6 @@ export default function Fluency() {
       if (next) selectTopic(next.id)
     }}>Đổi chủ đề ngẫu nhiên</button></section>
     <SpeakingLifeline topic={exam.title} roundMinutes={4} defaultOpen={true} />
-    <Speaking key={exam.id} parts={exam.parts} fluency />
+    <Speaking key={exam.id} parts={exam.parts} fluency="speak-432" />
   </>
 }

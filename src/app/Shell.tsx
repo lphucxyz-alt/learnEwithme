@@ -11,14 +11,14 @@ import { useStudy } from './StudyProvider'
 import { NavIcon, type NavIconKey } from '../components/NavIcons'
 import { CelebrationHost } from '../features/discipline/CelebrationHost'
 
-const routes: { path: string; iconKey: NavIconKey; title: string; mobile: string }[] = [
-  { path: '/', iconKey: 'dashboard', title: 'Trung tâm', mobile: 'Hôm nay' },
-  { path: '/foundations', iconKey: 'foundations', title: 'Nền tảng', mobile: 'Nền tảng' },
-  { path: '/practice', iconKey: 'practice', title: 'Luyện nhanh', mobile: 'Luyện' },
-  { path: '/ipa', iconKey: 'ipa', title: 'Phòng lab IPA', mobile: 'IPA' },
-  { path: '/verbs', iconKey: 'verbs', title: 'Động từ', mobile: 'Động từ' },
-  { path: '/structures', iconKey: 'structures', title: 'Kho cấu trúc', mobile: 'Cấu trúc' },
-  { path: '/tests', iconKey: 'tests', title: 'Kho đề IELTS', mobile: 'Kho đề' }
+const routes: { path: string; iconKey: NavIconKey; title: string }[] = [
+  { path: '/', iconKey: 'dashboard', title: 'Trung tâm' },
+  { path: '/foundations', iconKey: 'foundations', title: 'Nền tảng' },
+  { path: '/practice', iconKey: 'practice', title: 'Luyện nhanh' },
+  { path: '/ipa', iconKey: 'ipa', title: 'Phòng lab IPA' },
+  { path: '/verbs', iconKey: 'verbs', title: 'Động từ' },
+  { path: '/structures', iconKey: 'structures', title: 'Kho cấu trúc' },
+  { path: '/tests', iconKey: 'tests', title: 'Kho đề IELTS' }
 ]
 
 const paths: Record<string, string> = {
@@ -53,6 +53,8 @@ export function Shell() {
   const [query, setQuery] = useState('')
   const [cursor, setCursor] = useState(0)
   const dialog = useRef<HTMLDialogElement>(null)
+  const menuToggle = useRef<HTMLButtonElement>(null)
+  const menuClose = useRef<HTMLButtonElement>(null)
   const location = useLocation()
   const navigate = useNavigate()
   const results = searchItems.filter(item => normalize(item.title + ' ' + item.type).includes(normalize(query))).slice(0, 12)
@@ -61,6 +63,11 @@ export function Shell() {
     setQuery('')
     setCursor(0)
     if (!dialog.current?.open) dialog.current?.showModal()
+  }
+
+  function closeMenu() {
+    setMobileMenuOpen(false)
+    requestAnimationFrame(() => menuToggle.current?.focus())
   }
 
   useEffect(() => {
@@ -83,15 +90,21 @@ export function Shell() {
 
   useEffect(() => {
     if (!mobileMenuOpen) return
+    const viewport = window.matchMedia('(max-width: 768px)')
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    const focusFrame = requestAnimationFrame(() => menuClose.current?.focus())
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileMenuOpen(false)
+      if (event.key === 'Escape') closeMenu()
     }
+    const closeOnResize = () => { if (!viewport.matches) setMobileMenuOpen(false) }
     window.addEventListener('keydown', closeOnEscape)
+    viewport.addEventListener('change', closeOnResize)
     return () => {
+      cancelAnimationFrame(focusFrame)
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', closeOnEscape)
+      viewport.removeEventListener('change', closeOnResize)
     }
   }, [mobileMenuOpen])
 
@@ -102,10 +115,13 @@ export function Shell() {
       </a>
 
       <aside id="mobile-sidebar" className="sidebar" aria-label="Điều hướng chính">
-        <Link className="brand" to="/">
-          <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
-          <span>IELTS Discipline <strong>OS</strong></span>
-        </Link>
+        <div className="sidebar-heading">
+          <Link className="brand" to="/" onClick={() => setMobileMenuOpen(false)}>
+            <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
+            <span>IELTS Discipline <strong>OS</strong></span>
+          </Link>
+          <button ref={menuClose} className="mobile-menu-close icon-only" type="button" aria-label="Đóng menu" onClick={closeMenu}><Icon name="close" /></button>
+        </div>
         <nav aria-label="Điều hướng chính">
           {routes.map(route => (
             <NavLink key={route.path} end={route.path === '/'} to={route.path} title={route.title} aria-label={route.title} onClick={() => setMobileMenuOpen(false)}>
@@ -119,32 +135,31 @@ export function Shell() {
             <Icon name="settings" />
             <span className="nav-label">Cài đặt</span>
           </NavLink>
-          <button className="collapse" aria-label={collapsed ? 'Mở rộng sidebar' : 'Thu gọn sidebar'} onClick={() => setCollapsed(value => !value)}>
-            <Icon name="panel" />
-            <span>Thu gọn</span>
-          </button>
         </div>
       </aside>
 
-      <div className="workspace">
+      <div className="workspace" inert={mobileMenuOpen}>
         <header className="topbar">
-          <Link className="mobile-brand" to="/">
-            <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
-            <strong>IELTS OS</strong>
-          </Link>
-          <button className="mobile-menu-toggle icon-only" type="button" aria-label={mobileMenuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'} aria-expanded={mobileMenuOpen} aria-controls="mobile-sidebar" onClick={() => setMobileMenuOpen(value => !value)}>
-            <Icon name={mobileMenuOpen ? 'close' : 'menu'} />
-          </button>
-          <button className="search-button" aria-label="Tìm nội dung" onClick={openSearch}>
-            <Icon name="search" />
-            <span>Tìm nội dung</span>
-            <kbd>Ctrl K</kbd>
-          </button>
+          <div className="topbar-navigation">
+            <Link className="mobile-brand" to="/" aria-label="Trung tâm IELTS">
+              <img src={import.meta.env.BASE_URL + 'icon.svg'} alt="" />
+            </Link>
+            <button className="sidebar-collapse icon-only" type="button"
+              aria-label={collapsed ? 'Mở rộng menu' : 'Thu gọn menu'} title={collapsed ? 'Mở rộng menu' : 'Thu gọn menu'}
+              aria-controls="mobile-sidebar" aria-expanded={!collapsed} onClick={() => setCollapsed(value => !value)}>
+              <Icon name="panel" />
+            </button>
+            <button ref={menuToggle} className="mobile-menu-toggle icon-only" type="button" aria-label="Mở menu điều hướng" aria-expanded={mobileMenuOpen} aria-controls="mobile-sidebar" onClick={() => setMobileMenuOpen(true)}>
+              <Icon name="menu" />
+            </button>
+            <button className="search-button" aria-label="Tìm nội dung" onClick={openSearch}>
+              <Icon name="search" />
+              <span>Tìm nội dung</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+          </div>
           <div className="top-actions">
             <FocusTimer />
-            <Link className="button icon-only mobile-settings" to="/settings" aria-label="Cài đặt">
-              <Icon name="settings" />
-            </Link>
             <button
               className="icon-only theme-toggle"
               aria-label={state.theme === 'light' ? 'Chuyển sang giao diện tối' : 'Chuyển sang giao diện sáng'}
@@ -161,7 +176,7 @@ export function Shell() {
         </main>
       </div>
 
-      {mobileMenuOpen && <button className="mobile-scrim" type="button" aria-label="Đóng menu điều hướng" onClick={() => setMobileMenuOpen(false)} />}
+      {mobileMenuOpen && <button className="mobile-scrim" type="button" tabIndex={-1} aria-label="Đóng menu điều hướng" onClick={closeMenu} />}
 
       <dialog ref={dialog} aria-label="Tìm nội dung" className="palette" onKeyDown={event => {
         if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {

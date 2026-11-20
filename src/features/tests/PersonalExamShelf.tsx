@@ -17,14 +17,16 @@ export function PersonalExamShelf() {
   }, [])
 
   useEffect(() => {
-    if (!selected) { setPreview(''); return }
+    setPreview('')
+    if (!selected) return
     let disposed = false
     let objectUrl = ''
     void getPersonalExam(selected).then(blob => {
-      if (!blob) return
+      if (disposed) return
+      if (!blob) { setMessage('Không tìm thấy tệp PDF trên thiết bị.'); return }
       objectUrl = URL.createObjectURL(blob)
-      if (!disposed) setPreview(objectUrl)
-    }).catch(() => setMessage('Không mở được tệp này trên thiết bị.'))
+      setPreview(objectUrl)
+    }).catch(() => { if (!disposed) setMessage('Không mở được tệp này trên thiết bị.') })
     return () => {
       disposed = true
       if (objectUrl) URL.revokeObjectURL(objectUrl)

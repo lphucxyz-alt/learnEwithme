@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useStudy } from '../../app/StudyProvider'
 import { rateCard } from '../../services/srs'
 import type { Card } from '../../types/study'
 import { record } from './activity'
 import { FlipCard3D } from './FlipCard3D'
 
-export function ReviewCard({ card, onDone }: { card: Card; onDone?: () => void }) {
+export function ReviewCard({ card, onDone, qualifies = true }: { card: Card; onDone?: () => void; qualifies?: boolean }) {
   const [flipped, setFlipped] = useState(false)
   const { update } = useStudy()
 
@@ -13,26 +13,18 @@ export function ReviewCard({ card, onDone }: { card: Card; onDone?: () => void }
     update(previous => {
       const current = previous.cards[card.id]
       if (!current || current.due !== card.due || current.repetitions !== card.repetitions || current.lapses !== card.lapses) return previous
-      return { ...record(previous, 'review', 5), cards: { ...previous.cards, [card.id]: rateCard(current, quality) } }
+      return { ...record(previous, 'review', 5, 0, undefined, qualifies), cards: { ...previous.cards, [card.id]: rateCard(current, quality) } }
     })
     onDone?.()
   }
 
-  useEffect(() => {
-    function key(event: KeyboardEvent) {
-      if ((event.target as HTMLElement).closest('input, textarea, select, button, [role=dialog]') || event.ctrlKey || event.metaKey) return
-      if (event.code === 'Space') {
-        event.preventDefault()
-        setFlipped(prev => !prev)
-      }
-      if (flipped && /^[1-4]$/.test(event.key)) rate(Number(event.key) as 1 | 2 | 3 | 4)
-    }
-    window.addEventListener('keydown', key)
-    return () => window.removeEventListener('keydown', key)
-  })
-
   return (
-    <div className="stack" style={{ gap: '0.85rem' }}>
+    <div className="stack" onKeyDown={event => {
+      if (flipped && !event.repeat && !event.ctrlKey && !event.metaKey && /^[1-4]$/.test(event.key)) {
+        event.preventDefault()
+        rate(Number(event.key) as 1 | 2 | 3 | 4)
+      }
+    }}>
       <FlipCard3D
         flipped={flipped}
         onToggle={() => setFlipped(prev => !prev)}

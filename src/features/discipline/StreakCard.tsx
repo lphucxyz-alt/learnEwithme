@@ -15,7 +15,7 @@ export function StreakCard({ days, longest, studied, protectedYesterday }: {
       </span>
       <div><span className="metric-label">Chuỗi học</span><strong className="metric-value">{days} ngày</strong></div>
     </div>
-    <p className="muted">{studied ? 'Đã thắp lửa hôm nay' : protectedYesterday ? 'Khiên đã giữ chuỗi hôm qua. Học hôm nay để tiếp tục.' : days ? 'Học hôm nay để giữ lửa.' : 'Hoàn thành một bài luyện để thắp lửa.'}</p>
+    <p className="muted">{studied ? 'Đã ghi nhận ngày học' : protectedYesterday ? 'Khiên đã giữ chuỗi hôm qua. Học hôm nay để tiếp tục.' : 'Làm ít nhất nửa phiên luyện hoặc hoàn thành một nhiệm vụ hôm nay.'}</p>
     <div className="between"><small>Kỷ lục {longest} ngày</small><small>{next ? 'Đổi màu ở ' + next + ' ngày' : 'Đã đạt mốc 365 ngày'}</small></div>
     {next && <progress aria-label={'Tiến độ đến mốc ' + next + ' ngày'} value={days} max={next} />}
     <details><summary>Các mốc đổi màu</summary><div className="row">{milestones.map((milestone, index) =>

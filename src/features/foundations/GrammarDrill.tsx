@@ -5,8 +5,8 @@ import type { GrammarQuestion } from '../../data/foundations'
 import { shuffle } from '../../services/random'
 import type { GrammarTask } from './lesson-quiz'
 
-export function GrammarDrill({ question, done, onAnswer, final = false }: {
-  question: GrammarQuestion | GrammarTask; done: (correct: boolean) => void; onAnswer?: (correct: boolean) => void; final?: boolean
+export function GrammarDrill({ question, done, onAnswer, qualifies, final = false }: {
+  question: GrammarQuestion | GrammarTask; done: (correct: boolean) => void; onAnswer?: (correct: boolean) => void; qualifies: boolean; final?: boolean
 }) {
   const field = useId()
   const { complete } = useStudy()
@@ -32,14 +32,14 @@ export function GrammarDrill({ question, done, onAnswer, final = false }: {
     }
     const orderedAnswer = orderedTokens.map(index => wordTokens.find(token => token.index === index)?.word).join(' ')
     const response = mode === 'choice' ? selected : mode === 'word-order' ? orderedAnswer : typedAnswer
-    if (!response) return
+    if (!response.trim() || mode === 'word-order' && orderedTokens.length < wordTokens.length) return
     const normalize = (value: string) => value.trim().toLocaleLowerCase().replace(/\s+/g, ' ').replace(/[.,!?;:]+$/g, '')
     const correct = normalize(response) === normalize(question.answer)
     setResult(correct)
     complete('foundations', correct ? 7 : 2, 0, correct ? [] : [{
       id: 'grammar:' + question.id, domain: 'foundations', prompt: question.prompt,
       answer: question.answer + ' · ' + question.explanation
-    }])
+    }], qualifies)
     onAnswer?.(correct)
   }}>
     <fieldset className="question stack">
@@ -79,6 +79,6 @@ export function GrammarDrill({ question, done, onAnswer, final = false }: {
       <p>{question.explanation}</p>
       <p>{spokenExample} <Listen text={spokenExample} /></p>
     </div>}
-    <button className="primary" disabled={result === null && (mode === 'choice' ? !selected : mode === 'word-order' ? orderedTokens.length === 0 : !typedAnswer)}>{result === null ? 'Chấm câu trả lời' : final ? 'Xem kết quả' : 'Câu tiếp theo'}</button>
+    <button className="primary" disabled={result === null && (mode === 'choice' ? !selected : mode === 'word-order' ? orderedTokens.length < wordTokens.length : !typedAnswer.trim())}>{result === null ? 'Chấm câu trả lời' : final ? 'Xem kết quả' : 'Câu tiếp theo'}</button>
   </form>
 }

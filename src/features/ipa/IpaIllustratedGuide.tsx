@@ -10,15 +10,9 @@ export function IpaIllustratedGuide({ onSelectSound }: IpaIllustratedGuideProps)
   const page = ipaGuidePages[activePage]
 
   return (
-    <section className="panel ipa-guide" aria-labelledby="ipa-guide-title">
-      <div className="ipa-guide-heading">
-        <div>
-          <p className="overline">LỘ TRÌNH KHẨU HÌNH · 5 BÀI NGẮN</p>
-          <h2 id="ipa-guide-title">Học bằng hình, luyện ngay từng âm</h2>
-          <p className="muted">Bộ hình bạn gửi được chia thành từng bài. Chọn ký hiệu để xem khẩu hình động và nghe mẫu.</p>
-        </div>
-        <span className="pill">Bài {String(activePage + 1).padStart(2, '0')} / {ipaGuidePages.length}</span>
-      </div>
+    <details className="panel ipa-guide" id="ipa-reference">
+      <summary><strong>Tài liệu khẩu hình minh họa</strong> <small>· {ipaGuidePages.length} bài</small></summary>
+      <div className="stack">
 
       <div className="ipa-guide-tabs" role="tablist" aria-label="Bài học IPA bằng hình">
         {ipaGuidePages.map((item, index) => (
@@ -55,12 +49,13 @@ export function IpaIllustratedGuide({ onSelectSound }: IpaIllustratedGuideProps)
           <img
             src={import.meta.env.BASE_URL + 'ipa-guide/' + page.image}
             alt={page.title + ' — tài liệu hình minh họa phát âm tiếng Anh'}
-            loading={activePage === 0 ? 'eager' : 'lazy'}
+            loading="lazy"
             decoding="async"
           />
           <figcaption>Tài liệu hình do bạn cung cấp · {page.title}</figcaption>
         </figure>
       </div>
-    </section>
+      </div>
+    </details>
   )
 }

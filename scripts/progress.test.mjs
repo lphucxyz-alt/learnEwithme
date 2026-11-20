@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { dayKey, record, secondsUntilVietnamMidnight, shiftDay, streaks } from '../src/features/discipline/activity.ts'
 import { leastRecent, rememberPractice, shuffle } from '../src/services/random.ts'
+import { examProgress, hasExamCredit, minimumWork } from '../src/features/discipline/study-credit.ts'
 
 const start = '2026-11-25'
 const studyDays = offsets => Object.fromEntries(offsets.map(offset => [shiftDay(start, offset), {
@@ -76,4 +77,22 @@ test('least-recent selection yields unseen items first and history stays bounded
   assert.deepEqual(rememberPractice(['a', 'b'], ['a', 'c']), ['b', 'a', 'c'])
   assert.equal(rememberPractice([], Array.from({ length: 241 }, (_, index) => String(index))).length, 240)
   assert.deepEqual(shuffle(pool, () => 0.9999), pool)
+})
+
+test('an objective exam requires half its own questions, rounded up, with real answers', () => {
+  const exam = { skill: 'Listening', questions: ['a', 'b', 'c', 'd', 'e'].map(id => ({ id })) }
+  const answers = { a: 'A', b: ' ', c: '22', d: '…', other: 'winter' }
+  assert.equal(minimumWork(5), 3)
+  assert.equal(examProgress(exam, answers).answered, 2)
+  assert.equal(hasExamCredit(exam, answers), false)
+  assert.equal(hasExamCredit(exam, { ...answers, b: 'winter' }), true)
+})
+
+test('writing and speaking require enough words or recordings rather than opening a task', () => {
+  const writing = { skill: 'Writing', tasks: [{ minWords: 150 }, { minWords: 250 }] }
+  assert.equal(hasExamCredit(writing, { 'task-0': 'example '.repeat(74) }), false)
+  assert.equal(hasExamCredit(writing, { 'task-0': 'example '.repeat(75) }), true)
+  const speaking = { skill: 'Speaking', parts: [{}, {}, {}] }
+  assert.equal(hasExamCredit(speaking, { 'part-1': '30', 'part-2': '29' }), false)
+  assert.equal(hasExamCredit(speaking, { 'part-1': '30', 'part-2': '30' }), true)
 })

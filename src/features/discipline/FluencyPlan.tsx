@@ -1,47 +1,51 @@
+import { useState } from 'react'
 import { useStudy } from '../../app/StudyProvider'
 import { Listen } from '../../components/Audio'
 import { Link } from 'react-router-dom'
-import { rememberPractice } from '../../services/random'
-import type { Domain } from '../../types/study'
+import { exams } from '../tests/catalog'
+import { dayKey } from './activity'
+import { countWords, hasExamCredit } from './study-credit'
+import { saveRoutineNote, type RoutineNote } from './routine-work'
+
+type RoutineId = RoutineNote | 'speak-432' | 'weekly-story' | 'easy-listen' | 'read-easy'
 
 interface RoutineTask {
-  id: string
+  id: RoutineId
   title: string
   detail: string
   minutes: number
-  href: string
-  action: string
-  domain: Domain
+  href?: string
+  action?: string
 }
 
 const weeklySchedule: Record<number, RoutineTask[]> = {
   1: [
-    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói', domain: 'practice' },
-    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe', domain: 'tests' },
+    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói' },
+    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe' },
   ],
   2: [
-    { id: 'read-easy', title: 'Đọc một bài vừa sức', detail: 'Đọc gần hết nội dung mà không phải tra liên tục. Đoán nghĩa từ mới qua câu.', minutes: 20, href: '/tests?skill=Reading', action: 'Chọn bài đọc', domain: 'tests' },
-    { id: 'new-words', title: 'Đặt câu với từ mới', detail: 'Chọn một từ vừa gặp, viết hai câu về cuộc sống của bạn và đọc thành tiếng.', minutes: 10, href: '/foundations', action: 'Mở bài học', domain: 'foundations' },
+    { id: 'read-easy', title: 'Đọc một bài vừa sức', detail: 'Đọc gần hết nội dung mà không phải tra liên tục. Đoán nghĩa từ mới qua câu.', minutes: 20, href: '/tests?skill=Reading', action: 'Chọn bài đọc' },
+    { id: 'new-words', title: 'Đặt câu với từ mới', detail: 'Chọn một từ vừa gặp, viết hai câu về cuộc sống của bạn và đọc thành tiếng.', minutes: 10 },
   ],
   3: [
-    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói', domain: 'practice' },
-    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe', domain: 'tests' },
+    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói' },
+    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe' },
   ],
   4: [
-    { id: 'read-easy', title: 'Đọc một bài vừa sức', detail: 'Đọc gần hết nội dung mà không phải tra liên tục. Đoán nghĩa từ mới qua câu.', minutes: 20, href: '/tests?skill=Reading', action: 'Chọn bài đọc', domain: 'tests' },
-    { id: 'new-words', title: 'Đặt câu với từ mới', detail: 'Chọn một từ vừa gặp, viết hai câu về cuộc sống của bạn và đọc thành tiếng.', minutes: 10, href: '/foundations', action: 'Mở bài học', domain: 'foundations' },
+    { id: 'read-easy', title: 'Đọc một bài vừa sức', detail: 'Đọc gần hết nội dung mà không phải tra liên tục. Đoán nghĩa từ mới qua câu.', minutes: 20, href: '/tests?skill=Reading', action: 'Chọn bài đọc' },
+    { id: 'new-words', title: 'Đặt câu với từ mới', detail: 'Chọn một từ vừa gặp, viết hai câu về cuộc sống của bạn và đọc thành tiếng.', minutes: 10 },
   ],
   5: [
-    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói', domain: 'practice' },
-    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe', domain: 'tests' },
+    { id: 'speak-432', title: 'Luyện nói 4/3/2 với một đề', detail: 'Nói 4 phút, nghe lại và sửa một lỗi, rồi nói lại trong 3 phút và 2 phút.', minutes: 20, href: '/practice/speaking', action: 'Mở phòng luyện nói' },
+    { id: 'easy-listen', title: 'Nghe nội dung tiếng Anh vừa sức', detail: 'Chọn một bài nghe ngắn, nghe để hiểu ý chính và ghi lại vài cụm hữu ích.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe' },
   ],
   6: [
-    { id: 'weekly-story', title: 'Ghi âm kể lại tuần này bằng tiếng Anh', detail: 'Nói khoảng 3 phút về việc bạn đã làm, điều thú vị và kế hoạch tuần sau.', minutes: 3, href: '/practice/speaking', action: 'Mở phòng ghi âm', domain: 'practice' },
-    { id: 'easy-listen', title: 'Đọc hoặc nghe nội dung vừa sức', detail: 'Chọn bài ngắn và tận hưởng việc hiểu được nhiều hơn mà không dừng ở mọi từ mới.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe', domain: 'tests' },
+    { id: 'weekly-story', title: 'Ghi âm kể lại tuần này bằng tiếng Anh', detail: 'Nói khoảng 3 phút về việc bạn đã làm, điều thú vị và kế hoạch tuần sau.', minutes: 3, href: '/practice/speaking?mode=weekly-story', action: 'Mở phòng ghi âm' },
+    { id: 'easy-listen', title: 'Đọc hoặc nghe nội dung vừa sức', detail: 'Chọn bài ngắn và tận hưởng việc hiểu được nhiều hơn mà không dừng ở mọi từ mới.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe' },
   ],
   0: [
-    { id: 'weekly-story', title: 'Ghi âm kể lại tuần này bằng tiếng Anh', detail: 'Nói khoảng 3 phút về việc bạn đã làm, điều thú vị và kế hoạch tuần sau.', minutes: 3, href: '/practice/speaking', action: 'Mở phòng ghi âm', domain: 'practice' },
-    { id: 'easy-listen', title: 'Đọc hoặc nghe nội dung vừa sức', detail: 'Chọn bài ngắn và tận hưởng việc hiểu được nhiều hơn mà không dừng ở mọi từ mới.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe', domain: 'tests' },
+    { id: 'weekly-story', title: 'Ghi âm kể lại tuần này bằng tiếng Anh', detail: 'Nói khoảng 3 phút về việc bạn đã làm, điều thú vị và kế hoạch tuần sau.', minutes: 3, href: '/practice/speaking?mode=weekly-story', action: 'Mở phòng ghi âm' },
+    { id: 'easy-listen', title: 'Đọc hoặc nghe nội dung vừa sức', detail: 'Chọn bài ngắn và tận hưởng việc hiểu được nhiều hơn mà không dừng ở mọi từ mới.', minutes: 15, href: '/tests?skill=Listening', action: 'Chọn bài nghe' },
   ],
 }
 
@@ -57,55 +61,85 @@ const practiceSteps = [
 const dailyTask: RoutineTask = {
   id: 'self-talk', title: 'Tự nói thầm bằng tiếng Anh',
   detail: 'Mô tả việc bạn đang làm và ghi lại một cụm từ khiến bạn bị khựng.',
-  minutes: 5, href: '/practice/speaking', action: 'Mở bài luyện nói', domain: 'practice',
+  minutes: 5,
+}
+
+function RoutineNotes({ task }: { task: RoutineNote }) {
+  const { update } = useStudy()
+  const [first, setFirst] = useState('')
+  const [second, setSecond] = useState('')
+  const vocabulary = task === 'new-words'
+  const valid = countWords(first) >= (vocabulary ? 4 : 2) && countWords(second) >= 4
+    && first.trim().toLowerCase() !== second.trim().toLowerCase()
+  return <details className="routine-notes">
+    <summary>{vocabulary ? 'Viết hai câu' : 'Ghi lại cụm từ'}</summary>
+    <form className="stack" onSubmit={event => {
+      event.preventDefault()
+      if (valid) update(previous => saveRoutineNote(previous, task, [first, second]))
+    }}>
+      <label>{vocabulary ? 'Câu thứ nhất' : 'Cụm từ bạn bị khựng'}
+        <input value={first} onChange={event => setFirst(event.target.value)} maxLength={600} />
+      </label>
+      <label>{vocabulary ? 'Câu thứ hai' : 'Câu bạn muốn nói'}
+        <input value={second} onChange={event => setSecond(event.target.value)} maxLength={600} />
+      </label>
+      <small>{vocabulary ? 'Viết hai câu khác nhau, ít nhất 4 từ mỗi câu.' : 'Ghi một cụm ít nhất 2 từ và một câu ít nhất 4 từ.'}</small>
+      <button className="primary" disabled={!valid}>Lưu bài luyện</button>
+    </form>
+  </details>
 }
 
 export function FluencyPlan({ weekday, dateKey }: { weekday: number; dateKey: string }) {
-  const { state, complete, update } = useStudy()
+  const { state } = useStudy()
   const tasks = [...weeklySchedule[weekday], dailyTask]
   const date = new Date(dateKey + 'T12:00:00')
   const dateLabel = new Intl.DateTimeFormat('vi-VN', { day: 'numeric', month: 'long' }).format(date)
-  const doneCount = tasks.filter(task => state.recentPractice.includes(dateKey + ':routine:' + task.id)).length
+  const completedSkills = new Set(state.attempts.filter(attempt => dayKey(new Date(attempt.at)) === dateKey).flatMap(attempt => {
+    const exam = exams.find(item => item.id === attempt.examId)
+    return exam && hasExamCredit(exam, attempt.draft.answers) ? [exam.skill] : []
+  }))
+  function isDone(task: RoutineId) {
+    if (task === 'easy-listen') return completedSkills.has('Listening') || (weekday === 0 || weekday === 6) && completedSkills.has('Reading')
+    if (task === 'read-easy') return completedSkills.has('Reading')
+    return Boolean(state.routineWork[dateKey]?.[task])
+  }
+  const doneCount = tasks.filter(task => isDone(task.id)).length
   const totalMinutes = tasks.reduce((sum, task) => sum + task.minutes, 0)
-
-  function startTask(task: RoutineTask) {
-    const prefix = dateKey + ':routine-start:' + task.id + ':'
-    update(previous => ({ ...previous, recentPractice: rememberPractice(
-      previous.recentPractice.filter(key => !key.startsWith(prefix)), [prefix + Date.now()]
-    ) }))
-  }
-
-  function markDone(task: RoutineTask) {
-    const doneKey = dateKey + ':routine:' + task.id
-    if (state.recentPractice.includes(doneKey)) return
-    const prefix = dateKey + ':routine-start:' + task.id + ':'
-    const startKey = state.recentPractice.filter(key => key.startsWith(prefix)).at(-1)
-    const startedAt = startKey ? Number(startKey.slice(prefix.length)) : 0
-    const seconds = startedAt ? Math.min(task.minutes * 60, Math.max(0, Math.floor((Date.now() - startedAt) / 1000))) : 0
-    complete(task.domain, 5, seconds)
-    update(previous => ({ ...previous, recentPractice: rememberPractice(
-      previous.recentPractice.filter(key => !key.startsWith(prefix)), [doneKey]
-    ) }))
-  }
 
   return <section className="panel daily-routine" aria-labelledby="daily-routine-title">
     <div className="daily-routine-heading">
       <div><p className="overline">KẾ HOẠCH HÔM NAY · {dateLabel.toLocaleUpperCase('vi-VN')}</p>
         <h2 id="daily-routine-title">{dayNames[weekday]}: học gì hôm nay?</h2>
-        <p className="muted">Làm lần lượt các việc ngắn này. Mở bài học, rồi đánh dấu xong khi bạn đã thực hành.</p>
+        <p className="muted">Web tự đánh dấu xong khi bạn đạt điều kiện của từng nhiệm vụ.</p>
       </div>
       <div className="daily-routine-total"><strong>{doneCount}/{tasks.length}</strong><span>nhiệm vụ · khoảng {totalMinutes} phút</span></div>
     </div>
     <progress value={doneCount} max={tasks.length} aria-label="Nhiệm vụ trong lịch hôm nay đã hoàn thành" />
     <div className="daily-routine-list">
       {tasks.map((task, index) => {
-        const done = state.recentPractice.includes(dateKey + ':routine:' + task.id)
+        const { id } = task
+        const done = isDone(id)
+        const notes = id === 'new-words' || id === 'self-talk'
         return <article className="daily-routine-task" key={task.id} data-done={done}>
-          <span className="daily-routine-index">{done ? '✓' : String(index + 1).padStart(2, '0')}</span>
-          <div className="daily-routine-copy"><div className="row"><h3>{task.title}</h3><span className="pill">{task.minutes} phút</span></div><p>{task.detail}</p></div>
+          <span className="daily-routine-index" aria-hidden="true">{done ? '✓' : String(index + 1).padStart(2, '0')}</span>
+          <div className="daily-routine-copy">
+            <div className="row"><h3>{task.title}</h3><span className="pill">{task.minutes} phút</span></div>
+            <p>{task.detail}</p>
+            {!done && !notes && <small>{{
+              'speak-432': 'Ghi đủ nửa thời lượng ở 2 trong 3 lượt cùng một đề.',
+              'weekly-story': 'Lưu một bản ghi từ 1 phút 30 giây.',
+              'easy-listen': 'Trả lời ít nhất nửa số câu rồi nộp bài.',
+              'read-easy': 'Trả lời ít nhất nửa số câu rồi nộp bài.'
+            }[id]}</small>}
+            {!done && notes && <RoutineNotes task={id} />}
+            {done && notes && <details className="routine-notes"><summary>Xem ghi chú đã lưu</summary>
+              {state.routineWork[dateKey]?.[id]?.map(note => <p key={note}>{note}</p>)}
+            </details>}
+          </div>
           <div className="daily-routine-actions">
-            <Link className="button daily-routine-open" to={task.href} onClick={() => startTask(task)}>{task.action} ↗</Link>
-            <button type="button" disabled={done} aria-label={done ? task.title + ' · đã hoàn thành' : 'Đánh dấu hoàn thành · ' + task.title} onClick={() => markDone(task)}>{done ? 'Đã xong' : 'Hoàn thành'}</button>
+            {task.href && <Link className="button daily-routine-open" to={task.href}>{task.action}</Link>}
+            {task.id === 'easy-listen' && (weekday === 0 || weekday === 6) && <Link className="button daily-routine-open" to="/tests?skill=Reading">Chọn bài đọc</Link>}
+            {done && <span className="routine-complete" role="status">Đã xong</span>}
           </div>
         </article>
       })}

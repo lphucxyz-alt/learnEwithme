@@ -3,7 +3,7 @@ import { Listen } from '../../components/Audio'
 import { useStudy } from '../../app/StudyProvider'
 import { accepts, clozeAnswer, verbCard, verbExample, type Verb } from './verbs'
 
-export function VerbDrill({ verb, mode, done }: { verb: Verb; mode: 'typing' | 'cloze'; done: (correct: boolean) => void }) {
+export function VerbDrill({ verb, mode, done, qualifies }: { verb: Verb; qualifies: boolean; mode: 'typing' | 'cloze'; done: (correct: boolean) => void }) {
   const { complete } = useStudy()
   const start = useRef(Date.now())
   const [values, setValues] = useState(['', ''])
@@ -12,9 +12,10 @@ export function VerbDrill({ verb, mode, done }: { verb: Verb; mode: 'typing' | '
   return <form className="stack" onSubmit={event => {
     event.preventDefault()
     if (result !== null) { done(result); return }
+    if (!values[0].trim() || !cloze && !values[1].trim()) return
     const correct = cloze ? accepts(values[0], clozeAnswer(verb)) : accepts(values[0], verb.past) && accepts(values[1], verb.part)
     setResult(correct)
-    complete('verbs', correct ? 8 : 2, Math.min(120, Math.round((Date.now() - start.current) / 1000)), correct ? [] : [verbCard(verb)])
+    complete('verbs', correct ? 8 : 2, Math.min(120, Math.round((Date.now() - start.current) / 1000)), correct ? [] : [verbCard(verb)], qualifies)
   }}>
     <p>{cloze ? verb.example : <strong>{verb.base} · {verb.meaning}</strong>}</p>
     <div className="row">{(cloze ? ['Từ cần điền'] : ['V2', 'V3']).map((label, index) => <label key={label}>{label}
@@ -25,16 +26,12 @@ export function VerbDrill({ verb, mode, done }: { verb: Verb; mode: 'typing' | '
   </form>
 }
 
-export function Flashcard({ verb, move }: { verb: Verb; move: (direction: number) => void }) {
+export function Flashcard({ verb, move, onReveal }: { verb: Verb; move: (direction: number) => void; onReveal: () => void }) {
   const { complete } = useStudy()
   const [flipped, setFlipped] = useState(false)
   const touch = useRef(0)
-  const interacted = useRef(false)
   function flip() {
-    if (!interacted.current) {
-      complete('verbs', 3)
-      interacted.current = true
-    }
+    if (!flipped) onReveal()
     setFlipped(value => !value)
   }
   useEffect(() => {
@@ -54,6 +51,6 @@ export function Flashcard({ verb, move }: { verb: Verb; move: (direction: number
     }} onClick={flip}><strong>{flipped ? verb.past + ' · ' + verb.part : verb.base}</strong>
       <span>{flipped ? verbExample(verb) : verb.meaning + ' · Chạm hoặc nhấn Space để lật'}</span></button>
     <div className="row"><button onClick={() => move(-1)}>Thẻ trước</button><button onClick={() => move(1)}>Thẻ sau</button>
-      {flipped && <button onClick={() => complete('verbs', 1, 0, [verbCard(verb)], false)}>Đưa vào sổ lỗi</button>}</div>
+      {flipped && <button onClick={() => complete('verbs', 0, 0, [verbCard(verb)], false)}>Đưa vào sổ lỗi</button>}</div>
   </div>
 }

@@ -10,6 +10,9 @@ import { EarDrill } from '../features/ipa/EarDrill'
 import { Mouth } from '../features/ipa/Mouth'
 import { IpaTipCard, VoiceMirror } from '../features/ipa/VoiceMirror'
 import { IpaIllustratedGuide } from '../features/ipa/IpaIllustratedGuide'
+import { minimumWork } from '../features/discipline/study-credit'
+
+const earTotal = 20
 
 export default function Ipa() {
   const { state, update } = useStudy()
@@ -21,6 +24,7 @@ export default function Ipa() {
   const [earPosition, setEarPosition] = useState(0)
   const [earScore, setEarScore] = useState(0)
   const [earStarted, setEarStarted] = useState(false)
+  const relatedPairs = pairs.filter(item => item.sounds.includes(sound.symbol))
 
   function randomPair() {
     const key = (index: number) => 'ipa:' + pairs[index].words.join(':')
@@ -49,13 +53,7 @@ export default function Ipa() {
       <p>Học khẩu hình từ hình minh họa, nghe từng âm và tự ghi âm để luyện chắc phát âm.</p>
     </header>
 
-    <IpaIllustratedGuide onSelectSound={symbol => {
-      setAudioStatus('')
-      setParams({ sound: symbol })
-      window.setTimeout(() => document.getElementById('ipa-sound-lab')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
-    }} />
-
-    <div className="split">
+    <div className="ipa-workspace">
       <section className="panel stack" id="ipa-sound-lab">
         <h2>Bảng 44 ký hiệu IPA</h2>
         {[...new Set(sounds.map(item => item.group))].map(group =>
@@ -77,9 +75,26 @@ export default function Ipa() {
             </div>
           </div>
         )}
+        <div className="ipa-pair-links stack">
+          <h3>Luyện nghe</h3>
+          {relatedPairs.map(item =>
+            <button key={item.words.join(':')} type="button" onClick={() => {
+              setPair(pairs.indexOf(item))
+              setRound(value => value + 1)
+              document.getElementById('ear')?.scrollIntoView()
+            }}>Phân biệt {item.words.join(' / ')}</button>
+          )}
+          <button type="button" onClick={() => document.getElementById('ear')?.scrollIntoView()}>Đến bài nghe 20 câu</button>
+          <button type="button" onClick={() => {
+            const guide = document.querySelector<HTMLDetailsElement>('#ipa-reference')
+            if (!guide) return
+            guide.open = true
+            guide.scrollIntoView()
+          }}>Xem tài liệu minh họa</button>
+        </div>
       </section>
 
-      <section className="panel stack">
+      <section className="panel stack" id="ipa-mouth">
         <div className="between">
           <h2>/{sound.symbol}/ · Từ mẫu: <span className="formula">{sound.word}</span></h2>
           <Listen text={sound.word} label="Nghe từ mẫu" />
@@ -105,19 +120,6 @@ export default function Ipa() {
           Bản thu tham khảo của Hiệp hội Ngữ âm Quốc tế
         </a>
 
-        {pairs.filter(item => item.sounds.includes(sound.symbol)).map(item =>
-          <button
-            key={item.words.join(':')}
-            className="button"
-            onClick={() => {
-              setPair(pairs.indexOf(item))
-              setRound(value => value + 1)
-              document.getElementById('ear')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-          >
-            Luyện phân biệt cặp /{item.sounds.join('/ – /')}/ ({item.words.join(' / ')})
-          </button>
-        )}
       </section>
     </div>
 
@@ -130,14 +132,19 @@ export default function Ipa() {
         <button className="button" onClick={randomPair}>Cặp âm ngẫu nhiên</button>
       </div>
       {!earStarted && <><p className="muted">Một lượt gồm 20 câu nghe ngẫu nhiên các cặp âm, có tính điểm và lưu câu sai để ôn lại.</p><button className="primary" onClick={() => { setEarStarted(true); setEarPosition(0); setEarScore(0); setRound(value => value + 1) }}>Bắt đầu 20 câu</button></>}
-      {earStarted && earPosition < 20 && <><span className="pill">{earPosition + 1}/20</span><EarDrill key={pair + ':' + round} pair={pairs[pair]} done={correct => {
+      {earStarted && earPosition < earTotal && <><span className="pill">{earPosition + 1}/{earTotal}</span><EarDrill key={pair + ':' + round} pair={pairs[pair]} qualifies={earPosition + 1 >= minimumWork(earTotal)} done={correct => {
         setEarScore(value => value + Number(correct))
         setEarPosition(value => value + 1)
         randomPair()
       }} /></>}
-      {earStarted && earPosition === 20 && <div role="status" className="stack"><p>Kết quả: <strong>{earScore}/20</strong>. Câu sai đã được thêm vào hàng đợi ôn.</p><button className="primary" onClick={() => { setEarStarted(false); setEarPosition(0); setEarScore(0) }}>Luyện lại 20 câu</button></div>}
+      {earStarted && earPosition === earTotal && <div role="status" className="stack"><p>Kết quả: <strong>{earScore}/{earTotal}</strong>. Câu sai đã được thêm vào hàng đợi ôn.</p><button className="primary" onClick={() => { setEarStarted(false); setEarPosition(0); setEarScore(0) }}>Luyện lại 20 câu</button></div>}
     </section>
 
+    <IpaIllustratedGuide onSelectSound={symbol => {
+      setAudioStatus('')
+      setParams({ sound: symbol })
+      document.getElementById('ipa-mouth')?.scrollIntoView()
+    }} />
     <AudioSandbox />
   </>
 }

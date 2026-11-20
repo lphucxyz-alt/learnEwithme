@@ -26,7 +26,7 @@ export function StudyProvider({ children }: { children: ReactNode }) {
   }, [state])
   function complete(domain: Domain, xp: number, seconds = 0, errors: CardSeed[] = [], qualifies = true) {
     update(previous => {
-      const next = record(previous, domain, xp, seconds, undefined, qualifies)
+      const next = xp || seconds || qualifies ? record(previous, domain, xp, seconds, undefined, qualifies) : previous
       const cards = { ...next.cards }
       for (const error of errors) {
         const card = seedCard(error, cards[error.id])
